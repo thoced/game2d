@@ -13,6 +13,7 @@ public class mainProgram {
 		// TODO Auto-generated method stub
 		//Create the window
 		RenderWindow window = new RenderWindow();
+		
 		window.create(new VideoMode(800, 600), "Hello JSFML!");
 
 		//Limit the framerate

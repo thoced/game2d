@@ -4,11 +4,14 @@ import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RectangleShape;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
 
 public class wall implements Iunitbase
 {
 	private RectangleShape rect;
+	private float rotation = 0.0f;
+	private float speed = 100.0f;
 	
 	public wall(FloatRect fr)
 	{
@@ -16,12 +19,15 @@ public class wall implements Iunitbase
 		
 		rect.setFillColor(Color.GREEN);
 		
+		rect.setOrigin(new Vector2f(fr.width/2,fr.height/2));
+		
 	}
 
 	@Override
-	public void update() {
+	public void update(Time deltaTime) {
 		// TODO Auto-generated method stub
-		
+		rect.setRotation(rotation * deltaTime.asSeconds());
+		rotation += speed;
 	}
 
 	@Override

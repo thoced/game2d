@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.system.Clock;
+import org.jsfml.system.Time;
 import org.jsfml.window.event.Event;
 
 import structure.Iunitbase;
@@ -13,6 +15,10 @@ public class bilouFramework
 {
 	// arrayUnits
 	private ArrayList<Iunitbase> arrayUnits;
+	// frameclock
+	private Clock frameClock = new Clock();
+	// Time
+	private  Time totalTime;
 	
 	public bilouFramework()
 	{
@@ -21,7 +27,12 @@ public class bilouFramework
 	
 	public void Update()
 	{
+		Time deltaTime = frameClock.restart();
 		
+		for(Iunitbase unit : arrayUnits)
+		{
+			unit.update(deltaTime);
+		}
 	}
 	
 	public void Draw(RenderWindow window)
