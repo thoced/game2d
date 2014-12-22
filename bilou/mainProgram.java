@@ -17,14 +17,22 @@ public class mainProgram {
 
 		//Limit the framerate
 		window.setFramerateLimit(30);
+		
+		// contentload
+		framework.LoadContent();
 
 		//Main loop
 		while(window.isOpen()) {
 		    //Fill the window with red
 		    window.clear(Color.RED);
 
-		    //Display what was drawn (... the red color!)
-		    window.display();
+		   
+	        // update
+	        framework.Update();
+	        // draw
+	        framework.Draw(window);
+		    
+	        window.display();
 
 		    //Handle events
 		    for(Event event : window.pollEvents()) 
@@ -38,12 +46,9 @@ public class mainProgram {
 		        
 		        // catchevent
 		        framework.CatchEvent(event);
-		        // update
-		        framework.Update();
-		        // draw
-		        framework.Draw();
 		        
-		        
+		       
+		       
 		    }
 		}
 	}
