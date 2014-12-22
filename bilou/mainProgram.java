@@ -9,6 +9,7 @@ public class mainProgram {
 
 	public static void main(String[] args) 
 	{
+		bilouFramework framework = new bilouFramework();
 		// TODO Auto-generated method stub
 		//Create the window
 		RenderWindow window = new RenderWindow();
@@ -26,11 +27,23 @@ public class mainProgram {
 		    window.display();
 
 		    //Handle events
-		    for(Event event : window.pollEvents()) {
-		        if(event.type == Event.Type.CLOSED) {
+		    for(Event event : window.pollEvents()) 
+		    {
+		        if(event.type == Event.Type.CLOSED) 
+		        {
 		            //The user pressed the close button
+		        	framework.ReleaseContent();
 		            window.close();
 		        }
+		        
+		        // catchevent
+		        framework.CatchEvent(event);
+		        // update
+		        framework.Update();
+		        // draw
+		        framework.Draw();
+		        
+		        
 		    }
 		}
 	}
