@@ -1,5 +1,6 @@
 package structure;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RectangleShape;
 import org.jsfml.graphics.RenderWindow;
@@ -12,6 +13,8 @@ public class wall implements Iunitbase
 	public wall(FloatRect fr)
 	{
 		rect = new RectangleShape(new Vector2f(fr.width,fr.height));
+		
+		rect.setFillColor(Color.GREEN);
 		
 	}
 
