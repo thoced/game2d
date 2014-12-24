@@ -9,7 +9,7 @@ import bilou.IGameBase;
 public class QuadTreeNode 
 {
 	// membre static LevelNodeMax
-	public static int LevelNodeMax = 4;
+	public static int LevelNodeMax = 8;
 	// bounds du noeud
 	private FloatRect bounds;
 	// liste des éléments présents dans le noeud
@@ -53,30 +53,67 @@ public class QuadTreeNode
 	public void InsertElement(IGameBase element)
 	{
 		
-		if(levelNode < QuadTreeNode.LevelNodeMax)
-		{
+		
 		
 			// l'element est-il dans le bounds ?
 			FloatRect result = bounds.intersection(element.GetGlobalBounds());
 			if(result != FloatRect.EMPTY)
 			{
-				// on descend dans les noeuds fils
-				nodesFils[0].InsertElement(element);
-				nodesFils[1].InsertElement(element);
-				nodesFils[2].InsertElement(element);
-				nodesFils[3].InsertElement(element);
 				
+				if(levelNode < QuadTreeNode.LevelNodeMax)
+				{
+					// on descend dans les noeuds fils
+					nodesFils[0].InsertElement(element);
+					nodesFils[1].InsertElement(element);
+					nodesFils[2].InsertElement(element);
+					nodesFils[3].InsertElement(element);
+				}
+				else
+				{
+					// si on a atteind le levelMax, on ajoute dans le noeud
+					if(elements == null)
+						elements = new ArrayList<IGameBase>();
+					
+					elements.add(element);
+				}
 			}
 		}
-		else
+		
+		
+	}
+	
+	public ArrayList<IGameBase> GetElements(FloatRect zone)
+	{
+		ArrayList<IGameBase> ret1,ret2,ret3,ret4;
+		// recherche des élements de façon récursive
+		FloatRect result = this.bounds.intersection(zone);
+		if(result != FloatRect.EMPTY)
 		{
-			// si on a atteind le levelMax, on ajoute dans le noeud
-			if(elements == null)
-				elements = new ArrayList<IGameBase>();
+			// la zone est bien comprise dans le node, on descend jusqu'a ce que la listes des élements est null
+			if(elements != null)
+			{
+				// on descend dans les 4 nodes fils
+				
+				ret1 = nodesFils[0].GetElements(zone);
+				ret2 = nodesFils[1].GetElements(zone);
+				ret3 = nodesFils[2].GetElements(zone);
+				ret4 = nodesFils[3].GetElements(zone);
+				
+				ret1.addAll(ret2);
+				ret1.addAll(ret3);
+				ret1.addAll(ret4);
+				
+				return ret1;
 			
-			elements.add(element);
+				
+			}
+			else
+			{
+				return elements;
+			}
 		}
 		
+		return null;
 	}
 
 	public FloatRect getBounds() {
