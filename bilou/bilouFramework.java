@@ -7,29 +7,35 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Time;
+import org.jsfml.system.Vector2f;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 
+import CoreQuadTree.QuadTreeNode;
 import structure.Iunitbase;
 import structure.wall;
 
 public class bilouFramework 
 {
 	// arrayUnits
-	private ArrayList<Iunitbase> arrayElements;
+	private ArrayList<IGameBase> arrayElements;
 	// frameclock
 	private Clock frameClock = new Clock();
 	// Time
 	private  Time totalTime;
 	// Camera
 	private Camera camera;
+	// QuadTree
+	private QuadTreeNode quadtree;
 	
 	public bilouFramework()
 	{
 		// camera
 		camera = new Camera();
+		// instance quadtree
+		quadtree = new QuadTreeNode(1,new FloatRect(0,0,10000,10000));
 		// arrayunits
-		arrayElements = new ArrayList<Iunitbase>();
+		arrayElements = new ArrayList<IGameBase>();
 	}
 	
 	public void Update()
@@ -38,9 +44,9 @@ public class bilouFramework
 		// update camera
 		camera.Update(deltaTime);
 		
-		for(Iunitbase unit : arrayElements)
+		for(IGameBase unit : arrayElements)
 		{
-			unit.update(deltaTime);
+			unit.Update(deltaTime);
 		}
 	}
 	
@@ -48,9 +54,9 @@ public class bilouFramework
 	{
 		window.setView(camera.getView());
 		
-		for(Iunitbase unit : arrayElements)
+		for(IGameBase unit : arrayElements)
 		{
-			unit.draw(window);
+			unit.Draw(window);
 		}
 	}
 	
@@ -87,8 +93,13 @@ public class bilouFramework
 	
 	public void LoadContent()
 	{
-		wall w = new wall(new FloatRect(0,0,200,200));
-		arrayElements.add(w);
+		
+		
+		ElementBase element = new ElementBase(new Vector2f(64,64),new Vector2f(128,128));
+		
+		this.quadtree.InsertElement(element);
+		
+		arrayElements.add(element);
 	}
 	
 	public void ReleaseContent()
