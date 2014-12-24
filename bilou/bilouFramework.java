@@ -16,7 +16,7 @@ import structure.wall;
 public class bilouFramework 
 {
 	// arrayUnits
-	private ArrayList<Iunitbase> arrayUnits;
+	private ArrayList<Iunitbase> arrayElements;
 	// frameclock
 	private Clock frameClock = new Clock();
 	// Time
@@ -29,7 +29,7 @@ public class bilouFramework
 		// camera
 		camera = new Camera();
 		// arrayunits
-		arrayUnits = new ArrayList<Iunitbase>();
+		arrayElements = new ArrayList<Iunitbase>();
 	}
 	
 	public void Update()
@@ -38,7 +38,7 @@ public class bilouFramework
 		// update camera
 		camera.Update(deltaTime);
 		
-		for(Iunitbase unit : arrayUnits)
+		for(Iunitbase unit : arrayElements)
 		{
 			unit.update(deltaTime);
 		}
@@ -48,7 +48,7 @@ public class bilouFramework
 	{
 		window.setView(camera.getView());
 		
-		for(Iunitbase unit : arrayUnits)
+		for(Iunitbase unit : arrayElements)
 		{
 			unit.draw(window);
 		}
@@ -88,7 +88,7 @@ public class bilouFramework
 	public void LoadContent()
 	{
 		wall w = new wall(new FloatRect(0,0,200,200));
-		arrayUnits.add(w);
+		arrayElements.add(w);
 	}
 	
 	public void ReleaseContent()
