@@ -8,6 +8,8 @@ import bilou.IGameBase;
 
 public class QuadTreeNode 
 {
+	// membre static LevelNodeMax
+	public static int LevelNodeMax = 4;
 	// bounds du noeud
 	private FloatRect bounds;
 	// liste des éléments présents dans le noeud
@@ -27,7 +29,7 @@ public class QuadTreeNode
 		this.bounds = bounds;  
 		
 		// si le levelNode est supérieur au max de la hauteur des noeuds fils, on return
-		if(levelNode > QuadTree.LevelNodeMax)
+		if(levelNode > QuadTreeNode.LevelNodeMax)
 			return;
 		
 		// instantiation des nodes fils
@@ -48,10 +50,10 @@ public class QuadTreeNode
 	
 	}
 	
-	public void InsertNode(IGameBase element)
+	public void InsertElement(IGameBase element)
 	{
 		
-		if(levelNode < QuadTree.LevelNodeMax)
+		if(levelNode < QuadTreeNode.LevelNodeMax)
 		{
 		
 			// l'element est-il dans le bounds ?
@@ -59,10 +61,10 @@ public class QuadTreeNode
 			if(result != FloatRect.EMPTY)
 			{
 				// on descend dans les noeuds fils
-				nodesFils[0].InsertNode(element);
-				nodesFils[1].InsertNode(element);
-				nodesFils[2].InsertNode(element);
-				nodesFils[3].InsertNode(element);
+				nodesFils[0].InsertElement(element);
+				nodesFils[1].InsertElement(element);
+				nodesFils[2].InsertElement(element);
+				nodesFils[3].InsertElement(element);
 				
 			}
 		}
