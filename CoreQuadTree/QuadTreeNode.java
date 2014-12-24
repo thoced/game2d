@@ -13,7 +13,7 @@ public class QuadTreeNode
 	// bounds du noeud
 	private FloatRect bounds;
 	// liste des éléments présents dans le noeud
-	private ArrayList<IGameBase> elements;
+	private ArrayList<IGameBase> elements = null;
 	// references vers les 4 sous noeuds
 	private QuadTreeNode[] nodesFils;
 	// node level (permet de déterminer la hauteur maximal de l'arbre
@@ -71,6 +71,9 @@ public class QuadTreeNode
 		else
 		{
 			// si on a atteind le levelMax, on ajoute dans le noeud
+			if(elements == null)
+				elements = new ArrayList<IGameBase>();
+			
 			elements.add(element);
 		}
 		
