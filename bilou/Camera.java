@@ -1,5 +1,7 @@
 package bilou;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.View;
 import org.jsfml.system.Time;
@@ -12,8 +14,8 @@ public class Camera implements ICoreBase
 	// Constante
 	public static Vector2f Right = 	new Vector2f(1,0);
 	public static Vector2f Left = 	new Vector2f(-1,0);
-	public static Vector2f Up = 		new Vector2f(0,1);
-	public static Vector2f Down = 	new Vector2f(0,0-1);
+	public static Vector2f Up = 	new Vector2f(0,1);
+	public static Vector2f Down = 	new Vector2f(0,-1);
 	public static Vector2f Zero = Vector2f.ZERO;
 	// CurrentAdd
 	private Vector2f currentAdd = Vector2f.ZERO;
@@ -35,13 +37,8 @@ public class Camera implements ICoreBase
 		Vector2f newcenter = Vector2f.add(view.getCenter(), Vector2f.mul(currentAdd, speed * deltaTime.asSeconds()));
 		view.setCenter(newcenter);
 		
+		
 	
-	}
-
-	public void Draw(RenderWindow window) 
-	{
-		// TODO Auto-generated method stub
-
 	}
 	
 	public View getView()
