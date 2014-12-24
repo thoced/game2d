@@ -71,7 +71,7 @@ public class Camera implements ICoreBase
 		Vector2f size = view.getSize();
 		size = Vector2f.mul(size, 2);
 		view.setSize(size);
-		this.zoomLevel ++;
+		this.zoomLevel --;
 	}
 
 }
