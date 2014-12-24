@@ -11,16 +11,17 @@ public class mainProgram {
 
 	public static void main(String[] args) 
 	{
-		bilouFramework framework = new bilouFramework();
+		
 		// TODO Auto-generated method stub
 		//Create the window
 		RenderWindow window = new RenderWindow();
 		
-		window.create(new VideoMode(1024, 768), "Hello JSFML!",RenderWindow.FULLSCREEN);
+		window.create(new VideoMode(1024, 768), "Hello JSFML!");
 
 		//Limit the framerate
 		window.setFramerateLimit(30);
 		
+		bilouFramework framework = new bilouFramework(window);
 		// contentload
 		framework.LoadContent();
 
