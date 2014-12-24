@@ -9,7 +9,7 @@ import bilou.IGameBase;
 public class QuadTreeNode 
 {
 	// membre static LevelNodeMax
-	public static int LevelNodeMax = 8;
+	public static int LevelNodeMax = 6;
 	// bounds du noeud
 	private FloatRect bounds;
 	// liste des éléments présents dans le noeud
@@ -57,7 +57,7 @@ public class QuadTreeNode
 		
 			// l'element est-il dans le bounds ?
 			FloatRect result = bounds.intersection(element.GetGlobalBounds());
-			if(result != FloatRect.EMPTY)
+			if(result != null)
 			{
 				
 				if(levelNode < QuadTreeNode.LevelNodeMax)
