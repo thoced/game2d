@@ -4,10 +4,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.IntRect;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 
@@ -23,13 +25,17 @@ public class bilouFramework
 	private Clock frameClock = new Clock();
 	// Time
 	private  Time totalTime;
+	// RenderWindow JSFML (SFML)
+	private RenderWindow window;
 	// Camera
 	private Camera camera;
 	// QuadTree
 	private QuadTreeNode quadtree;
 	
-	public bilouFramework()
+	public bilouFramework(RenderWindow w)
 	{
+		// Window
+		window = w;
 		// camera
 		camera = new Camera();
 		// instance quadtree
@@ -54,14 +60,26 @@ public class bilouFramework
 	{
 		window.setView(camera.getView());
 		
-		for(IGameBase unit : arrayElements)
+		
+		/*for(IGameBase unit : arrayElements)
 		{
 			unit.Draw(window);
-		}
+		}*/
+		Vector2f  rr = camera.getView().getSize();
+		//IntRect zon = new IntRect(camera.getView().getCenter(),window.getSize());
+		rr.toString();
+	//	ArrayList<IGameBase> elements = quadtree.GetElements(window.getView().getSize());
+		
+		/*for(IGameBase e : elements)
+		{
+			e.Draw(window);
+		}*/
 	}
 	
 	public void CatchEvent(Event event)
 	{
+		if(event.type == Event.Type.MOUSE_MOVED)return;
+		
 		if(event.type == Event.Type.MOUSE_MOVED)
 		{
 			camera.Move(Camera.Zero);
