@@ -21,6 +21,8 @@ public class bilouFramework
 {
 	// arrayUnits
 	private ArrayList<IGameBase> arrayElements;
+	// listes elements venant du quadtree
+	private ArrayList<IGameBase> listeElements;
 	// frameclock
 	private Clock frameClock = new Clock();
 	// Time
@@ -37,11 +39,13 @@ public class bilouFramework
 		// Window
 		window = w;
 		// camera
-		camera = new Camera();
+		camera = new Camera(window);
 		// instance quadtree
 		quadtree = new QuadTreeNode(1,new FloatRect(0,0,10000,10000));
 		// arrayunits
 		arrayElements = new ArrayList<IGameBase>();
+		//ListeElement
+		listeElements = new ArrayList<IGameBase>();
 	}
 	
 	public void Update()
@@ -60,25 +64,33 @@ public class bilouFramework
 	{
 		window.setView(camera.getView());
 		
-		
 		/*for(IGameBase unit : arrayElements)
 		{
 			unit.Draw(window);
 		}*/
-		Vector2f  rr = camera.getView().getSize();
-		//IntRect zon = new IntRect(camera.getView().getCenter(),window.getSize());
-		rr.toString();
-	//	ArrayList<IGameBase> elements = quadtree.GetElements(window.getView().getSize());
+		Vector2f  size = camera.getView().getSize();
+		Vector2f centre = camera.getView().getCenter();
+		Vector2f source = Vector2f.sub(centre, Vector2f.div(size,2));
+		FloatRect zone = new FloatRect(source,size);
 		
-		/*for(IGameBase e : elements)
+		// on récupère les élements visible 
+		listeElements.clear();
+		quadtree.GetElements(zone,listeElements);
+		
+		if(listeElements != null)
 		{
-			e.Draw(window);
-		}*/
+			System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
+			
+			for(IGameBase e : listeElements)
+			{
+				e.Draw(window);
+			}
+		}
 	}
 	
 	public void CatchEvent(Event event)
 	{
-		if(event.type == Event.Type.MOUSE_MOVED)return;
+		
 		
 		if(event.type == Event.Type.MOUSE_MOVED)
 		{
@@ -111,13 +123,17 @@ public class bilouFramework
 	
 	public void LoadContent()
 	{
-		
-		
+	
 		ElementBase element = new ElementBase(new Vector2f(64,64),new Vector2f(128,128));
+		ElementBase element2 = new ElementBase(new Vector2f(64,64),new Vector2f(192,128));
+		ElementBase element3 = new ElementBase(new Vector2f(64,64),new Vector2f(2048,128));
 		
 		this.quadtree.InsertElement(element);
+		this.quadtree.InsertElement(element2);
+		this.quadtree.InsertElement(element3);
 		
 		arrayElements.add(element);
+		arrayElements.add(element2);
 	}
 	
 	public void ReleaseContent()
