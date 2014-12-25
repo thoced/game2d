@@ -25,9 +25,9 @@ public class Camera implements ICoreBase
 	private int zoomLevel = 0;
 	
 	
-	public Camera()
+	public Camera(RenderWindow window)
 	{
-		view = new View();
+		view = (View) window.getView();
 	}
 	
 	public void Update(Time deltaTime) 
