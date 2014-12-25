@@ -40,8 +40,6 @@ public class ElementBase implements IGameBase
 
 	}
 
-	
-
 	@Override
 	public FloatRect GetGlobalBounds() 
 	{

@@ -19,7 +19,7 @@ public class mainProgram {
 		window.create(new VideoMode(1024, 768), "Hello JSFML!");
 
 		//Limit the framerate
-		window.setFramerateLimit(30);
+		window.setFramerateLimit(60);
 		
 		bilouFramework framework = new bilouFramework(window);
 		// contentload
