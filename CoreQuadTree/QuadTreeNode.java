@@ -80,38 +80,31 @@ public class QuadTreeNode
 		
 	}
 	
-	public ArrayList<IGameBase> GetElements(FloatRect zone)
+	public void GetElements(FloatRect zone,ArrayList<IGameBase> listes)
 	{
 		ArrayList<IGameBase> ret1,ret2,ret3,ret4;
 		// recherche des élements de façon récursive
 		FloatRect result = this.bounds.intersection(zone);
-		if(result != FloatRect.EMPTY)
+		if(result != null)
 		{
 			// la zone est bien comprise dans le node, on descend jusqu'a ce que la listes des élements est null
-			if(elements != null)
+			if(this.levelNode < QuadTreeNode.LevelNodeMax)
 			{
 				// on descend dans les 4 nodes fils
 				
-				ret1 = nodesFils[0].GetElements(zone);
-				ret2 = nodesFils[1].GetElements(zone);
-				ret3 = nodesFils[2].GetElements(zone);
-				ret4 = nodesFils[3].GetElements(zone);
-				
-				ret1.addAll(ret2);
-				ret1.addAll(ret3);
-				ret1.addAll(ret4);
-				
-				return ret1;
+				nodesFils[0].GetElements(zone,listes);
+				nodesFils[1].GetElements(zone,listes);
+				nodesFils[2].GetElements(zone,listes);
+				nodesFils[3].GetElements(zone,listes);
 			
-				
 			}
 			else
 			{
-				return elements;
+				if(this.elements != null)
+				listes.addAll(this.elements);
 			}
 		}
 		
-		return null;
 	}
 
 	public FloatRect getBounds() {
