@@ -2,16 +2,20 @@ package CoreQuadTree;
 
 import java.util.ArrayList;
 
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
+import org.jsfml.graphics.RectangleShape;
+import org.jsfml.graphics.RenderWindow;
+import org.jsfml.system.Vector2f;
 
 import bilou.IGameBase;
 
 public class QuadTreeNode 
 {
 	// membre static LevelNodeMax
-	public static int LevelNodeMax = 4;
+	public static int LevelNodeMax = 6;
 	// nombre maximal d'éléments dans le node avant un split
-	public static int NbMaxElement = 1;
+	public static int NbMaxElement = 2;
 	// bounds du noeud
 	private FloatRect bounds;
 	// liste des éléments présents dans le noeud
@@ -34,6 +38,27 @@ public class QuadTreeNode
 		// initialisation de elements
 		this.elements = new ArrayList<IGameBase>();
 		
+	}
+	
+	public void DrawDebugBounds(RenderWindow window)
+	{
+		// permet d'afficher les bounds de l'arbre (mode debug)
+		if(this.iSSplited)
+		{
+			nodesFils[0].DrawDebugBounds(window);
+			nodesFils[1].DrawDebugBounds(window);
+			nodesFils[2].DrawDebugBounds(window);
+			nodesFils[3].DrawDebugBounds(window);
+		}
+		else
+		{
+			RectangleShape shape = new RectangleShape(new Vector2f(this.bounds.width,this.bounds.height));
+			shape.setPosition(new Vector2f(this.bounds.left,this.bounds.top));
+			shape.setFillColor(Color.TRANSPARENT);
+			shape.setOutlineColor(Color.BLUE);
+			shape.setOutlineThickness(8.0f);
+			window.draw(shape);
+		}
 	}
 	
 	public void Split()
@@ -83,7 +108,7 @@ public class QuadTreeNode
 				else
 				{
 					// ce n'est pas encore splité
-					if(this.elements.size() < this.NbMaxElement || this.levelNode > QuadTreeNode.LevelNodeMax)
+					if(this.elements.size() <= this.NbMaxElement || this.levelNode > QuadTreeNode.LevelNodeMax)
 					{
 						elements.add(element);
 					}
