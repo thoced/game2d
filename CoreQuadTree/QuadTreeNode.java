@@ -67,10 +67,15 @@ public class QuadTreeNode
 		nodesFils = new QuadTreeNode[4];
 		// initialisation
 		// création des bounds des fils nodes
-		FloatRect b1 =  new FloatRect(bounds.left,bounds.top,bounds.width/2,bounds.height/2);
-		FloatRect b2 =  new FloatRect(bounds.left + bounds.width /2,bounds.top,bounds.width/2,bounds.height/2);
-		FloatRect b3 =  new FloatRect(bounds.left,bounds.top + bounds.height / 2,bounds.width/2,bounds.height/2);
-		FloatRect b4 =  new FloatRect(bounds.left + bounds.width /2,bounds.top + bounds.height /2,bounds.width/2,bounds.height/2);
+		
+		// bounds /2
+		float nw = bounds.width / 2;
+		float nh = bounds.height /2;
+		
+		FloatRect b1 =  new FloatRect(bounds.left,bounds.top,nw,nh);
+		FloatRect b2 =  new FloatRect(bounds.left + nw,bounds.top,nw,nh);
+		FloatRect b3 =  new FloatRect(bounds.left,bounds.top + nh,nw,nh);
+		FloatRect b4 =  new FloatRect(bounds.left + nw,bounds.top + nh,nw,nh);
 				
 		// instance des 4 nodes fils
 		nodesFils[0] = new QuadTreeNode(levelNode + 1,b1);
@@ -137,21 +142,18 @@ public class QuadTreeNode
 		if(result != null)
 		{
 			
-			if(!this.iSSplited)
+			if(this.iSSplited)
 			{
-				listes.addAll(this.elements);
+				// on descend dans les 4 nodes fils
+				nodesFils[0].GetElements(zone,listes);
+				nodesFils[1].GetElements(zone,listes);
+				nodesFils[2].GetElements(zone,listes);
+				nodesFils[3].GetElements(zone,listes);
 			}
 			else
-			{
-				
-					// on descend dans les 4 nodes fils
-					
-					nodesFils[0].GetElements(zone,listes);
-					nodesFils[1].GetElements(zone,listes);
-					nodesFils[2].GetElements(zone,listes);
-					nodesFils[3].GetElements(zone,listes);
-				
-				
+			{	
+				// le noeud ne possède pas de fils, on retourne la listes avec les élements supplémentaires
+			    listes.addAll(this.elements);
 			}
 			
 		}
