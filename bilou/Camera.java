@@ -22,7 +22,10 @@ public class Camera implements ICoreBase
 	// Speed camera
 	private float speed = 512.0f;
 	// ZoomLevel camera
-	private int zoomLevel = 0;
+	private int zoomLevel = 1;
+   
+
+//Fill the win = 0;
 	
 	
 	public Camera(RenderWindow window)
@@ -40,6 +43,9 @@ public class Camera implements ICoreBase
 		
 	
 	}
+    
+
+//Fill the win
 	
 	public View getView()
 	{
@@ -56,6 +62,8 @@ public class Camera implements ICoreBase
 		currentAdd = move;
 	}
 
+
+//Fill the win
 	public void ZoomIn()
 	{
 		Vector2f size = view.getSize();
