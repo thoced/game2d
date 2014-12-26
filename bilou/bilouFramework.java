@@ -2,6 +2,7 @@ package bilou;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.IntRect;
@@ -41,7 +42,7 @@ public class bilouFramework
 		// camera
 		camera = new Camera(window);
 		// instance quadtree
-		quadtree = new QuadTreeNode(1,new FloatRect(0,0,5120*2,5120*2));
+		quadtree = new QuadTreeNode(1,new FloatRect(0,0,5120,5120));
 		// arrayunits
 		arrayElements = new ArrayList<IGameBase>();
 		//ListeElement
@@ -85,7 +86,7 @@ public class bilouFramework
 		}
 		
 		// drawdebug quadtree
-		quadtree.DrawDebugBounds(window);
+		//quadtree.DrawDebugBounds(window);
 		
 	}
 	
@@ -129,11 +130,16 @@ public class bilouFramework
 		ElementBase element2 = new ElementBase(new Vector2f(64,64),new Vector2f(192,128));
 		ElementBase element3 = new ElementBase(new Vector2f(64,64),new Vector2f(2048,128));
 		
-		for(int i=0;i<6;i++)
+		Random rand = new Random();
+		
+		for(int i=0;i<1024;i++)
 		{
-			ElementBase element4 = new ElementBase(new Vector2f(16,16),new Vector2f(128 + i * 64,128 + i * 64));
+			
+			ElementBase element4 = new ElementBase(new Vector2f(16,16),new Vector2f(rand.nextInt(5000),rand.nextInt(5000)));
 			this.quadtree.InsertElement(element4);
 		}
+		
+		
 		
 		//this.quadtree.InsertElement(element);
 		//this.quadtree.InsertElement(element2);
