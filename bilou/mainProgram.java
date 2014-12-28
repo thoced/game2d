@@ -16,12 +16,12 @@ public class mainProgram {
 		//Create the window
 		RenderWindow window = new RenderWindow();
 		
-		window.create(new VideoMode(1024, 768), "Hello JSFML!");
+		window.create(new VideoMode(1024, 768), "Bilou FrameWork (Test QuadTree)");
 
 		//Limit the framerate
 		window.setFramerateLimit(60);
 		
-		bilouFramework framework = new bilouFramework(window);
+		Framework framework = new Framework(window);
 		// contentload
 		framework.LoadContent();
 
@@ -53,7 +53,7 @@ public class mainProgram {
 		    }
 			
 		    //Fill the window with red
-		    window.clear(Color.RED);
+		    window.clear(Color.BLACK);
 	        // update
 	        framework.Update();
 	        // draw

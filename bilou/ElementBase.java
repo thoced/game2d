@@ -53,4 +53,12 @@ public class ElementBase implements IGameBase
 		// TODO Auto-generated method stub
 		return rectvue.getLocalBounds();
 	}
+
+	
+
+	@Override
+	public void Init(Framework parent) {
+		// TODO Auto-generated method stub
+		
+	}
 }

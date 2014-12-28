@@ -7,6 +7,8 @@ import org.jsfml.system.Time;
 public interface IGameBase 
 {
 
+	public abstract  void Init(Framework parent);
+	
 	public abstract void Update(Time deltaTime);
 	
 	public abstract void Draw(RenderWindow window);

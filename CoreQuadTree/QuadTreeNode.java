@@ -13,9 +13,9 @@ import bilou.IGameBase;
 public class QuadTreeNode 
 {
 	// membre static LevelNodeMax
-	public static int LevelNodeMax = 6;
+	public static int LevelNodeMax = 8;
 	// nombre maximal d'éléments dans le node avant un split
-	public static int NbMaxElement = 2;
+	public static int NbMaxElement = 5;
 	// bounds du noeud
 	private FloatRect bounds;
 	// liste des éléments présents dans le noeud
@@ -35,7 +35,7 @@ public class QuadTreeNode
 		levelNode = level;
 		// creation du bounds
 		this.bounds = bounds;  
-		// initialisation de elements
+		// initialisation des elements
 		this.elements = new ArrayList<IGameBase>();
 		
 	}
@@ -56,7 +56,7 @@ public class QuadTreeNode
 			shape.setPosition(new Vector2f(this.bounds.left,this.bounds.top));
 			shape.setFillColor(Color.TRANSPARENT);
 			shape.setOutlineColor(Color.BLUE);
-			shape.setOutlineThickness(8.0f);
+			shape.setOutlineThickness(window.getView().getSize().x * 0.0005f);
 			window.draw(shape);
 		}
 	}
@@ -113,7 +113,7 @@ public class QuadTreeNode
 				else
 				{
 					// ce n'est pas encore splité
-					if(this.elements.size() <= this.NbMaxElement || this.levelNode > QuadTreeNode.LevelNodeMax)
+					if(this.elements.size() <= QuadTreeNode.NbMaxElement || this.levelNode > QuadTreeNode.LevelNodeMax)
 					{
 						elements.add(element);
 					}
