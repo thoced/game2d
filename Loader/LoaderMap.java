@@ -11,6 +11,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jsfml.graphics.Transform;
 import org.jsfml.system.Time;
 
 import bilou.ElementBase;
@@ -89,9 +90,32 @@ public class LoaderMap implements ICoreBase
 				  // on récupère la largeur et la hauteur
 				  float width  = Float.parseFloat(e.getAttributeValue("width"));
 				  float height = Float.parseFloat(e.getAttributeValue("height"));
+				  // récupération de la transformation
+				  String transform = e.getAttributeValue("transform");
+				  Transform trans = Transform.IDENTITY;
+				  if(transform != null && transform.contains("matrix"))
+				  {
+					  // la transformation est une matrice
+					  String[] splitA = transform.split("\\(");
+					  String temp = splitA[1].replace(")", "");
+					  String[] values = temp.split(",");
+					  float a00 = Float.parseFloat(values[0]);
+					  float a01 = Float.parseFloat(values[1]);
+					  float a02 = Float.parseFloat(values[2]);
+					  float a10 = Float.parseFloat(values[3]);
+					  float a11 = Float.parseFloat(values[4]);
+					  float a12 = Float.parseFloat(values[5]);
+					  float a20 = 0.0f;
+					  float a21 = 0.0f;
+					  float a22 = 1.0f;
+					  trans = new Transform(a00,a01,a02,a10,a11,a12,a20,a21,a22);
+					  
+				  }
 				  
 				  // création de l'élement
 				  ElementBase b = new ElementBase(width,height,x,y);
+				  // update de la matrice de transformation
+				  b.setTrans(trans);
 				  // ajout dans la liste
 				  listElement.add(b);
 			  }
