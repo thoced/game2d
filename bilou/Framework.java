@@ -107,7 +107,7 @@ public class Framework
 	
 	public void CatchEvent(Event event)
 	{
-		
+		//if(event.type == Event.Type.MOUSE_MOVED)return;
 		
 		if(event.type == Event.Type.MOUSE_MOVED)
 		{
@@ -169,9 +169,9 @@ public class Framework
 		
 		//arrayElements.add(element);
 		//arrayElements.add(element2);
-		log = new Logo();
+		/*log = new Logo();
 		log.Init(this);
-		arrayElements.add(log);
+		arrayElements.add(log);*/
 		
 		// chargement de la map
 		loader.LoadContent();
