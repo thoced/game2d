@@ -93,7 +93,7 @@ public class Framework
 		listeElements.clear();
 		quadtree.GetElements(zone,listeElements);
 		
-		//System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
+		System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
 		
 		for(IGameBase e : listeElements)
 		{
@@ -152,13 +152,13 @@ public class Framework
 		
 		Random rand = new Random();
 		
-	/*	for(int i=0;i<16;i++)
+		for(int i=0;i<16;i++)
 		{
 			
 			//ElementBase element4 = new ElementBase(new Vector2f(16,16),new Vector2f(rand.nextInt(4096),rand.nextInt(4096)));
 			ElementBase element4 = new ElementBase(new Vector2f(8,8),new Vector2f(128 + i * 32,128 + i * 64));
 			this.quadtree.InsertElement(element4);
-		}*/
+		}
 		//ElementBase element4 = new ElementBase(new Vector2f(16,256),new Vector2f(128,128));
 		//this.quadtree.InsertElement(element4);
 		
