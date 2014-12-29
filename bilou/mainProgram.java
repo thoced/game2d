@@ -16,7 +16,7 @@ public class mainProgram {
 		//Create the window
 		RenderWindow window = new RenderWindow();
 		
-		window.create(new VideoMode(1024, 768), "Bilou FrameWork (Test QuadTree)",RenderWindow.FULLSCREEN);
+		window.create(new VideoMode(1024, 768), "Bilou FrameWork (Test QuadTree)");
 
 		//Limit the framerate
 		window.setFramerateLimit(60);

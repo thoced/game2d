@@ -108,7 +108,8 @@ public class LoaderMap implements ICoreBase
 					  float a20 = 0.0f;
 					  float a21 = 0.0f;
 					  float a22 = 1.0f;
-					  trans = new Transform(a00,a01,a02,a10,a11,a12,a20,a21,a22);
+					 // trans = new Transform(a00,a01,a02,a10,a11,a12,a20,a21,a22);
+					  //trans = Transform.rotate(Transform.IDENTITY, 33.0f);
 					  
 				  }
 				  

@@ -33,6 +33,7 @@ public class ElementBase implements IGameBase
 	public ElementBase()
 	{
 		rectvue = new RectangleShape();
+		
 	}
 	
 	public ElementBase(Vector2f dimension,Vector2f position)
@@ -61,19 +62,7 @@ public class ElementBase implements IGameBase
 		rectvue.setOutlineColor(Color.RED);
 		rectvue.setOutlineThickness(2.0f);
 		
-		//debug
-		Texture text = new Texture();
-		try 
-		{
-			text.loadFromStream(ElementBase.class.getResourceAsStream("/Maps/texture.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		rectvue.setTexture(text,true);
-		//rectvue.setTextureRect(new IntRect(0,0,512,512));
-		
-		
+
 	}
 	
 	@Override
@@ -86,10 +75,13 @@ public class ElementBase implements IGameBase
 	@Override
 	public void Draw(RenderWindow window) 
 	{
-		// TODO Auto-generated method stub
+		
 		//RenderStates state;
-		//state = new RenderStates(this.trans);
+		// on applique la nouvelle matrice de transformation
+		//state = new RenderStates(newTrans);
 		window.draw(rectvue);
+		
+		
 
 	}
 
