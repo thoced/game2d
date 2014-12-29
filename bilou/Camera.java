@@ -20,7 +20,7 @@ public class Camera implements ICoreBase
 	// CurrentAdd
 	private Vector2f currentAdd = Vector2f.ZERO;
 	// Speed camera
-	private float speed = 512.0f;
+	private float speed = 12.0f;
 	// ZoomLevel camera
 	private int zoomLevel = 1;
    

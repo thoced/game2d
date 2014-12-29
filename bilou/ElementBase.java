@@ -59,8 +59,9 @@ public class ElementBase implements IGameBase
 		rectvue = new RectangleShape(new Vector2f(width,height));
 		rectvue.setOrigin(0,0);
 		rectvue.setPosition(new Vector2f(x,y));
-		rectvue.setOutlineColor(Color.RED);
-		rectvue.setOutlineThickness(2.0f);
+		//rectvue.setOutlineColor(Color.RED);
+		rectvue.setFillColor(new Color(64,64,64));
+		//rectvue.setOutlineThickness(1.0f);
 		
 
 	}
@@ -80,9 +81,7 @@ public class ElementBase implements IGameBase
 		// on applique la nouvelle matrice de transformation
 		//state = new RenderStates(newTrans);
 		window.draw(rectvue);
-		
-		
-
+	
 	}
 
 	@Override
