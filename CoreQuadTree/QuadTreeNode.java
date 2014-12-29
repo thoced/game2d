@@ -153,7 +153,13 @@ public class QuadTreeNode
 			else
 			{	
 				// le noeud ne possède pas de fils, on retourne la listes avec les élements supplémentaires
-			    listes.addAll(this.elements);
+			    //listes.addAll(this.elements);
+			    
+			    for(IGameBase b : this.elements)
+			    {
+			    	if(!listes.contains(b))
+			    		listes.add(b);
+			    }
 			}
 			
 		}
