@@ -76,7 +76,7 @@ public class Logo implements IGameBase
 	}
 
 	@Override
-	public void Draw(RenderWindow window) 
+	public void Draw(RenderTexture window) 
 	{
 		// TODO Auto-generated method stub
 		//logoSprite.draw(target, states);
@@ -163,5 +163,7 @@ public class Logo implements IGameBase
 		
 		
 	}
+
+	
 
 }

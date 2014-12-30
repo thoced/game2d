@@ -20,7 +20,7 @@ public class Camera implements ICoreBase
 	// CurrentAdd
 	private Vector2f currentAdd = Vector2f.ZERO;
 	// Speed camera
-	private float speed = 12.0f;
+	private float speed = 128.0f;
 	// ZoomLevel camera
 	private int zoomLevel = 1;
    
@@ -40,8 +40,6 @@ public class Camera implements ICoreBase
 		Vector2f newcenter = Vector2f.add(view.getCenter(), Vector2f.mul(currentAdd, speed * deltaTime.asSeconds()));
 		view.setCenter(newcenter);
 		
-		
-	
 	}
     
 

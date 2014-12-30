@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.809375"
-     inkscape:cx="375"
-     inkscape:cy="272.89575"
+     inkscape:zoom="1.61875"
+     inkscape:cx="178.05807"
+     inkscape:cy="99.92278"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -219,6 +219,46 @@
        height="20"
        x="300"
        y="668"
+       transform="translate(0,284.36218)" />
+    <rect
+       style="fill:#009779;fill-opacity:1;fill-rule:nonzero;stroke:#0000c4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3422"
+       width="25"
+       height="35"
+       x="300"
+       y="688"
+       transform="translate(0,284.36218)" />
+    <rect
+       style="fill:#009779;fill-opacity:1;fill-rule:nonzero;stroke:#0000c4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3424"
+       width="130"
+       height="10"
+       x="170"
+       y="713"
+       transform="translate(0,284.36218)" />
+    <rect
+       style="fill:#009779;fill-opacity:1;fill-rule:nonzero;stroke:#0000c4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3426"
+       width="90"
+       height="10"
+       x="65"
+       y="713"
+       transform="translate(0,284.36218)" />
+    <rect
+       style="fill:#009779;fill-opacity:1;fill-rule:nonzero;stroke:#0000c4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3428"
+       width="50"
+       height="10"
+       x="0"
+       y="713"
+       transform="translate(0,284.36218)" />
+    <rect
+       style="fill:#009779;fill-opacity:1;fill-rule:nonzero;stroke:#0000c4;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3430"
+       width="10"
+       height="25"
+       x="0"
+       y="688"
        transform="translate(0,284.36218)" />
   </g>
 </svg>

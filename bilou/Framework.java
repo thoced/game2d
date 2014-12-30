@@ -1,12 +1,21 @@
 package bilou;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.jsfml.graphics.BlendMode;
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.IntRect;
+import org.jsfml.graphics.RenderStates;
+import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.graphics.Shader;
+import org.jsfml.graphics.ShaderSourceException;
+import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.TextureCreationException;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
@@ -33,6 +42,14 @@ public class Framework
 	private  Time totalTime;
 	// RenderWindow JSFML (SFML)
 	private RenderWindow window;
+	// RenderTexture
+	private RenderTexture renderText,renderText2,renderFinal;
+	// Sprite posteffect
+	private Sprite postEffect1,postEffect2,postEffectFinal;
+	// RenderState
+	private RenderStates rState;
+	// Shader
+	private Shader shader;
 	// Camera
 	private Camera camera;
 	// QuadTree
@@ -41,11 +58,35 @@ public class Framework
 	private Logo log;
 	// LoaderMap
 	private LoaderMap loader;
+	// Lens
+	private Lens lens;
 	
-	public Framework(RenderWindow w)
+	private robot rob;
+	
+	public Framework(RenderWindow w) throws TextureCreationException
 	{
 		// Window
 		window = w;
+		// RenderTexture 01
+		renderText = new RenderTexture();
+		renderText.create(window.getSize().x, window.getSize().y);
+		// creation du postEffect Sprite
+		postEffect1 = new Sprite(renderText.getTexture());
+		
+		// RenderTexture 02
+		renderText2 = new RenderTexture();
+		renderText2.create(window.getSize().x, window.getSize().y);
+		postEffect2 = new Sprite(renderText2.getTexture());
+		
+		// RenderFinal
+		renderFinal = new RenderTexture();
+		renderFinal.create(window.getSize().x, window.getSize().y);
+		postEffectFinal = new Sprite(renderFinal.getTexture());
+		
+		// RenderState
+		shader = new Shader();
+		rState = new RenderStates(BlendMode.ADD);
+		
 		// camera
 		camera = new Camera(window);
 		// instance quadtree
@@ -58,7 +99,30 @@ public class Framework
 		listeElements = new ArrayList<IGameBase>();
 		// (TEST) chargement d'un niveau
 		loader = new LoaderMap();
+		// Lens
+		lens = new Lens();
+		try 
+		{
+			lens.Init(this);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ShaderSourceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		rob = new robot();
+		try {
+			rob.Init(this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ShaderSourceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void Update()
@@ -72,6 +136,8 @@ public class Framework
 			unit.Update(deltaTime);
 		}
 		
+		lens.Update(deltaTime);
+		
 		// suppression des élements
 		arrayElements.removeAll(arrayDelete);
 	}
@@ -80,10 +146,7 @@ public class Framework
 	{
 		window.setView(camera.getView());
 		
-		for(IGameBase unit : arrayElements)
-		{
-			unit.Draw(window);
-		}
+		
 		Vector2f  size = camera.getView().getSize();
 		Vector2f centre = camera.getView().getCenter();
 		Vector2f source = Vector2f.sub(centre, Vector2f.div(size,2));
@@ -93,15 +156,44 @@ public class Framework
 		listeElements.clear();
 		quadtree.GetElements(zone,listeElements);
 		
-		System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
+		//System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
 		
+		// on efface le backbuffer
+		renderText.clear(new Color(32,32,48));
+		
+		// RENDER 01
+		// on dessine les élements
 		for(IGameBase e : listeElements)
 		{
-			e.Draw(window);
+			e.Draw(renderText);
 		}
+		// on rend les élements
+		renderText.display();
 		
+		// RENDER 02
+		// on dessine la lumière dans le render 2
+		renderText2.clear(new Color(0,0,0,0));
+		lens.Draw(renderText2);
+		renderText2.display();
+		
+		// RENDER FINAL
+		// on fusionne les deux render 01 et 03
+		renderFinal.clear(new Color(255,255,255,0));
+		renderFinal.draw(postEffect1);
+		renderFinal.draw(postEffect2,rState);
+		renderFinal.display();
+		
+			
+			
 		// drawdebug quadtree
 		//quadtree.DrawDebugBounds(window);
+		
+		// backbuffer dans le frontbuffer
+	//	renderText.display();
+		window.clear(new Color(32,32,48));
+		window.draw(postEffectFinal);
+		window.display();
+		
 		
 	}
 	
@@ -179,6 +271,9 @@ public class Framework
 		//arrayElements.addAll(loader.getListElement());
 		for(IGameBase a : loader.getListElement())
 			this.quadtree.InsertElement(a);
+		
+	//	arrayElements.add(lens);
+		//arrayElements.add(rob);
 	}
 	
 	public void ReleaseContent()

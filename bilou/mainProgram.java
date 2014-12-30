@@ -2,6 +2,7 @@ package bilou;
 
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.graphics.TextureCreationException;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.event.Event;
@@ -21,11 +22,21 @@ public class mainProgram {
 		//Limit the framerate
 		window.setFramerateLimit(60);
 		
-		Framework framework = new Framework(window);
-		// contentload
-		framework.LoadContent();
+		Framework framework = null;
+		try 
+		{
+			framework = new Framework(window);
+			// contentload
+			framework.LoadContent();
 
-		//Main loop
+			//Main loop
+			
+		} catch (TextureCreationException e) {
+			// TODO Auto-generated catch block
+			window.close();
+			e.printStackTrace();
+		}
+		
 		while(window.isOpen()) 
 		{
 			//Handle events
@@ -52,14 +63,13 @@ public class mainProgram {
 		        framework.CatchEvent(event);  
 		    }
 			
-		    //Fill the window with red
-		    window.clear(Color.BLACK);
+		 
 	        // update
 	        framework.Update();
 	        // draw
 	        framework.Draw(window);
-		    
-	        window.display();
+	       
+	      
 	        
 
 		    

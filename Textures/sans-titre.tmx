@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tileset01" tilewidth="16" tileheight="16" spacing="2" margin="2">
+  <image source="sma4_tiles.png" width="982" height="452"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENgDAQBMGXTM1AUZiigNwt4Bqc8MITTH66bUtEAwAAAFJYS8Q2YC/fb/+jo/9aB5x66DEBPXLRIxc9crn6r/eARw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKm9zhP60g==
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="100" height="100">
+  <object x="34" y="163" width="234" height="105"/>
+ </objectgroup>
+</map>

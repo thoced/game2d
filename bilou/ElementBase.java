@@ -8,7 +8,9 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.IntRect;
 import org.jsfml.graphics.RectangleShape;
 import org.jsfml.graphics.RenderStates;
+import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Time;
@@ -56,11 +58,13 @@ public class ElementBase implements IGameBase
 		width = w;
 		height = h;
 		
+		
 		rectvue = new RectangleShape(new Vector2f(width,height));
 		rectvue.setOrigin(0,0);
 		rectvue.setPosition(new Vector2f(x,y));
 		//rectvue.setOutlineColor(Color.RED);
-		rectvue.setFillColor(new Color(64,64,64));
+		rectvue.setFillColor(new Color(0,0,0));
+		
 		//rectvue.setOutlineThickness(1.0f);
 		
 
@@ -74,7 +78,7 @@ public class ElementBase implements IGameBase
 	}
 
 	@Override
-	public void Draw(RenderWindow window) 
+	public void Draw(RenderTexture window) 
 	{
 		
 		//RenderStates state;
@@ -114,6 +118,8 @@ public class ElementBase implements IGameBase
 		this.trans = trans;
 		
 	}
+
+	
 	
 	
 }
