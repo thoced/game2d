@@ -1,5 +1,6 @@
 package Loader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.json.*;
@@ -20,10 +21,14 @@ public class LoaderTiled
 	// firstgid
 	private int firstgid;
 	
+	// nom de la map
+	private String nameMap;
+	// data map
+	private List<Integer> dataMap;
 	
 	public String toString()
 	{
-		return String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight); 
+		return String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight) + dataMap; 
 	}
 	
 	public void Load()
@@ -44,14 +49,13 @@ public class LoaderTiled
 					this.mapHeight = obj.getInt("height");
 				}
 				
-				
 				// ---------------- obtention du tableau tileset -------------
 				// -----------------------------------------------------------
 				// -----------------------------------------------------------
 				
-				JsonArray  layers = obj.getJsonArray("tilesets");
-				// on récupère la liste des objets contenu danas le tableau layers		
-				List<JsonObject> l = layers.getValuesAs(JsonObject.class);
+				JsonArray  tilesets = obj.getJsonArray("tilesets");
+				// on récupère la liste des objets contenu danas le tableau tilesets		
+				List<JsonObject> l = tilesets.getValuesAs(JsonObject.class);
 				
 				for(JsonObject o :  l)
 				{
@@ -98,8 +102,32 @@ public class LoaderTiled
 				
 				// ---------------------------------------------------------
 				// ---------------------------------------------------------
+				// ---------------- obtention du tableau layers -------------
+				// -----------------------------------------------------------
+				// -----------------------------------------------------------
 				
+				JsonArray  layers = obj.getJsonArray("layers");
+				// on récupère la liste des objets contenu danas le tableau layers		
+				List<JsonObject> listLayers = layers.getValuesAs(JsonObject.class);
 				
+				// instance de data map
+				dataMap = new ArrayList<Integer>();
+				
+				for(JsonObject o : listLayers)
+				{
+					if(o.containsKey("name"))
+					{
+						this.nameMap = o.getString("name");
+					}
+					
+					if(o.containsKey("data"))
+					{
+						dataMap.clear();
+						JsonArray data = o.getJsonArray("data");
+						for(int ind=0;ind<data.size();ind++)
+							dataMap.add(data.getInt(ind));
+					}
+				}
 	}
 	
 	public static void main(String[] args) 
