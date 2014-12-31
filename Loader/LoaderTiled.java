@@ -1,5 +1,6 @@
 package Loader;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ public class LoaderTiled
 	private int margin,spacing;
 	// firstgid
 	private int firstgid;
-	
 	// nom de la map
 	private String nameMap;
 	// data map
@@ -31,10 +31,17 @@ public class LoaderTiled
 		return String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight) + dataMap; 
 	}
 	
-	public void Load()
+	public void Load(InputStream nameFile) throws LoaderTiledException
 	{
+		// si l'input stream est null, on lance l'exception
+		if(nameFile==null)
+			throw new LoaderTiledException();
+		
 		// ouverture du fichier
-				JsonReader reader = Json.createReader(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
+				JsonReader reader = Json.createReader(nameFile);
+				if(reader==null)
+					throw new LoaderTiledException();
+				
 				// lecture de l'objet principale json
 				JsonObject obj = reader.readObject();
 				
@@ -130,14 +137,193 @@ public class LoaderTiled
 				}
 	}
 	
+	
+	
+	/**
+						this.tileWidth = o.getInt("ti
+	 * @return the mapWidth
+	 */
+	public int getMapWidth() {
+		return mapWidth;
+	}
+
+	/**
+	 * @param mapWidth the mapWidth to set
+	 */
+	public void setMapWidth(int mapWidth) {
+		this.mapWidth = mapWidth;
+	}
+
+	/**
+	 * @return the mapHeight
+	 */
+	public int getMapHeight() {
+		return mapHeight;
+	}
+
+	/**
+	 * @param mapHeight the mapHeight to set
+	 */
+	public void setMapHeight(int mapHeight) {
+		this.mapHeight = mapHeight;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the imageWidth
+	 */
+	public int getImageWidth() {
+		return imageWidth;
+	}
+
+	/**
+	 * @param imageWidth the imageWidth to set
+	 */
+	public void setImageWidth(int imageWidth) {
+		this.imageWidth = imageWidth;
+	}
+
+	/**
+	 * @return the imageHeight
+	 */
+	public int getImageHeight() {
+		return imageHeight;
+	}
+
+	/**
+	 * @param imageHeight the imageHeight to set
+	 */
+	public void setImageHeight(int imageHeight) {
+		this.imageHeight = imageHeight;
+	}
+
+	/**
+	 * @return the tileWidth
+	 */
+	public int getTileWidth() {
+		return tileWidth;
+	}
+
+	/**
+	 * @param tileWidth the tileWidth to set
+	 */
+	public void setTileWidth(int tileWidth) {
+		this.tileWidth = tileWidth;
+	}
+
+	/**
+	 * @return the tileHeight
+	 */
+	public int getTileHeight() {
+		return tileHeight;
+	}
+
+	/**
+	 * @param tileHeight the tileHeight to set
+	 */
+	public void setTileHeight(int tileHeight) {
+		this.tileHeight = tileHeight;
+	}
+
+	/**
+	 * @return the margin
+	 */
+	public int getMargin() {
+		return margin;
+	}
+
+	/**
+	 * @param margin the margin to set
+	 */
+	public void setMargin(int margin) {
+		this.margin = margin;
+	}
+
+	/**
+	 * @return the spacing
+	 */
+	public int getSpacing() {
+		return spacing;
+	}
+
+	/**
+	 * @param spacing the spacing to set
+	 */
+	public void setSpacing(int spacing) {
+		this.spacing = spacing;
+	}
+
+	/**
+	 * @return the firstgid
+	 */
+	public int getFirstgid() {
+		return firstgid;
+	}
+
+	/**
+	 * @param firstgid the firstgid to set
+	 */
+	public void setFirstgid(int firstgid) {
+		this.firstgid = firstgid;
+	}
+
+	/**
+	 * @return the nameMap
+	 */
+	public String getNameMap() {
+		return nameMap;
+	}
+
+	/**
+	 * @param nameMap the nameMap to set
+	 */
+	public void setNameMap(String nameMap) {
+		this.nameMap = nameMap;
+	}
+
+	/**
+	 * @return the dataMap
+	 */
+	public List<Integer> getDataMap() {
+		return dataMap;
+	}
+
+	/**
+	 * @param dataMap the dataMap to set
+	 */
+	public void setDataMap(List<Integer> dataMap) {
+		this.dataMap = dataMap;
+	}
+
 	public static void main(String[] args) 
 	{
 		
 		LoaderTiled tiled = new LoaderTiled();
-		tiled.Load();
+		try 
+		{
+			tiled.Load(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
+			
+		} catch (LoaderTiledException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(tiled);
 		
-	//	System.out.println(number);
+	
 		
 		
 	}
