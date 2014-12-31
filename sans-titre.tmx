@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiletset01" tilewidth="16" tileheight="16" spacing="2" margin="2">
+  <image source="Textures/tileset.png" width="982" height="452"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYKA+4MKCiVGDSx029ZSoI9d99AAAB6cBQQ==
+  </data>
+ </layer>
+</map>
