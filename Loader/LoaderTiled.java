@@ -28,7 +28,7 @@ public class LoaderTiled
 	
 	public String toString()
 	{
-		return String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight) + dataMap; 
+		return nameMap + String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight) + dataMap; 
 	}
 	
 	public void Load(InputStream nameFile) throws LoaderTiledException
@@ -134,7 +134,12 @@ public class LoaderTiled
 						for(int ind=0;ind<data.size();ind++)
 							dataMap.add(data.getInt(ind));
 					}
+					
+					
 				}
+				
+				// fermeture du reader
+				reader.close();
 	}
 	
 	
