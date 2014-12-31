@@ -16,7 +16,7 @@
          "name":"Calque d'objets 1",
          "objects":[
                 {
-                 "height":33,
+                 "height":15,
                  "name":"",
                  "properties":
                     {
@@ -24,9 +24,9 @@
                     },
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":60,
-                 "y":49
+                 "width":14,
+                 "x":47,
+                 "y":61
                 }],
          "opacity":1,
          "type":"objectgroup",
