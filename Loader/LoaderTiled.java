@@ -7,6 +7,10 @@ import java.util.List;
 import javax.json.*;
 import javax.json.JsonValue.ValueType;
 
+import org.jsfml.graphics.Texture;
+
+import bilou.DrawableMap;
+
 public class LoaderTiled 
 {
 	// taille de la map
@@ -320,6 +324,9 @@ public class LoaderTiled
 		try 
 		{
 			tiled.Load(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
+			
+			DrawableMap dm = new DrawableMap();
+			//dm.LoadMap(tiled.getDataMap(), new Texture(tiled.getImage()), width, height, wTile, hTile, margin, parcing);
 			
 		} catch (LoaderTiledException e) 
 		{
