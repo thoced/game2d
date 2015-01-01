@@ -15,7 +15,9 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Shader;
 import org.jsfml.graphics.ShaderSourceException;
 import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Texture;
 import org.jsfml.graphics.TextureCreationException;
+import org.jsfml.graphics.Transform;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
@@ -25,6 +27,8 @@ import org.jsfml.window.event.Event;
 
 import CoreQuadTree.QuadTreeNode;
 import Loader.LoaderMap;
+import Loader.LoaderTiled;
+import Loader.LoaderTiledException;
 import structure.Iunitbase;
 import structure.wall;
 
@@ -63,6 +67,8 @@ public class Framework
 	
 	private robot rob;
 	
+	private DrawableMap dm;
+	
 	public Framework(RenderWindow w) throws TextureCreationException
 	{
 		// Window
@@ -70,22 +76,26 @@ public class Framework
 		// RenderTexture 01
 		renderText = new RenderTexture();
 		renderText.create(window.getSize().x, window.getSize().y);
+	//	renderText.setView(window.getView());
 		// creation du postEffect Sprite
 		postEffect1 = new Sprite(renderText.getTexture());
 		
 		// RenderTexture 02
 		renderText2 = new RenderTexture();
 		renderText2.create(window.getSize().x, window.getSize().y);
+	//	renderText2.setView(window.getView());
 		postEffect2 = new Sprite(renderText2.getTexture());
 		
 		// RenderFinal
 		renderFinal = new RenderTexture();
 		renderFinal.create(window.getSize().x, window.getSize().y);
+	//	renderFinal.setView(window.getView());
 		postEffectFinal = new Sprite(renderFinal.getTexture());
 		
 		// RenderState
 		shader = new Shader();
 		rState = new RenderStates(BlendMode.ADD);
+		
 		
 		// camera
 		camera = new Camera(window);
@@ -123,6 +133,8 @@ public class Framework
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public void Update()
@@ -163,10 +175,12 @@ public class Framework
 		
 		// RENDER 01
 		// on dessine les élements
-		for(IGameBase e : listeElements)
+	/*	for(IGameBase e : listeElements)
 		{
 			e.Draw(renderText);
 		}
+		
+		
 		// on rend les élements
 		renderText.display();
 		
@@ -182,18 +196,29 @@ public class Framework
 		renderFinal.draw(postEffect1);
 		renderFinal.draw(postEffect2,rState);
 		renderFinal.display();
+	*/
+	
+	//	renderText.setView(camera.getView());
+	//	dm.draw(renderText, rState);
 		
-			
+		
+	//	renderFinal.draw(postEffect1);
+		
 			
 		// drawdebug quadtree
 		//quadtree.DrawDebugBounds(window);
 		
 		// backbuffer dans le frontbuffer
-	//	renderText.display();
-		window.clear(new Color(32,32,48));
-		window.draw(postEffectFinal);
-		window.display();
+		//renderText.display();
+		/*RenderStates rs = new RenderStates(this.camera.getView().getTransform());
+		dm.draw(renderText,rState);
+		renderText.display();
+		*/
+	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
+		window.clear(new Color(32,32,48));
+		window.draw(dm);
+		window.display();
 		
 	}
 	
@@ -271,6 +296,27 @@ public class Framework
 		//arrayElements.addAll(loader.getListElement());
 		for(IGameBase a : loader.getListElement())
 			this.quadtree.InsertElement(a);
+		
+		LoaderTiled tiled = new LoaderTiled();
+		try 
+		{
+			tiled.Load(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
+			
+			dm = new DrawableMap();
+			Texture text = new Texture();
+			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset01.png"));
+			
+			dm.LoadMap(tiled.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing());
+			
+		} catch (LoaderTiledException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(tiled);
 		
 	//	arrayElements.add(lens);
 		//arrayElements.add(rob);
