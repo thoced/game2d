@@ -2,6 +2,7 @@ package bilou;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.View;
 import org.jsfml.system.Time;
@@ -20,7 +21,7 @@ public class Camera implements ICoreBase
 	// CurrentAdd
 	private Vector2f currentAdd = Vector2f.ZERO;
 	// Speed camera
-	private float speed = 128.0f;
+	private float speed = 512.0f;
 	// ZoomLevel camera
 	private int zoomLevel = 1;
    
@@ -28,9 +29,10 @@ public class Camera implements ICoreBase
 //Fill the win = 0;
 	
 	
-	public Camera(RenderWindow window)
+	public Camera(RenderTexture window)
 	{
 		view = (View) window.getView();
+		//view = new View();
 	}
 	
 	public void Update(Time deltaTime) 
@@ -39,6 +41,7 @@ public class Camera implements ICoreBase
 		// Modification de la vue de la camera
 		Vector2f newcenter = Vector2f.add(view.getCenter(), Vector2f.mul(currentAdd, speed * deltaTime.asSeconds()));
 		view.setCenter(newcenter);
+		
 		
 	}
     
@@ -66,14 +69,16 @@ public class Camera implements ICoreBase
 	{
 		Vector2f size = view.getSize();
 		size = Vector2f.div(size, 2);
-		view.setSize(size);
+		//view.setSize(size);
+		view.zoom(2);
 		this.zoomLevel ++;
 	}
 	public void ZoomOut()
 	{
 		Vector2f size = view.getSize();
 		size = Vector2f.mul(size, 2);
-		view.setSize(size);
+		//view.setSize(size);
+		view.zoom(0.5f);
 		this.zoomLevel --;
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RectangleShape;
+import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Vector2f;
 

@@ -1,5 +1,6 @@
 package Loader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class LoaderTiled
 	// taille des tiles
 	private int tileWidth,tileHeight;
 	// marge et spacing entre les tiles
-	private int margin,spacing;
+	private int margin,parcing;
 	// firstgid
 	private int firstgid;
 	// nom de la map
@@ -92,7 +93,7 @@ public class LoaderTiled
 					
 					if(o.containsKey("spacing"))
 					{
-						this.spacing = o.getInt("spacing");
+						this.parcing = o.getInt("spacing");
 					}
 					
 					if(o.containsKey("tilewidth"))
@@ -264,15 +265,15 @@ public class LoaderTiled
 	/**
 	 * @return the spacing
 	 */
-	public int getSpacing() {
-		return spacing;
+	public int getParcing() {
+		return parcing;
 	}
 
 	/**
 	 * @param spacing the spacing to set
 	 */
-	public void setSpacing(int spacing) {
-		this.spacing = spacing;
+	public void setParcing(int parcing) {
+		this.parcing = parcing;
 	}
 
 	/**
@@ -320,20 +321,7 @@ public class LoaderTiled
 	public static void main(String[] args) 
 	{
 		
-		LoaderTiled tiled = new LoaderTiled();
-		try 
-		{
-			tiled.Load(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
-			
-			DrawableMap dm = new DrawableMap();
-			//dm.LoadMap(tiled.getDataMap(), new Texture(tiled.getImage()), width, height, wTile, hTile, margin, parcing);
-			
-		} catch (LoaderTiledException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(tiled);
+		
 		
 	
 		

@@ -18,6 +18,7 @@ import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.graphics.TextureCreationException;
 import org.jsfml.graphics.Transform;
+import org.jsfml.graphics.View;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
@@ -98,7 +99,7 @@ public class Framework
 		
 		
 		// camera
-		camera = new Camera(window);
+		camera = new Camera(renderText);
 		// instance quadtree
 		quadtree = new QuadTreeNode(1,new FloatRect(0,0,4096,4096));
 		// arrayunits
@@ -156,7 +157,7 @@ public class Framework
 	
 	public void Draw(RenderWindow window)
 	{
-		window.setView(camera.getView());
+		//window.setView(camera.getView());
 		
 		
 		Vector2f  size = camera.getView().getSize();
@@ -186,7 +187,7 @@ public class Framework
 		
 		// RENDER 02
 		// on dessine la lumière dans le render 2
-		renderText2.clear(new Color(0,0,0,0));
+		renderText2.clear(new Color(0,0,0,0));Drawable
 		lens.Draw(renderText2);
 		renderText2.display();
 		
@@ -210,14 +211,15 @@ public class Framework
 		
 		// backbuffer dans le frontbuffer
 		//renderText.display();
-		/*RenderStates rs = new RenderStates(this.camera.getView().getTransform());
+		
+		renderText.setView(camera.getView());
 		dm.draw(renderText,rState);
 		renderText.display();
-		*/
+		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
 		window.clear(new Color(32,32,48));
-		window.draw(dm);
+		window.draw(postEffect1);
 		window.display();
 		
 	}
@@ -302,9 +304,16 @@ public class Framework
 		{
 			tiled.Load(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
 			
-			dm = new DrawableMap();
+			try 
+			{
+				dm = new DrawableMap();
+				
+			} catch (ShaderSourceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Texture text = new Texture();
-			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset01.png"));
+			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset02.png"));
 			
 			dm.LoadMap(tiled.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing());
 			

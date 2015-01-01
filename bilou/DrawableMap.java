@@ -1,5 +1,6 @@
 package bilou;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.jsfml.graphics.BlendMode;
@@ -9,6 +10,8 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.PrimitiveType;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTarget;
+import org.jsfml.graphics.Shader;
+import org.jsfml.graphics.ShaderSourceException;
 import org.jsfml.graphics.Texture;
 import org.jsfml.graphics.Transform;
 import org.jsfml.graphics.Transformable;
@@ -28,10 +31,17 @@ public  class DrawableMap implements Drawable, Transformable
 	
 	private List<Integer> map;
 	
-	public DrawableMap()
+	// Shader
+	private Shader shader;
+	
+	public DrawableMap() throws IOException, ShaderSourceException
 	{
 		// initialisationdu vertexarray
 		listVertex = new VertexArray(PrimitiveType.QUADS);
+		// initialisation du shader
+		shader = new Shader();
+		shader.loadFromStream(DrawableMap.class.getResourceAsStream("/Shaders/VertexShaderMap.vert"),Shader.Type.VERTEX);
+		shader.loadFromStream(DrawableMap.class.getResourceAsStream("/Shaders/FragmentShaderMap.frag"),Shader.Type.FRAGMENT);
 	}
 	
 	public void LoadMap(List<Integer> map,Texture text,int mapWidth,int mapHeight,int wTile,int hTile,int margin,int parcing)
@@ -108,11 +118,6 @@ public  class DrawableMap implements Drawable, Transformable
 		return this.mapHeight * this.hTile;
 	}
 	
-	@Override
-	public Transform getInverseTransform() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Vector2f getOrigin() {
@@ -219,12 +224,20 @@ public  class DrawableMap implements Drawable, Transformable
 	@Override
 	public void draw(RenderTarget renderTarget,RenderStates states) 
 	{
+		shader.setParameter("maTexture", Shader.CURRENT_TEXTURE);
+		
 		RenderStates newStates = new RenderStates(BlendMode.NONE,
 		        Transform.combine(states.transform, this.getTransform()),this.textureTileSets,null);
 
 		renderTarget.draw(listVertex,newStates);
 		
 		
+	}
+
+	@Override
+	public Transform getInverseTransform() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
