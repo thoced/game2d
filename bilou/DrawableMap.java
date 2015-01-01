@@ -2,6 +2,8 @@ package bilou;
 
 import java.util.List;
 
+import org.jsfml.graphics.BlendMode;
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.Drawable;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.PrimitiveType;
@@ -12,6 +14,7 @@ import org.jsfml.graphics.Transform;
 import org.jsfml.graphics.Transformable;
 import org.jsfml.graphics.Vertex;
 import org.jsfml.graphics.VertexArray;
+import org.jsfml.graphics.View;
 import org.jsfml.system.Vector2f;
 
 public  class DrawableMap implements Drawable, Transformable 
@@ -21,7 +24,7 @@ public  class DrawableMap implements Drawable, Transformable
 	
 	private VertexArray listVertex;
 	
-	private int width,height,wTile,hTile,margin,parcing;
+	private int mapWidth,mapHeight,wTile,hTile,margin,parcing;
 	
 	private List<Integer> map;
 	
@@ -31,12 +34,12 @@ public  class DrawableMap implements Drawable, Transformable
 		listVertex = new VertexArray(PrimitiveType.QUADS);
 	}
 	
-	public void LoadMap(List<Integer> map,Texture text,int width,int height,int wTile,int hTile,int margin,int parcing)
+	public void LoadMap(List<Integer> map,Texture text,int mapWidth,int mapHeight,int wTile,int hTile,int margin,int parcing)
 	{
 		this.textureTileSets = text;
 		
-		this.width = width;
-		this.height = height;
+		this.mapWidth = mapWidth;
+		this.mapHeight = mapHeight;
 		this.wTile = wTile;
 		this.hTile = hTile;
 		this.margin = margin;
@@ -51,15 +54,58 @@ public  class DrawableMap implements Drawable, Transformable
 	
 	private void createVertex()
 	{
-		Vertex v0 = new Vertex(new Vector2f(0,0));
-		Vertex v1 = new Vertex(new Vector2f(1,0));
-		Vertex v2 = new Vertex(new Vector2f(1,1));
-		Vertex v3 = new Vertex(new Vector2f(0,1));
+		// indice dans le vecteur de la map
+		int i = 0;
 		
-		listVertex.add(v0);
-		listVertex.add(v1);
-		listVertex.add(v2);
-		listVertex.add(v3);
+		for(int posY = 0; posY < this.getMapHeightInPixels(); posY += this.hTile)
+		{
+			for(int posX = 0; posX < this.getMapWidthInPixels(); posX += this.wTile)
+			{
+				//creation des TextureRects
+				
+				
+				int ind = this.map.get(i) - 1;
+				
+				// obtention des valeurs x,y de la texture par rapport à l'indice
+				int x = (ind % (this.textureTileSets.getSize().x / (this.wTile)) * this.wTile) ;
+				int y = (ind / (this.textureTileSets.getSize().x / (this.wTile)) * this.hTile) ;
+				
+				Vector2f t0 = new Vector2f(x,y);
+				Vector2f t1 = new Vector2f(x + this.wTile,y);
+				Vector2f t2 = new Vector2f(x + this.wTile,y + this.hTile);
+				Vector2f t3 = new Vector2f(x,y + this.hTile);
+				
+				// creation des vertex
+				Vertex v0 = new Vertex(new Vector2f(posX,posY),t0);
+				Vertex v1 = new Vertex(new Vector2f(posX + this.wTile,posY),t1);
+				Vertex v2 = new Vertex(new Vector2f(posX + this.wTile, posY + this.hTile),t2);
+				Vertex v3 = new Vertex(new Vector2f(posX,posY + this.hTile),t3);
+				
+				// ajout des vertex dans le tableau de vertex
+				listVertex.add(v0);
+				listVertex.add(v1);
+				listVertex.add(v2);
+				listVertex.add(v3);
+				
+				// incrementation de l'indice du map
+				i++;
+			}
+		}
+	
+		
+		
+	}
+	
+	public int getMapWidthInPixels()
+	{
+		//retourne la taille de la map en longueur multiplié par la taille d'un tiles
+		return this.mapWidth * this.wTile;
+	}
+	
+	public int getMapHeightInPixels()
+	{
+		//retourne la taille de la map en hauteur multiplié par la hauteur d'un tiles
+		return this.mapHeight * this.hTile;
 	}
 	
 	@Override
@@ -95,7 +141,7 @@ public  class DrawableMap implements Drawable, Transformable
 	@Override
 	public Transform getTransform() {
 		// TODO Auto-generated method stub
-		return null;
+		return Transform.IDENTITY;
 	}
 
 	@Override
@@ -166,13 +212,18 @@ public  class DrawableMap implements Drawable, Transformable
 
 	@Override
 	public void setScale(float arg0, float arg1) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu,camera.getView().getViewport()b
 		
 	}
 
 	@Override
-	public void draw(RenderTarget arg0, RenderStates arg1) {
-		// TODO Auto-generated method stub
+	public void draw(RenderTarget renderTarget,RenderStates states) 
+	{
+		RenderStates newStates = new RenderStates(BlendMode.NONE,
+		        Transform.combine(states.transform, this.getTransform()),this.textureTileSets,null);
+
+		renderTarget.draw(listVertex,newStates);
+		
 		
 	}
 
