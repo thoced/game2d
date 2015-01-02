@@ -404,6 +404,20 @@ public class LoaderTiled
 		this.dataMap = dataMap;
 	}
 
-		
+	/**
+	 * @return the dataObjects
+	 */
+	public List<TiledObjectBase> getDataObjects() {
+		return dataObjects;
+	}
+
+	/**
+	 * @param dataObjects the dataObjects to set
+	 */
+	public void setDataObjects(List<TiledObjectBase> dataObjects) {
+		this.dataObjects = dataObjects;
+	}
+
+	
 
 }
