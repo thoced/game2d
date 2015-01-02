@@ -28,12 +28,14 @@ public class LoaderTiled
 	private int firstgid;
 	// nom de la map
 	private String nameMap;
-	// data map
-	private List<Integer> dataMap;
+	// liste des layers tiles
+	private List<TiledLayerTiles> listLayersTiles = new ArrayList<TiledLayerTiles>();
+	// liste des layers objects
+	private List<TiledLayerObjects> listLayersObjects = new ArrayList<TiledLayerObjects>();
 	
 	public String toString()
 	{
-		return nameMap + String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight) + dataMap; 
+		return nameMap + String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight); 
 	}
 	
 	public void Load(InputStream nameFile) throws LoaderTiledException
@@ -122,29 +124,129 @@ public class LoaderTiled
 				// on récupère la liste des objets contenu danas le tableau layers		
 				List<JsonObject> listLayers = layers.getValuesAs(JsonObject.class);
 				
-				// instance de data map
-				dataMap = new ArrayList<Integer>();
 				
 				for(JsonObject o : listLayers)
 				{
-					if(o.containsKey("name"))
+					if(o.containsKey("type"))
 					{
-						this.nameMap = o.getString("name");
+						// reception du type
+						String typeLayers = o.getString("type");
+						
+						// si le type est objectgroup
+						if(typeLayers.equals("objectgroup"))
+						{
+							// parse des objets
+							this.parseObjects(o);
+						}
+						
+						// si le type est tile
+						if(typeLayers.equals("tilelayer"))
+						{
+							// parse des tiles
+							this.parseTile(o);
+						}
 					}
-					
-					if(o.containsKey("data"))
-					{
-						dataMap.clear();
-						JsonArray data = o.getJsonArray("data");
-						for(int ind=0;ind<data.size();ind++)
-							dataMap.add(data.getInt(ind));
-					}
-					
-					
+	
 				}
 				
 				// fermeture du reader
 				reader.close();
+	}
+	
+	private void parseTile(JsonObject obj)
+	{
+		// instance de la class TiledLayerTiles
+		TiledLayerTiles layerTiles = new TiledLayerTiles();
+	
+		// reception du nom de la tile
+		layerTiles.setName(obj.getString("name"));
+		
+		// parse de la map
+		if(obj.containsKey("data"))
+		{
+			// ajout de l'indice dans le layerTiles
+			JsonArray data = obj.getJsonArray("data");
+			for(int ind=0;ind<data.size();ind++)
+				layerTiles.InsertIndice(data.getInt(ind));
+		}
+		
+		// ajout du layer Tiles dans la liste
+		this.listLayersTiles.add(layerTiles);
+	}
+	
+	private void parseObjects(JsonObject obj)
+	{
+		// on instancie l'objet dataObject
+		//this.dataObjects = new ArrayList<TiledObjectBase>();
+		// instance de la class TiledLayerObjects
+		TiledLayerObjects layerObject = new TiledLayerObjects();
+		
+		// récupération du tableau des objets 
+		JsonArray arrayObjects = obj.getJsonArray("objects");
+		
+		for(JsonValue value : arrayObjects)
+		{
+			// Pour chaque objet je récupère les values
+			if(value.getValueType() == ValueType.OBJECT)
+			{
+				JsonObject o = (JsonObject) value;
+				
+				// polyline
+				if(o.containsKey("polyline"))
+				{
+					// c'est un objet rectangle, on instantie
+					TiledObjectPolyline poly = new TiledObjectPolyline();
+					// si c'est un objet polyline
+					poly.setType(o.getString("type"));
+					poly.setX(o.getInt("x"));
+					poly.setY(o.getInt("y"));
+					// on récupère l'array polyline
+					JsonArray arrayPolyline = o.getJsonArray("polyline");
+					for(JsonValue valuePoly : arrayPolyline)
+					{
+						if(valuePoly.getValueType() == ValueType.OBJECT)
+						{
+							// on récupère les couples x,y pour les polyline
+							JsonObject opoly = (JsonObject) valuePoly;
+							
+							
+							int xpoly = opoly.getInt("x");
+							int ypoly = opoly.getInt("y");
+							// on ajoute un point
+							poly.InsertPoint(xpoly, ypoly);
+						}
+					}
+					
+					// on insère dans le tableau
+					//this.dataObjects.add(poly);
+					// on insère dans le layerobject
+					layerObject.InsertObject(poly);
+					
+				}
+				else
+				{
+					// c'est un objet rectangle, on instantie
+					TiledObjectRectangle rect = new TiledObjectRectangle();
+					// on récupère les x et y du rectangle plus le type
+					rect.setType(o.getString("type"));
+					rect.setX(o.getInt("x"));
+					rect.setY(o.getInt("y"));
+					// on récupère la taille du rectangle
+					rect.setWidth(o.getInt("width"));
+					rect.setHeight(o.getInt("height"));
+					// on insère dans le tableau
+					//this.dataObjects.add(rect);
+					// on insert l'objet rect dans le layerobject
+					layerObject.InsertObject(rect);
+				}
+				
+				
+				
+			}
+		}
+		
+		// insertion du layer
+		this.listLayersObjects.add(layerObject);
 	}
 	
 	
@@ -305,28 +407,35 @@ public class LoaderTiled
 	}
 
 	/**
-	 * @return the dataMap
+	 * @return the listLayersTiles
 	 */
-	public List<Integer> getDataMap() {
-		return dataMap;
+	public List<TiledLayerTiles> getListLayersTiles() {
+		return listLayersTiles;
 	}
 
 	/**
-	 * @param dataMap the dataMap to set
+	 * @param listLayersTiles the listLayersTiles to set
 	 */
-	public void setDataMap(List<Integer> dataMap) {
-		this.dataMap = dataMap;
+	public void setListLayersTiles(List<TiledLayerTiles> listLayersTiles) {
+		this.listLayersTiles = listLayersTiles;
 	}
 
-	public static void main(String[] args) 
-	{
-		
-		
-		
-	
-		
-		
+	/**
+	 * @return the listLayersObjects
+	 */
+	public List<TiledLayerObjects> getListLayersObjects() {
+		return listLayersObjects;
 	}
-		
+
+	/**
+	 * @param listLayersObjects the listLayersObjects to set
+	 */
+	public void setListLayersObjects(List<TiledLayerObjects> listLayersObjects) {
+		this.listLayersObjects = listLayersObjects;
+	}
+
+	
+
+	
 
 }
