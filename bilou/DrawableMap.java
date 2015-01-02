@@ -224,11 +224,13 @@ public  class DrawableMap implements Drawable, Transformable
 	@Override
 	public void draw(RenderTarget renderTarget,RenderStates states) 
 	{
-		//shader.setParameter("maTexture", Shader.CURRENT_TEXTURE);
+		shader.setParameter("maTexture", Shader.CURRENT_TEXTURE);
 		
 		RenderStates newStates = new RenderStates(BlendMode.ADD,
 		        Transform.combine(states.transform, this.getTransform()),this.textureTileSets,null);
 
+		
+	
 		renderTarget.draw(listVertex,newStates);
 		
 		
