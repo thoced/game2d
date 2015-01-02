@@ -30,6 +30,7 @@ import CoreQuadTree.QuadTreeNode;
 import Loader.LoaderMap;
 import Loader.LoaderTiled;
 import Loader.LoaderTiledException;
+import Loader.TiledLayerTiles;
 import structure.Iunitbase;
 import structure.wall;
 
@@ -218,7 +219,7 @@ public class Framework
 		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
-		window.clear(new Color(32,32,48));
+		window.clear(new Color(3,32,48));
 		window.draw(postEffect1);
 		window.display();
 		
@@ -315,7 +316,14 @@ public class Framework
 			Texture text = new Texture();
 			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset02.png"));
 			
-			dm.LoadMap(tiled.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing());
+			// recupération du layer tiled
+			for(TiledLayerTiles o : tiled.getListLayersTiles())
+			{
+				// chargement d'un des layer tiles (Attention il va falloir charger plusieur Drawable map par Layer)
+				dm.LoadMap(o.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing());
+				
+			}
+			
 			
 		} catch (LoaderTiledException e) 
 		{
