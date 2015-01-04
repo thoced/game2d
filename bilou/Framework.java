@@ -28,6 +28,7 @@ import org.jsfml.window.event.Event;
 
 import CoreManagerObstacle.ObstacleManager;
 import CoreQuadTree.QuadTreeNode;
+import CoreTexturesManager.TexturesManager;
 import Entities.EntitiesManager;
 import Loader.LoaderMap;
 import Loader.LoaderTiled;
@@ -71,6 +72,8 @@ public class Framework
 	private LoaderMap loader;
 	// Manager d'Obstacle
 	private ObstacleManager obstacleManager;
+	// Textures manager
+	private TexturesManager texturesManager;
 	// Entities manager
 	private EntitiesManager entitiesManager;
 	// Lens
@@ -123,6 +126,8 @@ public class Framework
 		loader = new LoaderMap();
 		// instance du manager d'obstacle;
 		obstacleManager = new ObstacleManager();
+		// instance de Textures Manager
+		texturesManager = new TexturesManager();
 		// instance du manager d'entitées
 		entitiesManager = new EntitiesManager();
 		// Lens
@@ -165,6 +170,9 @@ public class Framework
 		}
 		
 		lens.Update(deltaTime);
+		
+		// update du entities manager
+		entitiesManager.Update(deltaTime);
 		
 		// suppression des élements
 		arrayElements.removeAll(arrayDelete);
@@ -240,6 +248,12 @@ public class Framework
 		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
+		// appel a la methode draw de l'entites manager
+		renderText.setView(camera.getView());
+		entitiesManager.Draw(renderText,rStateForeGround);
+		renderText.display();
+		
+		
 		// affichage dans la fenetre principale (écran)
 		window.clear(new Color(3,32,48));
 		window.draw(postEffect1);
@@ -272,11 +286,11 @@ public class Framework
 		
 		if(event.type == Event.Type.KEY_PRESSED)
 		{
-			if(event.asKeyEvent().key == Keyboard.Key.A)
+			if(event.asKeyEvent().key == Keyboard.Key.O)
 			{
 				camera.ZoomIn();
 			}
-			else if(event.asKeyEvent().key == Keyboard.Key.Z)
+			else if(event.asKeyEvent().key == Keyboard.Key.P)
 			{
 				camera.ZoomOut();
 			}
@@ -327,6 +341,10 @@ public class Framework
 		//arrayElements.addAll(loader.getListElement());
 		for(IGameBase a : loader.getListElement())
 			this.quadtree.InsertElement(a);
+		// textures manager loadcontent
+		texturesManager.LoadContent();
+		// entities manager loadcontent
+		entitiesManager.LoadContent();
 		
 		LoaderTiled tiled = new LoaderTiled();
 		try 

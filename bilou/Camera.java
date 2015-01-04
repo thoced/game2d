@@ -2,6 +2,7 @@ package bilou;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.View;
@@ -83,11 +84,7 @@ public class Camera implements ICoreBase
 		this.zoomLevel --;
 	}
 
-	@Override
-	public void Draw() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void LoadContent() {
@@ -115,6 +112,12 @@ public class Camera implements ICoreBase
 
 	@Override
 	public void CatchEvent(Event e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Draw(RenderTexture render, RenderStates state) {
 		// TODO Auto-generated method stub
 		
 	}

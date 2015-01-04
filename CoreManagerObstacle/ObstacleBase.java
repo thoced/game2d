@@ -13,5 +13,5 @@ public abstract class ObstacleBase
 	
 	public abstract ObstacleResult IsLineCollision(int x1,int y1,int x2,int y2);
 
-
+	
 }

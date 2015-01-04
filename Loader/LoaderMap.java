@@ -11,6 +11,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jsfml.graphics.RenderStates;
+import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Time;
 import org.jsfml.window.event.Event;
@@ -134,12 +136,7 @@ public class LoaderMap implements ICoreBase
 		this.listElement = listElement;
 	}
 
-	@Override
-	public void Draw() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void ReloadContent() {
 		// TODO Auto-generated method stub
@@ -160,6 +157,12 @@ public class LoaderMap implements ICoreBase
 
 	@Override
 	public void CatchEvent(Event e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Draw(RenderTexture render, RenderStates state) {
 		// TODO Auto-generated method stub
 		
 	}

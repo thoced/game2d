@@ -42,6 +42,7 @@ public class mainProgram {
 			//Handle events
 		    for(Event event : window.pollEvents()) 
 		    {
+	
 		        if(event.type == Event.Type.CLOSED) 
 		        {
 		            //The user pressed the close button
