@@ -82,4 +82,34 @@ public class Camera implements ICoreBase
 		this.zoomLevel --;
 	}
 
+	@Override
+	public void Draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void LoadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReloadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

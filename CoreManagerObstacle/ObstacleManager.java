@@ -3,7 +3,11 @@ package CoreManagerObstacle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObstacleManager extends ObstacleBase
+import org.jsfml.system.Time;
+
+import bilou.ICoreBase;
+
+public class ObstacleManager extends ObstacleBase implements ICoreBase
 {
 	private int sizeofmemory = 16;
 	// liste des obstacles
@@ -62,6 +66,42 @@ public class ObstacleManager extends ObstacleBase
 	{
 		// Effacement des l'ensemble des obstacles
 		this.listeObstacle.clear();
+	}
+
+	@Override
+	public void Update(Time deltaTime) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void LoadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReloadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Init() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

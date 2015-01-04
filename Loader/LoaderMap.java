@@ -132,6 +132,30 @@ public class LoaderMap implements ICoreBase
 	public void setListElement(List listElement) {
 		this.listElement = listElement;
 	}
+
+	@Override
+	public void Draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReloadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Init() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

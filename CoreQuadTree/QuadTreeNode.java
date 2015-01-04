@@ -7,11 +7,13 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RectangleShape;
 import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
+import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
 
+import bilou.ICoreBase;
 import bilou.IGameBase;
 
-public class QuadTreeNode 
+public class QuadTreeNode implements ICoreBase
 {
 	// membre static LevelNodeMax
 	public static int LevelNodeMax = 8;
@@ -173,6 +175,42 @@ public class QuadTreeNode
 
 	public void setBounds(FloatRect bounds) {
 		this.bounds = bounds;
+	}
+
+	@Override
+	public void Update(Time deltaTime) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void LoadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ReloadContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Init() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
