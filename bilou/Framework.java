@@ -26,11 +26,15 @@ import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 
+import CoreManagerObstacle.ObstacleManager;
 import CoreQuadTree.QuadTreeNode;
 import Loader.LoaderMap;
 import Loader.LoaderTiled;
 import Loader.LoaderTiledException;
+import Loader.TiledLayerObjects;
 import Loader.TiledLayerTiles;
+import Loader.TiledObjectBase;
+import Loader.TiledObjectRectangle;
 import structure.Iunitbase;
 import structure.wall;
 
@@ -53,7 +57,7 @@ public class Framework
 	// Sprite posteffect
 	private Sprite postEffect1,postEffect2,postEffectFinal;
 	// RenderState
-	private RenderStates rState;
+	private RenderStates rStateBackground,rStateForeGround;
 	// Shader
 	private Shader shader;
 	// Camera
@@ -64,12 +68,14 @@ public class Framework
 	private Logo log;
 	// LoaderMap
 	private LoaderMap loader;
+	// Manager d'Obstacle
+	private ObstacleManager obstacleManager;
 	// Lens
 	private Lens lens;
 	
 	private robot rob;
 	
-	private DrawableMap dm;
+	private DrawableMap dm,dm2;
 	
 	public Framework(RenderWindow w) throws TextureCreationException
 	{
@@ -96,7 +102,8 @@ public class Framework
 		
 		// RenderState
 		shader = new Shader();
-		rState = new RenderStates(BlendMode.ADD);
+		rStateBackground = new RenderStates(BlendMode.NONE);
+		rStateForeGround = new RenderStates(BlendMode.ADD);
 		
 		
 		// camera
@@ -111,6 +118,8 @@ public class Framework
 		listeElements = new ArrayList<IGameBase>();
 		// (TEST) chargement d'un niveau
 		loader = new LoaderMap();
+		// instance du manager d'obstacle;
+		obstacleManager = new ObstacleManager();
 		// Lens
 		lens = new Lens();
 		try 
@@ -213,12 +222,20 @@ public class Framework
 		// backbuffer dans le frontbuffer
 		//renderText.display();
 		
+		
+		// background affichage
 		renderText.setView(camera.getView());
-		dm.draw(renderText,rState);
+	 	dm.draw(renderText,rStateBackground);
+		renderText.display();
+		
+		// foreground affichage
+		renderText.setView(camera.getView());
+		dm2.draw(renderText,rStateForeGround);
 		renderText.display();
 		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
+		// affichage dans la fenetre principale (écran)
 		window.clear(new Color(3,32,48));
 		window.draw(postEffect1);
 		window.display();
@@ -303,27 +320,52 @@ public class Framework
 		LoaderTiled tiled = new LoaderTiled();
 		try 
 		{
+			// chargement de la map
 			tiled.Load(LoaderTiled.class.getResourceAsStream("/Maps/map.json"));
+			// création d'une texture (tileset)
+			Texture text = new Texture();
+			// chargement de la texture
+			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset03.png"));
 			
 			try 
 			{
+				// creation de la drawablemap (background)
 				dm = new DrawableMap();
+				// creation de la drawable map (foreground)
+				dm2 = new DrawableMap();
 				
 			} catch (ShaderSourceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Texture text = new Texture();
-			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset02.png"));
 			
-			// recupération du layer tiled
-			for(TiledLayerTiles o : tiled.getListLayersTiles())
+			
+			// réception du layers background
+			TiledLayerTiles o = tiled.getListLayersTiles().get(0);
+			dm.LoadMap(o.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing(),tiled.getFirstgid());
+			
+			// réception du layers foreground
+			TiledLayerTiles o2 = tiled.getListLayersTiles().get(1);
+			dm2.LoadMap(o2.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing(),tiled.getFirstgid());
+			
+			// reception des obstacle via les objet7
+			TiledLayerObjects layerObject = tiled.getListLayersObjects().get(0);
+			
+			// chargement dans le manager d'obstacle
+			if(layerObject != null)
 			{
-				// chargement d'un des layer tiles (Attention il va falloir charger plusieur Drawable map par Layer)
-				dm.LoadMap(o.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing());
-				
+				// pour chaque objet dans le layer objects
+				for(TiledObjectBase base : layerObject.getDataObjects())
+				{
+					
+					if(base.getTypeObjects() == TiledObjectBase.Type.RECTANGLE)
+					{
+					// on ajoute les obstacle dans le m.anager d'obstacle
+						TiledObjectRectangle r = (TiledObjectRectangle)base;
+						obstacleManager.InsertObstacle(r.getX(),r.getY(), r.getWidth(), r.getHeight());
+					}
+				}
 			}
-			
 			
 		} catch (LoaderTiledException e) 
 		{
