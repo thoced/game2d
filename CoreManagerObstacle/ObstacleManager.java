@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jsfml.system.Time;
+import org.jsfml.window.event.Event;
 
 import bilou.ICoreBase;
 
@@ -100,6 +101,12 @@ public class ObstacleManager extends ObstacleBase implements ICoreBase
 
 	@Override
 	public void Init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void CatchEvent(Event e) {
 		// TODO Auto-generated method stub
 		
 	}

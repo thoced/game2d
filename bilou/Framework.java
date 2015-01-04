@@ -28,6 +28,7 @@ import org.jsfml.window.event.Event;
 
 import CoreManagerObstacle.ObstacleManager;
 import CoreQuadTree.QuadTreeNode;
+import Entities.EntitiesManager;
 import Loader.LoaderMap;
 import Loader.LoaderTiled;
 import Loader.LoaderTiledException;
@@ -70,6 +71,8 @@ public class Framework
 	private LoaderMap loader;
 	// Manager d'Obstacle
 	private ObstacleManager obstacleManager;
+	// Entities manager
+	private EntitiesManager entitiesManager;
 	// Lens
 	private Lens lens;
 	
@@ -120,6 +123,8 @@ public class Framework
 		loader = new LoaderMap();
 		// instance du manager d'obstacle;
 		obstacleManager = new ObstacleManager();
+		// instance du manager d'entitées
+		entitiesManager = new EntitiesManager();
 		// Lens
 		lens = new Lens();
 		try 
@@ -259,6 +264,9 @@ public class Framework
 				camera.Move(Camera.Up);
 			else if(event.asMouseEvent().position.y < 64)
 				camera.Move(Camera.Down);
+			
+			
+			
 
 		}
 		
@@ -273,6 +281,9 @@ public class Framework
 				camera.ZoomOut();
 			}
 		}
+		
+		// catch pour l'entities manager
+				entitiesManager.CatchEvent(event);
 	}
 	
 	public void DestroyGameBase(IGameBase base)

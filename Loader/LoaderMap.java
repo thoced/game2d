@@ -13,6 +13,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jsfml.graphics.Transform;
 import org.jsfml.system.Time;
+import org.jsfml.window.event.Event;
 
 import bilou.ElementBase;
 import bilou.ICoreBase;
@@ -153,6 +154,12 @@ public class LoaderMap implements ICoreBase
 
 	@Override
 	public void Init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void CatchEvent(Event e) {
 		// TODO Auto-generated method stub
 		
 	}

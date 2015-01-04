@@ -7,6 +7,7 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.View;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
+import org.jsfml.window.event.Event;
 
 public class Camera implements ICoreBase
 {
@@ -108,6 +109,12 @@ public class Camera implements ICoreBase
 
 	@Override
 	public void Init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void CatchEvent(Event e) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -9,6 +9,7 @@ import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
+import org.jsfml.window.event.Event;
 
 import bilou.ICoreBase;
 import bilou.IGameBase;
@@ -209,6 +210,12 @@ public class QuadTreeNode implements ICoreBase
 
 	@Override
 	public void Init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void CatchEvent(Event e) {
 		// TODO Auto-generated method stub
 		
 	}
