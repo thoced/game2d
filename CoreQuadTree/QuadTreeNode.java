@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RectangleShape;
+import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Time;
@@ -184,11 +185,7 @@ public class QuadTreeNode implements ICoreBase
 		
 	}
 
-	@Override
-	public void Draw() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void LoadContent() {
@@ -216,6 +213,12 @@ public class QuadTreeNode implements ICoreBase
 
 	@Override
 	public void CatchEvent(Event e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Draw(RenderTexture render, RenderStates state) {
 		// TODO Auto-generated method stub
 		
 	}
