@@ -1,9 +1,12 @@
 package Entities;
 
+import org.jsfml.graphics.IntRect;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.event.Event;
+
+import CoreTexturesManager.TexturesManager;
 
 public class PlayerView extends EntitieBase 
 {
@@ -45,7 +48,7 @@ public class PlayerView extends EntitieBase
 	{
 		// TODO Auto-generated method stub
 		spritePlayer = new Sprite(TexturesManager.GetTextureByName("player"));
-		
+		spritePlayer.setTextureRect(new IntRect(0,0,64,64));
 		
 	}
 	
@@ -60,6 +63,21 @@ public class PlayerView extends EntitieBase
 		// TODO Auto-generated method stub
 		pControl.SetEvent(e);
 	}
+
+	/**
+	 * @return the spritePlayer
+	 */
+	public Sprite getSpritePlayer() {
+		return spritePlayer;
+	}
+
+	/**
+	 * @param spritePlayer the spritePlayer to set
+	 */
+	public void setSpritePlayer(Sprite spritePlayer) {
+		this.spritePlayer = spritePlayer;
+	}
+	
 	
 
 }
