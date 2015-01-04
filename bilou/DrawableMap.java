@@ -27,8 +27,8 @@ public  class DrawableMap implements Drawable, Transformable
 	
 	private VertexArray listVertex;
 	
-	private int mapWidth,mapHeight,wTile,hTile,margin,parcing;
-	
+	private int mapWidth,mapHeight,wTile,hTile,margin,parcing,firstgid;
+		
 	private List<Integer> map;
 	
 	// Shader
@@ -44,7 +44,7 @@ public  class DrawableMap implements Drawable, Transformable
 		shader.loadFromStream(DrawableMap.class.getResourceAsStream("/Shaders/FragmentShaderMap.frag"),Shader.Type.FRAGMENT);
 	}
 	
-	public void LoadMap(List<Integer> map,Texture text,int mapWidth,int mapHeight,int wTile,int hTile,int margin,int parcing)
+	public void LoadMap(List<Integer> map,Texture text,int mapWidth,int mapHeight,int wTile,int hTile,int margin,int parcing,int firstgid)
 	{
 		this.textureTileSets = text;
 		
@@ -54,6 +54,7 @@ public  class DrawableMap implements Drawable, Transformable
 		this.hTile = hTile;
 		this.margin = margin;
 		this.parcing = parcing;
+		this.firstgid = firstgid;
 		
 		this.map = map;
 		
@@ -74,28 +75,32 @@ public  class DrawableMap implements Drawable, Transformable
 				//creation des TextureRects
 				
 				
-				int ind = this.map.get(i) - 1;
+				int ind = this.map.get(i) - this.firstgid;
+				if(ind > -1) // si il n'y a pas de texture (-1) alors on ne créer par de quads
+				{
 				
-				// obtention des valeurs x,y de la texture par rapport à l'indice
-				int x = (ind % (this.textureTileSets.getSize().x / (this.wTile)) * this.wTile) ;
-				int y = (ind / (this.textureTileSets.getSize().x / (this.wTile)) * this.hTile) ;
+					// obtention des valeurs x,y de la texture par rapport à l'indice
+					int x = (ind % (this.textureTileSets.getSize().x / (this.wTile)) * this.wTile) ;
+					int y = (ind / (this.textureTileSets.getSize().x / (this.wTile)) * this.hTile) ;
+					
+					Vector2f t0 = new Vector2f(x,y);
+					Vector2f t1 = new Vector2f(x + this.wTile,y);
+					Vector2f t2 = new Vector2f(x + this.wTile,y + this.hTile);
+					Vector2f t3 = new Vector2f(x,y + this.hTile);
+					
+					// creation des vertex
+					Vertex v0 = new Vertex(new Vector2f(posX,posY),t0);
+					Vertex v1 = new Vertex(new Vector2f(posX + this.wTile,posY),t1);
+					Vertex v2 = new Vertex(new Vector2f(posX + this.wTile, posY + this.hTile),t2);
+					Vertex v3 = new Vertex(new Vector2f(posX,posY + this.hTile),t3);
+					
+					// ajout des vertex dans le tableau de vertex
+					listVertex.add(v0);
+					listVertex.add(v1);
+					listVertex.add(v2);
+					listVertex.add(v3);
 				
-				Vector2f t0 = new Vector2f(x,y);
-				Vector2f t1 = new Vector2f(x + this.wTile,y);
-				Vector2f t2 = new Vector2f(x + this.wTile,y + this.hTile);
-				Vector2f t3 = new Vector2f(x,y + this.hTile);
-				
-				// creation des vertex
-				Vertex v0 = new Vertex(new Vector2f(posX,posY),t0);
-				Vertex v1 = new Vertex(new Vector2f(posX + this.wTile,posY),t1);
-				Vertex v2 = new Vertex(new Vector2f(posX + this.wTile, posY + this.hTile),t2);
-				Vertex v3 = new Vertex(new Vector2f(posX,posY + this.hTile),t3);
-				
-				// ajout des vertex dans le tableau de vertex
-				listVertex.add(v0);
-				listVertex.add(v1);
-				listVertex.add(v2);
-				listVertex.add(v3);
+				}
 				
 				// incrementation de l'indice du map
 				i++;
@@ -224,13 +229,11 @@ public  class DrawableMap implements Drawable, Transformable
 	@Override
 	public void draw(RenderTarget renderTarget,RenderStates states) 
 	{
-		shader.setParameter("maTexture", Shader.CURRENT_TEXTURE);
-		
-		RenderStates newStates = new RenderStates(BlendMode.ADD,
+		RenderStates newStates = new RenderStates(BlendMode.ALPHA,
 		        Transform.combine(states.transform, this.getTransform()),this.textureTileSets,null);
 
-		
-	
+		shader.setParameter("maTexture", Shader.CURRENT_TEXTURE);
+
 		renderTarget.draw(listVertex,newStates);
 		
 		
