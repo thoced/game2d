@@ -16,8 +16,7 @@ public class EntitiesManager implements ICoreBase
 	
 	public EntitiesManager()
 	{
-		player = new PlayerView();
-		player.SetPosition(new Vector2f(96,10));
+		
 	}
 	@Override
 	public void Update(Time deltaTime)
@@ -33,7 +32,9 @@ public class EntitiesManager implements ICoreBase
 	{
 		// TODO Auto-generated method stub
 		//Load content du TextureManager
+		player = new PlayerView();
 		player.LoadContent();
+		player.SetPosition(new Vector2f(10,0));
 	}
 
 	@Override

@@ -113,8 +113,10 @@ public class PlayerControl extends EntitieBase
 	/**
 	 * @param positionPlayer the positionPlayer to set
 	 */
-	public void setPositionPlayer(Vector2f positionPlayer) {
+	public void setPositionPlayer(Vector2f positionPlayer) 
+	{
 		this.positionPlayer = positionPlayer;
+		this.UpdateAttachMVC();
 	}
 
 	@Override
