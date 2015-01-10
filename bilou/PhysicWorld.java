@@ -21,7 +21,7 @@ public class PhysicWorld implements ICoreBase {
 	{
 		pw = this;
 		// initilisation du gravity
-		gravity = new Vec2(0,1);
+		gravity = new Vec2(0,1024);
 		// instance du world physis
 		worldPhysic = new World(gravity);
 	}
@@ -44,9 +44,10 @@ public class PhysicWorld implements ICoreBase {
 
 
 	@Override
-	public void Update(Time deltaTime) {
+	public void Update(Time deltaTime) 
+	{
 		// TODO Auto-generated method stub
-		
+		worldPhysic.step(deltaTime.asSeconds(), 6, 2);
 	}
 
 	@Override
