@@ -168,23 +168,26 @@ public class Framework
 		// update camera
 		camera.Update(deltaTime);
 		
-		// update du physic
-		physic.Update(deltaTime);
 		
 		for(IGameBase unit : arrayElements)
 		{
 			unit.Update(deltaTime);
 		}
 		
-		
-		
 		lens.Update(deltaTime);
+		
+		
 		
 		// update du entities manager
 		entitiesManager.Update(deltaTime);
 		
 		// suppression des élements
 		arrayElements.removeAll(arrayDelete);
+		
+		// update du physic
+		physic.Update(deltaTime);
+		
+				
 	}
 	
 	public void Draw(RenderWindow window)

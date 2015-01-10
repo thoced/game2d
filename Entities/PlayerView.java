@@ -46,7 +46,9 @@ public class PlayerView extends EntitieBase
 		
 		// on met à jour l'affichage du sprite
 		Vector2f pos = new Vector2f(this.pControl.getBody().getPosition().x,this.pControl.getBody().getPosition().y);
+		spritePlayer.setRotation(this.pControl.getBody().getAngle());
 		spritePlayer.setPosition(pos);
+		
 		spritePlayer.setOrigin(new Vector2f(32,32));
 		
 		

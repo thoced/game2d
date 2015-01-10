@@ -7,6 +7,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Time;
@@ -44,32 +45,38 @@ public class PlayerControl extends EntitieBase
 	// bodydef
 	private BodyDef bodyDef;
 	
+	private FixtureDef fixture;
+	
+	private Fixture ff;
+	
 	public PlayerControl()
 	{
 		// creatin du body jbox2d
 		bodyDef = new BodyDef();
-		bodyDef.position = new Vec2(31,0);
-		body = PhysicWorld.getWorldPhysic().createBody(bodyDef);
+		bodyDef.position = new Vec2(45,0);
+		bodyDef.type = BodyType.DYNAMIC;
 		
+		body = PhysicWorld.getWorldPhysic().createBody(bodyDef);
 		// initialisation du body
-		body.setActive(true);
+	
 		MassData md = new MassData();
-		md.mass = 70.0f;
+		md.mass = 1024.0f;
 		body.setMassData(md);
-		body.setBullet(false);
 		body.setFixedRotation(true);
-		body.setGravityScale(10.0f);
-		body.setType(BodyType.DYNAMIC);
+	
 		//
-		FixtureDef fixture = new FixtureDef();
+		fixture = new FixtureDef();
 		PolygonShape poly = new PolygonShape();
 		poly.setAsBox(32, 32);
-		Vec2[] vertices = poly.getVertices();
+		
 		fixture.shape = poly;
 		fixture.density = 1.0f;
-		fixture.friction = 1.0f;
-		body.createFixture(fixture);
-		body.synchronizeTransform();
+		fixture.friction = 0.1f;
+		fixture.restitution = 0.5f;
+		
+		ff = body.createFixture(fixture);
+		
+		body.resetMassData();
 	
 	}		
 		
@@ -83,13 +90,13 @@ public class PlayerControl extends EntitieBase
 		if(Keyboard.isKeyPressed(Keyboard.Key.D))
 		{
 			// si la touche D, la direction va vers la droite
-			body.applyForceToCenter(new Vec2(128,0));
+			ff.m_body.applyForceToCenter(new Vec2(128,0));
 		}
 		
 		if(Keyboard.isKeyPressed(Keyboard.Key.Q))
 		{
 			// si la touche Q, la direction va vers la gauche
-			direction = new Vector2f(-1,0);
+			body.applyForce(new Vec2(-128,0), body.getPosition());
 		}
 		
 		// appel de l'appelMVC
