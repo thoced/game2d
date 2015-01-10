@@ -76,6 +76,8 @@ public class Framework
 	private TexturesManager texturesManager;
 	// Entities manager
 	private EntitiesManager entitiesManager;
+	// PhysicWorld
+	private PhysicWorld physic;
 	// Lens
 	private Lens lens;
 	
@@ -87,6 +89,8 @@ public class Framework
 	{
 		// Window
 		window = w;
+		//physic
+		physic = new PhysicWorld();
 		// RenderTexture 01
 		renderText = new RenderTexture();
 		renderText.create(window.getSize().x, window.getSize().y);
@@ -164,10 +168,15 @@ public class Framework
 		// update camera
 		camera.Update(deltaTime);
 		
+		// update du physic
+		physic.Update(deltaTime);
+		
 		for(IGameBase unit : arrayElements)
 		{
 			unit.Update(deltaTime);
 		}
+		
+		
 		
 		lens.Update(deltaTime);
 		
