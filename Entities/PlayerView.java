@@ -1,5 +1,9 @@
 package Entities;
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.World;
 import org.jsfml.graphics.IntRect;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Time;
@@ -22,6 +26,9 @@ public class PlayerView extends EntitieBase
 		pControl = new PlayerControl();
 		// attachement au model MVC
 		pControl.Attach(this);
+		
+	
+		
 	
 	}
 
@@ -38,7 +45,8 @@ public class PlayerView extends EntitieBase
 		// appel callback venant du model mvc
 		
 		// on met à jour l'affichage du sprite
-		spritePlayer.setPosition(this.pControl.getPositionPlayer());
+		Vector2f pos = new Vector2f(this.pControl.getBody().getPosition().x,this.pControl.getBody().getPosition().y);
+		spritePlayer.setPosition(pos);
 		
 		
 	}
