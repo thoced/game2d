@@ -1,10 +1,13 @@
 package Entities;
 
+import org.jbox2d.collision.shapes.EdgeShape;
 import org.jbox2d.collision.shapes.MassData;
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
+import org.jbox2d.dynamics.FixtureDef;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
@@ -45,8 +48,9 @@ public class PlayerControl extends EntitieBase
 	{
 		// creatin du body jbox2d
 		bodyDef = new BodyDef();
-		bodyDef.position = new Vec2(64,0);
+		bodyDef.position = new Vec2(31,0);
 		body = PhysicWorld.getWorldPhysic().createBody(bodyDef);
+		
 		// initialisation du body
 		body.setActive(true);
 		MassData md = new MassData();
@@ -56,10 +60,21 @@ public class PlayerControl extends EntitieBase
 		body.setFixedRotation(true);
 		body.setGravityScale(10.0f);
 		body.setType(BodyType.DYNAMIC);
+		//
+		FixtureDef fixture = new FixtureDef();
+		PolygonShape poly = new PolygonShape();
+		poly.setAsBox(32, 32);
+		Vec2[] vertices = poly.getVertices();
+		fixture.shape = poly;
+		fixture.density = 1.0f;
+		fixture.friction = 1.0f;
+		body.createFixture(fixture);
+		body.synchronizeTransform();
+	
+	}		
 		
 		
-		
-	}
+	
 	
 	@Override
 	public void Update(Time elapsedTime) 
@@ -68,7 +83,7 @@ public class PlayerControl extends EntitieBase
 		if(Keyboard.isKeyPressed(Keyboard.Key.D))
 		{
 			// si la touche D, la direction va vers la droite
-			direction = new Vector2f(1,0);
+			body.applyForceToCenter(new Vec2(128,0));
 		}
 		
 		if(Keyboard.isKeyPressed(Keyboard.Key.Q))
