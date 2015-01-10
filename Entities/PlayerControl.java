@@ -56,38 +56,6 @@ public class PlayerControl extends EntitieBase
 		// on détermine le vecteur gravity
 		gravity = Vector2f.mul(gravityVector, speed * elapsedTime.asSeconds());
 		
-		// 1) on test d'abord pour la gravity
-		positionPlayer = Vector2f.add(positionPlayer,gravity);
-		// 4) on test si la nouvelle position du player ne rentre pas en collision avec un obstacle
-		ObstacleResult result = ObstacleManager.IsRectangleCollision((int)positionPlayer.x, (int)positionPlayer.y, 64, 64);
-		// 5) si pas d'obstacle on appel la methode callback
-		if(result == null)
-			this.UpdateAttachMVC();
-		else
-		{
-			positionPlayer = Vector2f.sub(positionPlayer, gravity);
-			this.UpdateAttachMVC();
-
-		}
-		
-		// 2) on test pour la velocity
-		if(direction == Vector2f.ZERO)
-			return;
-		
-		positionPlayer = Vector2f.add(positionPlayer, velocity);
-		// 4) on test si la nouvelle position du player ne rentre pas en collision avec un obstacle
-		ObstacleResult result2 = ObstacleManager.IsRectangleCollision((int)positionPlayer.x, (int)positionPlayer.y, 64, 64);
-		// 5) si pas d'obstacle on appel la methode callback
-		if(result2 == null)
-			this.UpdateAttachMVC();
-		else
-		{
-			positionPlayer = Vector2f.sub(positionPlayer, velocity);
-			this.UpdateAttachMVC();
-
-		}
-		
-
 	}
 
 	@Override
