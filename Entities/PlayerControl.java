@@ -1,5 +1,10 @@
 package Entities;
 
+import org.jbox2d.collision.shapes.MassData;
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.BodyType;
 import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
@@ -7,6 +12,7 @@ import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.KeyEvent;
 
+import bilou.PhysicWorld;
 import CoreManagerObstacle.ObstacleManager;
 import CoreManagerObstacle.ObstacleResult;
 
@@ -29,10 +35,31 @@ public class PlayerControl extends EntitieBase
 	private Vector2f jumpVector = new Vector2f(0,-1);
 	// jump
 	private Vector2f jump;
-	// gravité
-	private Vector2f gravityVector = new Vector2f(0,1);
 	
-	private Vector2f gravity;
+	// body physic
+	private Body body;
+	// bodydef
+	private BodyDef bodyDef;
+	
+	public PlayerControl()
+	{
+		// creatin du body jbox2d
+		bodyDef = new BodyDef();
+		bodyDef.position = new Vec2(64,0);
+		body = PhysicWorld.getWorldPhysic().createBody(bodyDef);
+		// initialisation du body
+		body.setActive(true);
+		MassData md = new MassData();
+		md.mass = 70.0f;
+		body.setMassData(md);
+		body.setBullet(false);
+		body.setFixedRotation(true);
+		body.setGravityScale(10.0f);
+		body.setType(BodyType.DYNAMIC);
+		
+		
+		
+	}
 	
 	@Override
 	public void Update(Time elapsedTime) 
@@ -50,12 +77,23 @@ public class PlayerControl extends EntitieBase
 			direction = new Vector2f(-1,0);
 		}
 		
-		// 1) on détermine la direction emprunté par le player
-		//  on détermine le vector velocity
-		velocity = Vector2f.mul(direction,speed * elapsedTime.asSeconds());
-		// on détermine le vecteur gravity
-		gravity = Vector2f.mul(gravityVector, speed * elapsedTime.asSeconds());
+		// appel de l'appelMVC
+		this.UpdateAttachMVC();
 		
+	}
+
+	/**
+	 * @return the body
+	 */
+	public Body getBody() {
+		return body;
+	}
+
+	/**
+	 * @param body the body to set
+	 */
+	public void setBody(Body body) {
+		this.body = body;
 	}
 
 	@Override
