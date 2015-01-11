@@ -10,5 +10,7 @@ public abstract class EntitieBase extends ModelMVC
 	public abstract void LoadContent();
 	
 	public abstract void SetEvent(Event e);
+	
+	
 
 }

@@ -5,19 +5,54 @@ import org.jbox2d.callbacks.ContactListener;
 import org.jbox2d.collision.Manifold;
 import org.jbox2d.dynamics.contacts.Contact;
 
+import Entities.PlayerControl;
+
 public class MyContactListener implements ContactListener {
 
 	@Override
-	public void beginContact(Contact contact) {
+	public void beginContact(Contact contact) 
+	{
 		// TODO Auto-generated method stub
+		
+		Contact c = contact;
+		
+ 
+			Object temp = c.m_fixtureA.m_body.getUserData();
+			
+			if(temp.getClass() == PlayerControl.class )
+			{
+				if(((String)c.m_fixtureB.m_body.getUserData()).equals("ground"))
+				{
+					((PlayerControl)temp).setIsground(true);
+					return;
+				}
+			}
+			
+		
+			
+		
 		
 	}
 
 	@Override
-	public void endContact(Contact contact) {
+	public void endContact(Contact contact)
+	{
 		// TODO Auto-generated method stub
-		int a=0;
-		a++;
+		Contact c = contact;
+		
+		
+			
+			Object temp = c.m_fixtureA.m_body.getUserData();
+			
+			if(temp.getClass() == PlayerControl.class )
+			{
+				((PlayerControl)temp).setIsground(false );
+			}
+			
+		
+			
+	
+		
 	}
 
 	@Override
