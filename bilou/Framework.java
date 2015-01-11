@@ -403,7 +403,8 @@ public class Framework
 					{
 					// on ajoute les obstacle dans le m.anager d'obstacle
 						TiledObjectRectangle r = (TiledObjectRectangle)base;
-						obstacleManager.InsertObstacle(r.getX(),r.getY(), r.getWidth(), r.getHeight());
+						obstacleManager.InsertObstacle(r.getX(),r.getY(), r.getWidth(), r.getHeight(),r.getType());
+						
 					}
 				}
 			}

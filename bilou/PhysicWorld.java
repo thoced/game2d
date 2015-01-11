@@ -1,6 +1,8 @@
 package bilou;
 import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.World;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTexture;
@@ -22,7 +24,7 @@ public class PhysicWorld implements ICoreBase {
 	{
 		pw = this;
 		// initilisation du gravity
-		gravity = new Vec2(0,128);
+		gravity = new Vec2(0,16);
 		// instance du world physis
 		worldPhysic = new World(gravity);
 		worldPhysic.setContactListener(new MyContactListener());
@@ -52,7 +54,8 @@ public class PhysicWorld implements ICoreBase {
 	public void Update(Time deltaTime) 
 	{
 		// TODO Auto-generated method stub
-		worldPhysic.step(deltaTime.asSeconds(), 2, 2);
+		
+		worldPhysic.step(1.0f/60.0f,8, 3);
 		
 	
 	}
