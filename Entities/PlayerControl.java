@@ -13,6 +13,7 @@ import org.jsfml.graphics.FloatRect;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.Keyboard;
+import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.KeyEvent;
 
@@ -37,8 +38,8 @@ public class PlayerControl extends EntitieBase
 	private Vector2f direction = Vector2f.ZERO;
 	// vecteur du jump
 	private Vector2f jumpVector = new Vector2f(0,-1);
-	// jump
-	private Vector2f jump;
+	// est il sur le ground
+	private boolean isground = false;
 	
 	// body physic
 	private Body body;
@@ -49,34 +50,54 @@ public class PlayerControl extends EntitieBase
 	
 	private Fixture ff;
 	
+	/**
+	 * @return the isground
+	 */
+	public boolean isIsground() {
+		return isground;
+	}
+
+
+
+
+	/**
+	 * @param isground the isground to set
+	 */
+	public void setIsground(boolean isground) {
+		this.isground = isground;
+	}
+
+
+
+
 	public PlayerControl()
 	{
 		// creatin du body jbox2d
 		bodyDef = new BodyDef();
-		bodyDef.position = new Vec2(45,0);
+		bodyDef.position = new Vec2(1,0);
 		bodyDef.type = BodyType.DYNAMIC;
 		
+		
 		body = PhysicWorld.getWorldPhysic().createBody(bodyDef);
+		body.setUserData(this);
 		// initialisation du body
 	
-		MassData md = new MassData();
-		md.mass = 1024.0f;
-		body.setMassData(md);
 		body.setFixedRotation(true);
-	
+		
+
 		//
 		fixture = new FixtureDef();
 		PolygonShape poly = new PolygonShape();
-		poly.setAsBox(32, 32);
+		poly.setAsBox(1, 1);
 		
 		fixture.shape = poly;
 		fixture.density = 1.0f;
-		fixture.friction = 0.1f;
-		fixture.restitution = 0.5f;
+		fixture.friction = 1.0f;
+		fixture.restitution = 0.0f;
 		
 		ff = body.createFixture(fixture);
 		
-		body.resetMassData();
+
 	
 	}		
 		
@@ -86,18 +107,30 @@ public class PlayerControl extends EntitieBase
 	@Override
 	public void Update(Time elapsedTime) 
 	{
+		if(!body.isAwake())
+			this.setIsground(true);
+		
 		// on verifie l'etat du clavier
-		if(Keyboard.isKeyPressed(Keyboard.Key.D))
+		if(   Keyboard.isKeyPressed(Keyboard.Key.D))
 		{
 			// si la touche D, la direction va vers la droite
-			ff.m_body.applyForceToCenter(new Vec2(128,0));
-		}
+			body.applyForce(new Vec2(96,0),body.getWorldCenter());
+			
 		
-		if(Keyboard.isKeyPressed(Keyboard.Key.Q))
+			
+		}else if( Keyboard.isKeyPressed(Keyboard.Key.Q))
 		{
 			// si la touche Q, la direction va vers la gauche
-			body.applyForce(new Vec2(-128,0), body.getPosition());
+			body.applyForce(new Vec2(-96,0),body.getWorldCenter());
+		
 		}
+		
+		if( this.isIsground() && Keyboard.isKeyPressed(Keyboard.Key.SPACE))
+		{
+			body.applyLinearImpulse(new Vec2(0,-24), body.getWorldCenter());
+		}
+		
+		
 		
 		// appel de l'appelMVC
 		this.UpdateAttachMVC();
