@@ -64,7 +64,7 @@ public class ObstacleManager implements ICoreBase
 		return null;
 	}
 
-	public void InsertObstacle(int x ,int y , int width,int height)
+	public void InsertObstacle(int x ,int y , int width,int height,String typeobstacle)
 	{
 		// création de l'obstacle rectangle
 		ObstacleRectangle rect = new ObstacleRectangle(x,y,width,height);
@@ -76,17 +76,27 @@ public class ObstacleManager implements ICoreBase
 		// pour le jbox2d
 		// on défini la demi hauteur et la longueur du rectangle
 		
-		int halfW = width / 2;
-		int halfH = height / 2;
+		// on créer les valeur en metre
+		float mx = x / 32.0f;
+		float my = y / 32.0f;
+		float mwidth = width / 32.0f;
+		float mheight = height / 32.0f;
+		
+		
+		float halfW =  (mwidth / 2.0f);
+		float halfH =  (mheight / 2.0f) ;
 		
 		// on cree le body def
 		BodyDef bDef = new BodyDef();
-		bDef.position = new Vec2(x + halfW, y + halfH);
+		bDef.position = new Vec2(mx + halfW, my + halfH);
 		bDef.bullet = false;
 		bDef.type = BodyType.STATIC;
 		
+		
 		// on cree le body
 		Body bRect = PhysicWorld.getWorldPhysic().createBody(bDef);
+		// ajout du type d'obstacle
+		bRect.setUserData(typeobstacle);
 		
 		// creation de la fixture
 		FixtureDef fixture = new FixtureDef();
@@ -95,6 +105,10 @@ public class ObstacleManager implements ICoreBase
 		polygon.setAsBox(halfW, halfH);
 		// attach a la fixture
 		fixture.shape = polygon;
+		fixture.friction = 1.0f;
+		fixture.density = 1f;
+		fixture.restitution = 0.0f;
+
 		// creation du fixutre
 		bRect.createFixture(fixture);
 		
