@@ -38,17 +38,7 @@ public class MyContactListener implements ContactListener {
 	public void endContact(Contact contact)
 	{
 		// TODO Auto-generated method stub
-		Contact c = contact;
 		
-		
-			
-			Object temp = c.m_fixtureA.m_body.getUserData();
-			
-			if(temp.getClass() == PlayerControl.class )
-			{
-				((PlayerControl)temp).setIsground(false );
-			}
-			
 		
 			
 	

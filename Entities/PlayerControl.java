@@ -92,7 +92,7 @@ public class PlayerControl extends EntitieBase
 		
 		fixture.shape = poly;
 		fixture.density = 1.0f;
-		fixture.friction = 1.0f;
+		fixture.friction = 0.5f;
 		fixture.restitution = 0.0f;
 		
 		ff = body.createFixture(fixture);
@@ -114,20 +114,21 @@ public class PlayerControl extends EntitieBase
 		if(   Keyboard.isKeyPressed(Keyboard.Key.D))
 		{
 			// si la touche D, la direction va vers la droite
-			body.applyForce(new Vec2(96,0),body.getWorldCenter());
+			body.applyForce(new Vec2(192,0),body.getWorldCenter());
 			
 		
 			
 		}else if( Keyboard.isKeyPressed(Keyboard.Key.Q))
 		{
 			// si la touche Q, la direction va vers la gauche
-			body.applyForce(new Vec2(-96,0),body.getWorldCenter());
+			body.applyForce(new Vec2(-192,0),body.getWorldCenter());
 		
 		}
 		
 		if( this.isIsground() && Keyboard.isKeyPressed(Keyboard.Key.SPACE))
 		{
-			body.applyLinearImpulse(new Vec2(0,-24), body.getWorldCenter());
+			body.applyLinearImpulse(new Vec2(0,-96), body.getWorldCenter());
+			this.setIsground(false);
 		}
 		
 		

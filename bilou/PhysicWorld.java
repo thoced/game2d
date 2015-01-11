@@ -24,13 +24,13 @@ public class PhysicWorld implements ICoreBase {
 	{
 		pw = this;
 		// initilisation du gravity
-		gravity = new Vec2(0,16);
+		gravity = new Vec2(0,55);
 		// instance du world physis
 		worldPhysic = new World(gravity);
 		worldPhysic.setContactListener(new MyContactListener());
 		
 		// setContinuousPhysics
-		//worldPhysic.setContinuousPhysics(true);
+		worldPhysic.setContinuousPhysics(true);
 	}
 	
 	
@@ -55,7 +55,7 @@ public class PhysicWorld implements ICoreBase {
 	{
 		// TODO Auto-generated method stub
 		
-		worldPhysic.step(1.0f/60.0f,8, 3);
+		worldPhysic.step(1.0f/60.0f,2, 1);
 		
 	
 	}
