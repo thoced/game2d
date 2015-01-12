@@ -10,6 +10,7 @@ import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.event.Event;
 
+import bilou.Camera;
 import CoreTexturesManager.TexturesManager;
 
 public class PlayerView extends EntitieBase 
@@ -46,15 +47,17 @@ public class PlayerView extends EntitieBase
 		
 		// on met à jour l'affichage du sprite
 		Vector2f pos = new Vector2f(this.pControl.getBody().getPosition().x,this.pControl.getBody().getPosition().y);
-		spritePlayer.setRotation(this.pControl.getBody().getAngle());
+		spritePlayer.setRotation((float) ((this.pControl.getBody().getAngle() * 180) / Math.PI) % 360);
 		
 		Vector2f tpos = Vector2f.mul(pos, 32.0f);
 		
 		spritePlayer.setPosition(tpos);
 		
+
 		spritePlayer.setOrigin(new Vector2f(32,32));
 		
-		
+		// test update camera
+		Camera.SetCenter(spritePlayer.getPosition());
 	}
 
 	@Override

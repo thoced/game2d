@@ -36,6 +36,7 @@ import Loader.LoaderTiledException;
 import Loader.TiledLayerObjects;
 import Loader.TiledLayerTiles;
 import Loader.TiledObjectBase;
+import Loader.TiledObjectPolyline;
 import Loader.TiledObjectRectangle;
 import structure.Iunitbase;
 import structure.wall;
@@ -84,6 +85,14 @@ public class Framework
 	private robot rob;
 	
 	private DrawableMap dm,dm2;
+	
+	private Texture charlie;
+	
+	private Sprite charlieSprite;
+	
+	// fps
+	private int fps = 0;
+	private Time fpsTime = Time.ZERO;
 	
 	public Framework(RenderWindow w) throws TextureCreationException
 	{
@@ -159,23 +168,36 @@ public class Framework
 			e.printStackTrace();
 		}
 		
+		// 
 		
 	}
 	
 	public void Update()
 	{
+		fps++;
+		
 		Time deltaTime = frameClock.restart();
+		
+		fpsTime = Time.add(fpsTime, deltaTime);
+		
+		if(fpsTime.asSeconds() > 1.0f)
+		{
+			System.out.println("fps : " + String.valueOf(fps));
+			fps=0;
+			fpsTime = Time.ZERO;
+		}
+		
 		// update camera
 		camera.Update(deltaTime);
 		
 		
-		for(IGameBase unit : arrayElements)
+		/*for(IGameBase unit : arrayElements)
 		{
 			unit.Update(deltaTime);
 		}
 		
 		lens.Update(deltaTime);
-		
+		*/
 		
 		
 		// update du entities manager
@@ -201,8 +223,8 @@ public class Framework
 		FloatRect zone = new FloatRect(source,size);
 		
 		// on récupère les élements visible 
-		listeElements.clear();
-		quadtree.GetElements(zone,listeElements);
+	//	listeElements.clear();
+		//quadtree.GetElements(zone,listeElements);
 		
 		//System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
 		
@@ -265,6 +287,11 @@ public class Framework
 		entitiesManager.Draw(renderText,rStateForeGround);
 		renderText.display();
 		
+		// charlie
+		renderText.setView(camera.getView());
+		renderText.draw(charlieSprite);
+		renderText.display();
+		
 		
 		// affichage dans la fenetre principale (écran)
 		window.clear(new Color(3,32,48));
@@ -319,6 +346,18 @@ public class Framework
 	
 	public void LoadContent()
 	{
+		
+		charlie = new Texture();
+		try {
+			charlie.loadFromStream(ElementBase.class.getResourceAsStream("/Textures/charlie.png"));
+			
+			charlieSprite = new Sprite(charlie);
+			charlieSprite.setPosition(0,192);
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
 		ElementBase element = new ElementBase(new Vector2f(64,64),new Vector2f(128,128));
 		ElementBase element2 = new ElementBase(new Vector2f(64,64),new Vector2f(192,128));
@@ -353,6 +392,9 @@ public class Framework
 		//arrayElements.addAll(loader.getListElement());
 		for(IGameBase a : loader.getListElement())
 			this.quadtree.InsertElement(a);
+		
+		
+		
 		// textures manager loadcontent
 		texturesManager.LoadContent();
 		// entities manager loadcontent
@@ -404,6 +446,16 @@ public class Framework
 					// on ajoute les obstacle dans le m.anager d'obstacle
 						TiledObjectRectangle r = (TiledObjectRectangle)base;
 						obstacleManager.InsertObstacle(r.getX(),r.getY(), r.getWidth(), r.getHeight(),r.getType());
+						
+						
+					}
+					
+					if(base.getTypeObjects() == TiledObjectBase.Type.POLYLINE)
+					{
+						// on ajoute un polyline comme obstacle
+						TiledObjectPolyline p = (TiledObjectPolyline)base;
+						
+						obstacleManager.InsertObstacle(p.getListPoint(),p.getX(),p.getY(),p.getType());
 						
 					}
 				}

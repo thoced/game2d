@@ -14,9 +14,7 @@ public class MyContactListener implements ContactListener {
 	{
 		// TODO Auto-generated method stub
 		
-		Contact c = contact;
-		
- 
+	
 			Object tempA = contact.m_fixtureA.m_body.getUserData();
 			Object tempB = contact.m_fixtureB.m_body.getUserData();
 			
@@ -32,20 +30,6 @@ public class MyContactListener implements ContactListener {
 					((PlayerControl)tempB).setIsground(true);
 			}
 			
-			/*if(temp != null && temp.getClass() == PlayerControl.class )
-			{
-				if(((String)c.m_fixtureB.m_body.getUserData()).equals("ground"))
-				{
-					((PlayerControl)temp).setIsground(true);
-					return;
-				}
-			}*/
-			
-				
-		
-			
-		
-		
 	}
 
 	@Override
@@ -62,15 +46,13 @@ public class MyContactListener implements ContactListener {
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
 		// TODO Auto-generated method stub
-		int a=0;
-		a++;
+		
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
 		// TODO Auto-generated method stub
-		int a=0;
-		a++;
+		
 	}
 
 }

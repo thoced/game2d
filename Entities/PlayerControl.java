@@ -40,6 +40,8 @@ public class PlayerControl extends EntitieBase
 	private Vector2f jumpVector = new Vector2f(0,-1);
 	// est il sur le ground
 	private boolean isground = false;
+	// la touche space est elle enfoncée
+	private boolean isSpace = false;
 	
 	// body physic
 	private Body body;
@@ -82,7 +84,7 @@ public class PlayerControl extends EntitieBase
 		body.setUserData(this);
 		// initialisation du body
 	
-		body.setFixedRotation(true);
+		//body.setFixedRotation(true);
 		
 
 		//
@@ -107,29 +109,32 @@ public class PlayerControl extends EntitieBase
 	@Override
 	public void Update(Time elapsedTime) 
 	{
-		if(!body.isAwake())
-			this.setIsground(true);
+		//if(!body.isAwake())
+		//	this.setIsground(true);
 		
 		// on verifie l'etat du clavier
 		if(   Keyboard.isKeyPressed(Keyboard.Key.D))
 		{
 			// si la touche D, la direction va vers la droite
-			body.applyForce(new Vec2(192,0),body.getWorldCenter());
+			body.applyForce(new Vec2(256,0),body.getWorldCenter());
 			
 		
 			
 		}else if( Keyboard.isKeyPressed(Keyboard.Key.Q))
 		{
 			// si la touche Q, la direction va vers la gauche
-			body.applyForce(new Vec2(-192,0),body.getWorldCenter());
+			body.applyForce(new Vec2(-256,0),body.getWorldCenter());
 		
 		}
 		
-		if( this.isIsground() && Keyboard.isKeyPressed(Keyboard.Key.SPACE))
+		if(!this.isSpace && this.isIsground() && Keyboard.isKeyPressed(Keyboard.Key.SPACE))
 		{
-			body.applyLinearImpulse(new Vec2(0,-96), body.getWorldCenter());
+			body.applyLinearImpulse(new Vec2(0,-72), body.getWorldCenter());
 			this.setIsground(false);
+			this.isSpace = true;
 		}
+		else if(!Keyboard.isKeyPressed(Keyboard.Key.SPACE))
+			this.isSpace = false;
 		
 		
 		

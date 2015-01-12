@@ -26,6 +26,8 @@ public class Camera implements ICoreBase
 	private float speed = 512.0f;
 	// ZoomLevel camera
 	private int zoomLevel = 1;
+	// private parent
+	private static Camera cam;
    
 
 //Fill the win = 0;
@@ -34,6 +36,7 @@ public class Camera implements ICoreBase
 	public Camera(RenderTexture window)
 	{
 		view = (View) window.getView();
+		cam = this;
 		//view = new View();
 	}
 	
@@ -41,11 +44,18 @@ public class Camera implements ICoreBase
 	{
 
 		// Modification de la vue de la camera
-		Vector2f newcenter = Vector2f.add(view.getCenter(), Vector2f.mul(currentAdd, speed * deltaTime.asSeconds()));
-		view.setCenter(newcenter);
+		//Vector2f newcenter = Vector2f.add(view.getCenter(), Vector2f.mul(currentAdd, speed * deltaTime.asSeconds()));
+		//view.setCenter(newcenter);
 		
 		
 	}
+	
+	public static void SetCenter(Vector2f center)
+	{
+		cam.getView().setCenter(center);
+	}
+	
+	
     
 
 //Fill the win
