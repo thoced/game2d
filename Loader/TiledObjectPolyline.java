@@ -30,4 +30,26 @@ public class TiledObjectPolyline extends TiledObjectBase
 		listPoint.add(p);
 		
 	}
+	
+	public TiledObjectPolylinePoint GetPoint(int ind)
+	{
+		if(ind > -1 && ind < this.listPoint.size())
+		{
+			// si l'indice se trouve entre 0 et le max de la liste des points
+			return this.listPoint.get(ind);
+		}
+		
+		return null;
+	}
+
+	/**
+	 * @return the listPoint
+	 */
+	public List<TiledObjectPolylinePoint> getListPoint() {
+		return listPoint;
+	}
+
+	
+	
+	
 }
