@@ -17,17 +17,31 @@ public class MyContactListener implements ContactListener {
 		Contact c = contact;
 		
  
-			Object temp = c.m_fixtureA.m_body.getUserData();
+			Object tempA = contact.m_fixtureA.m_body.getUserData();
+			Object tempB = contact.m_fixtureB.m_body.getUserData();
 			
-			if(temp.getClass() == PlayerControl.class )
+			if(tempA != null && tempA.getClass() == PlayerControl.class)
+			{
+				if(tempB != null && tempB.equals("ground"))
+					((PlayerControl)tempA).setIsground(true);
+			}
+			
+			if(tempB != null && tempB.getClass() == PlayerControl.class)
+			{
+				if(tempA != null && tempA.equals("ground"))
+					((PlayerControl)tempB).setIsground(true);
+			}
+			
+			/*if(temp != null && temp.getClass() == PlayerControl.class )
 			{
 				if(((String)c.m_fixtureB.m_body.getUserData()).equals("ground"))
 				{
 					((PlayerControl)temp).setIsground(true);
 					return;
 				}
-			}
+			}*/
 			
+				
 		
 			
 		
