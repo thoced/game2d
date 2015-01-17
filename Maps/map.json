@@ -501,6 +501,17 @@
          "width":256,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":32,
+         "image":"..\/Textures\/tileset01.png",
+         "name":"ima01",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":29,
+         "y":124
         }],
  "nextobjectid":26,
  "orientation":"orthogonal",
