@@ -275,6 +275,11 @@ public class Framework
 	 	dm.draw(renderText,rStateBackground);
 		renderText.display();
 		
+		// appel a la methode draw de l'entites manager
+				renderText.setView(camera.getView());
+				entitiesManager.Draw(renderText,rStateForeGround);
+				renderText.display();
+		
 		// foreground affichage
 		renderText.setView(camera.getView());
 		dm2.draw(renderText,rStateForeGround);
@@ -282,15 +287,12 @@ public class Framework
 		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
-		// appel a la methode draw de l'entites manager
-		renderText.setView(camera.getView());
-		entitiesManager.Draw(renderText,rStateForeGround);
-		renderText.display();
+		
 		
 		// charlie
-		renderText.setView(camera.getView());
+		/*renderText.setView(camera.getView());
 		renderText.draw(charlieSprite);
-		renderText.display();
+		renderText.display();*/
 		
 		
 		// affichage dans la fenetre principale (écran)
@@ -408,7 +410,7 @@ public class Framework
 			// création d'une texture (tileset)
 			Texture text = new Texture();
 			// chargement de la texture
-			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tileset03.png"));
+			text.loadFromStream(LoaderTiled.class.getResourceAsStream("/Textures/tilesetblavier.png"));
 			
 			try 
 			{

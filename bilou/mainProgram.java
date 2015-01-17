@@ -17,7 +17,7 @@ public class mainProgram {
 		//Create the window
 		RenderWindow window = new RenderWindow();
 		
-		window.create(new VideoMode(1360, 768), "THOCED FrameWork (Test QuadTree)");
+		window.create(new VideoMode(1360, 768), "THOCED FrameWork (Test QuadTree)",RenderWindow.FULLSCREEN);
 
 		//Limit the framerate
 		window.setFramerateLimit(60);
@@ -35,7 +35,7 @@ public class mainProgram {
 			// TODO Auto-generated catch block
 			window.close();
 			e.printStackTrace();
-		}
+		} 
 		
 		while(window.isOpen()) 
 		{
