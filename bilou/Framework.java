@@ -217,10 +217,12 @@ public class Framework
 		//window.setView(camera.getView());
 		
 		
-		Vector2f  size = camera.getView().getSize();
+		/*Vector2f  size = camera.getView().getSize();
 		Vector2f centre = camera.getView().getCenter();
 		Vector2f source = Vector2f.sub(centre, Vector2f.div(size,2));
-		FloatRect zone = new FloatRect(source,size);
+		FloatRect zone = new FloatRect(source,size);*/
+		
+		FloatRect zone = Camera.GetBoundsVisible();
 		
 		// on récupère les élements visible 
 	//	listeElements.clear();
