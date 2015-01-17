@@ -1,6 +1,7 @@
 package bilou;
 
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,6 +27,8 @@ import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 
+import CoreDrawableCalqueManager.DrawableCalque;
+import CoreDrawableCalqueManager.DrawableCalqueManager;
 import CoreManagerObstacle.ObstacleManager;
 import CoreQuadTree.QuadTreeNode;
 import CoreTexturesManager.TexturesManager;
@@ -33,6 +36,7 @@ import Entities.EntitiesManager;
 import Loader.LoaderMap;
 import Loader.LoaderTiled;
 import Loader.LoaderTiledException;
+import Loader.TiledLayerImages;
 import Loader.TiledLayerObjects;
 import Loader.TiledLayerTiles;
 import Loader.TiledObjectBase;
@@ -77,6 +81,8 @@ public class Framework
 	private TexturesManager texturesManager;
 	// Entities manager
 	private EntitiesManager entitiesManager;
+	// Calques Manager
+	private DrawableCalqueManager calquesManager;
 	// PhysicWorld
 	private PhysicWorld physic;
 	// Lens
@@ -89,6 +95,8 @@ public class Framework
 	private Texture charlie;
 	
 	private Sprite charlieSprite;
+	
+	
 	
 	// fps
 	private int fps = 0;
@@ -143,6 +151,8 @@ public class Framework
 		texturesManager = new TexturesManager();
 		// instance du manager d'entitées
 		entitiesManager = new EntitiesManager();
+		// instance du calquesmanager
+		calquesManager = new DrawableCalqueManager();
 		// Lens
 		lens = new Lens();
 		try 
@@ -289,6 +299,10 @@ public class Framework
 		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
+		// on affiche les drawable calques
+		renderText.setView(camera.getView());
+		calquesManager.Draw(renderText,rStateForeGround);
+		renderText.display();
 		
 		
 		// charlie
@@ -351,17 +365,6 @@ public class Framework
 	public void LoadContent()
 	{
 		
-		charlie = new Texture();
-		try {
-			charlie.loadFromStream(ElementBase.class.getResourceAsStream("/Textures/charlie.png"));
-			
-			charlieSprite = new Sprite(charlie);
-			charlieSprite.setPosition(0,192);
-			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 	
 		ElementBase element = new ElementBase(new Vector2f(64,64),new Vector2f(128,128));
 		ElementBase element2 = new ElementBase(new Vector2f(64,64),new Vector2f(192,128));
@@ -404,6 +407,7 @@ public class Framework
 		// entities manager loadcontent
 		entitiesManager.LoadContent();
 		
+		
 		LoaderTiled tiled = new LoaderTiled();
 		try 
 		{
@@ -428,12 +432,30 @@ public class Framework
 			
 			
 			// réception du layers background
-			TiledLayerTiles o = tiled.getListLayersTiles().get(0);
-			dm.LoadMap(o.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing(),tiled.getFirstgid());
+			//TiledLayerTiles o = tiled.getListLayersTiles().get(0);
+			//dm.LoadMap(o.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing(),tiled.getFirstgid());
 			
 			// réception du layers foreground
-			TiledLayerTiles o2 = tiled.getListLayersTiles().get(1);
-			dm2.LoadMap(o2.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing(),tiled.getFirstgid());
+			//TiledLayerTiles o2 = tiled.getListLayersTiles().get(1);
+			//dm2.LoadMap(o2.getDataMap(), text, tiled.getMapWidth(), tiled.getMapHeight(), tiled.getTileWidth(), tiled.getTileHeight(), tiled.getMargin(), tiled.getParcing(),tiled.getFirstgid());
+			
+			// création du drawable calque manager
+			for(TiledLayerImages calque : tiled.getListLayersImages())
+			{
+				// pour chaque calque on créer un drawablecalque
+				String pathTexture = calque.getPathImage();
+				// on récupère juste le nom de la texture
+				String[] nameTexture = pathTexture.split(File.separator);
+				
+				// on récupère la texture à partir du texturesmanager en y passant le dernier element du vecteur split
+				String nameText = nameTexture[nameTexture.length-1];
+				int posx = calque.getPosx();
+				int posy = calque.getPosy();
+				String nameCalque = calque.getName();
+			
+				// on ajoute dans le drawablemanager
+				calquesManager.InsertCalque(nameText, nameCalque, posx, posy);
+			}
 			
 			// reception des obstacle via les objet7
 			TiledLayerObjects layerObject = tiled.getListLayersObjects().get(0);
