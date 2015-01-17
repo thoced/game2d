@@ -146,12 +146,43 @@ public class LoaderTiled
 							// parse des tiles
 							this.parseTile(o);
 						}
+						
+						// si le type est une image
+						if(typeLayers.equals("imagelayer"))
+						{
+							// parse du layer image
+							this.parseImage(o);
+						}
 					}
 	
 				}
 				
 				// fermeture du reader
 				reader.close();
+	}
+	
+	private void parseImage(JsonObject obj)
+	{
+		// instance de la class TiledLayerImages
+		TiledLayerImages layerImages = new TiledLayerImages();
+		
+		// reception du nom 
+		layerImages.setName(obj.getString("name"));
+		
+		// reception du nom du fichier
+		layerImages.setPathImage(obj.getString("image"));
+		
+		// reception de la position de l'image 
+		layerImages.setPosx(obj.getInt("x"));
+		layerImages.setPosy(obj.getInt("y"));
+		
+		// reception de la taille de l'image
+		layerImages.setWidth(obj.getInt("width"));
+		layerImages.setHeight(obj.getInt("height"));
+		
+		// ajout du tiledlayerimage dans la liste
+		this.listLayersImages.add(layerImages);
+		
 	}
 	
 	private void parseTile(JsonObject obj)
