@@ -466,6 +466,20 @@ public class LoaderTiled
 		this.listLayersObjects = listLayersObjects;
 	}
 
+	/**
+	 * @return the listLayersImages
+	 */
+	public List<TiledLayerImages> getListLayersImages() {
+		return listLayersImages;
+	}
+
+	/**
+	 * @param listLayersImages the listLayersImages to set
+	 */
+	public void setListLayersImages(List<TiledLayerImages> listLayersImages) {
+		this.listLayersImages = listLayersImages;
+	}
+
 	
 
 	
