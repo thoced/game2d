@@ -2,6 +2,7 @@ package bilou;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTexture;
 import org.jsfml.graphics.RenderWindow;
@@ -32,6 +33,15 @@ public class Camera implements ICoreBase
 
 //Fill the win = 0;
 	
+	public static FloatRect GetBoundsVisible()
+	{
+		Vector2f  size = cam.getView().getSize();
+		Vector2f centre = cam.getView().getCenter();
+		Vector2f source = Vector2f.sub(centre, Vector2f.div(size,2));
+		return  new FloatRect(source,size);
+	}
+	
+	
 	
 	public Camera(RenderTexture window)
 	{
@@ -55,9 +65,6 @@ public class Camera implements ICoreBase
 		cam.getView().setCenter(center);
 	}
 	
-	
-    
-
 //Fill the win
 	
 	public View getView()
