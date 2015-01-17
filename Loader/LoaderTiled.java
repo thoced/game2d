@@ -32,7 +32,8 @@ public class LoaderTiled
 	private List<TiledLayerTiles> listLayersTiles = new ArrayList<TiledLayerTiles>();
 	// liste des layers objects
 	private List<TiledLayerObjects> listLayersObjects = new ArrayList<TiledLayerObjects>();
-	
+	// list des Layers d'images
+	private List<TiledLayerImages> listLayersImages = new ArrayList<TiledLayerImages>();
 	public String toString()
 	{
 		return nameMap + String.valueOf(mapWidth) + " , " + String.valueOf(mapHeight); 
