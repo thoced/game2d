@@ -4,8 +4,8 @@ import org.jsfml.graphics.Sprite;
 
 public class TiledLayerImages 
 {
-	// Sprite contenant l'image a afficher
-		private Sprite image;
+	// nom du layer image
+		private String name;
 		
 	// coordonnée d'affichage de l'image
 		private int posx,posy;
@@ -22,22 +22,27 @@ public class TiledLayerImages
 		/**
 		 * @return the image
 		 */
-		public Sprite getImage() {
-			return image;
-		}
-
-		/**
-		 * @param image the image to set
-		 */
-		public void setImage(Sprite image) {
-			this.image = image;
-		}
+		
 
 		/**
 		 * @return the posx
 		 */
 		public int getPosx() {
 			return posx;
+		}
+
+		/**
+		 * @return the name
+		 */
+		public String getName() {
+			return name;
+		}
+
+		/**
+		 * @param name the name to set
+		 */
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		/**
