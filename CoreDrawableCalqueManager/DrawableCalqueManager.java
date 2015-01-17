@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.jsfml.graphics.RenderStates;
 import org.jsfml.graphics.RenderTexture;
+import org.jsfml.graphics.Texture;
 import org.jsfml.system.Time;
 import org.jsfml.window.event.Event;
 
+import CoreTexturesManager.TexturesManager;
 import bilou.Camera;
 import bilou.ICoreBase;
 
@@ -38,6 +40,19 @@ public class DrawableCalqueManager implements ICoreBase
 			// affichage des calques
 			calque.Draw(render);
 		}
+		
+	}
+	
+	public void InsertCalque(String pathTexture,String name,int posx,int posy)
+	{
+		// on récupère la texture via le textures manager
+		Texture text = TexturesManager.GetTextureByName(pathTexture);
+		
+		// on créer un calque
+		DrawableCalque calque = new DrawableCalque(text,name,posx,posy);
+		
+		// on ajoute dans la liste
+		this.listCalques.add(calque);
 		
 	}
 

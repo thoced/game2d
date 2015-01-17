@@ -12,13 +12,17 @@ public class DrawableCalque
 {
 	// sprite du layer à afficher
 	private Sprite imageCalque;
+	// nom du calque
+	private String name;
 	
-	public DrawableCalque(Texture text,int posx,int posy)
+	public DrawableCalque(Texture text,String name,int posx,int posy)
 	{
 		// creation du sprite depuis une reference texture
 		imageCalque = new Sprite(text);
 		// position du sprite
 		imageCalque.setPosition(new Vector2f(posx,posy));
+		// nom du calque
+		this.name = name;
 	}
 	
 	public void Draw(RenderTexture render)
@@ -27,6 +31,7 @@ public class DrawableCalque
 		FloatRect result = Camera.GetBoundsVisible().intersection(this.imageCalque.getGlobalBounds());
 		if(result!=null)
 			render.draw(imageCalque);
+		
 	}
 	
 }
