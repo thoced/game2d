@@ -34,6 +34,10 @@ public class TexturesManager implements ICoreBase
 	// methode static de récupération d'un objet texture sur base du nom
 	public static Texture GetTextureByName(String name)
 	{
+		// le nom de la texture n'existe pas, on la charge
+		if(!hashTextures.containsKey(name))
+			manager.LoadTexture(name);
+		
 		// la nom de la texture n'existe pas, on recharge la methode loadcontent
 		if(!hashTextures.containsKey(name))
 			manager.LoadContent();
@@ -47,6 +51,22 @@ public class TexturesManager implements ICoreBase
 	
 	
 	
+	private void LoadTexture(String name) 
+	{
+		// TODO Auto-generated method stub
+		try 
+		{
+			Texture text = new Texture();
+			text.loadFromStream(TexturesManager.class.getResourceAsStream("/Textures/" + name));
+			// ajout dans la liste
+			hashTextures.put(name, text);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void Update(Time deltaTime) {
 		// TODO Auto-generated method stub
