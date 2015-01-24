@@ -25,9 +25,14 @@ public class DrawableCalqueManager implements ICoreBase
 	}
 	
 	@Override
-	public void Update(Time deltaTime) {
+	public void Update(Time deltaTime)
+	{
 		// TODO Auto-generated method stub
-		
+		for(DrawableCalque calque : this.listCalques)
+		{
+			// affichage des calques
+			calque.Update(deltaTime);
+		}
 	}
 
 	@Override
