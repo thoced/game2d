@@ -180,6 +180,21 @@ public class LoaderTiled
 		layerImages.setWidth(obj.getInt("width"));
 		layerImages.setHeight(obj.getInt("height"));
 		
+		// reception du type d'image si il y en a
+		if(obj.containsKey("type"))
+		{
+			layerImages.setType(obj.getString("type"));
+			
+		}
+		// reception du targetX targetY si existe
+		if(obj.containsKey("targetX") && obj.containsKey("targetY"))
+		{
+			layerImages.setTargetX(obj.getInt("targetX"));
+			layerImages.setTargetY(obj.getInt("targetY"));
+		}
+		
+				
+		
 		// ajout du tiledlayerimage dans la liste
 		this.listLayersImages.add(layerImages);
 		
