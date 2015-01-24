@@ -18,6 +18,9 @@ public class TiledLayerImages
 		
 	// type de chemin
 		private String type;
+		
+	// targetX et targetY (pour les déplacements dynamiques)
+		private float targetX,targetY;
 
 		/**
 		 * @return the image
@@ -27,8 +30,38 @@ public class TiledLayerImages
 		/**
 		 * @return the posx
 		 */
+		
+		
 		public int getPosx() {
 			return posx;
+		}
+
+		/**
+		 * @return the targetX
+		 */
+		public float getTargetX() {
+			return targetX;
+		}
+
+		/**
+		 * @param targetX the targetX to set
+		 */
+		public void setTargetX(float targetX) {
+			this.targetX = targetX;
+		}
+
+		/**
+		 * @return the targetY
+		 */
+		public float getTargetY() {
+			return targetY;
+		}
+
+		/**
+		 * @param targetY the targetY to set
+		 */
+		public void setTargetY(float targetY) {
+			this.targetY = targetY;
 		}
 
 		/**
