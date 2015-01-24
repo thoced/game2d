@@ -87,15 +87,15 @@ public class ObstacleManager implements ICoreBase
 		// on ajoute les vecteurs
 		
 		// on récupère la position initial de polyline
-		float bx = x / 32.0f;
-		float by = y / 32.0f;
+		float bx = x / PhysicWorld.getRatioPixelMeter();
+		float by = y / PhysicWorld.getRatioPixelMeter();
 		
 		int ind = 0;
 		for(Vec2 v : vectors)
 		{
 			// onrécupère les points de la listes
-			float diffx = listePoint.get(ind).x / 32.0f;
-			float diffy = listePoint.get(ind).y / 32.0f;
+			float diffx = listePoint.get(ind).x / PhysicWorld.getRatioPixelMeter();
+			float diffy = listePoint.get(ind).y / PhysicWorld.getRatioPixelMeter();
 			// on ajoute la différence entre les coordonnées du pont initial et la liste des points
 			v.set(bx + diffx,by + diffy);
 			ind++;
@@ -136,8 +136,8 @@ public class ObstacleManager implements ICoreBase
 		// on créer les valeur en metre
 		float mx = x / 32.0f;
 		float my = y / 32.0f;
-		float mwidth = width / 32.0f;
-		float mheight = height / 32.0f;
+		float mwidth = width / PhysicWorld.getRatioPixelMeter();
+		float mheight = height /PhysicWorld.getRatioPixelMeter();
 		
 		
 		float halfW =  (mwidth / 2.0f);

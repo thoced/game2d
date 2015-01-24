@@ -18,7 +18,11 @@ public class PhysicWorld implements ICoreBase {
 	// gravity physic JBOX2D
 	private static Vec2 gravity;
 	
+	// parent static
 	private PhysicWorld pw;
+	
+	// ratio (pixels / m)
+	private static float ratio = 32.0f;
 	
 	public PhysicWorld()
 	{
@@ -34,6 +38,14 @@ public class PhysicWorld implements ICoreBase {
 	}
 	
 	
+	
+	/**
+	 * @return the ratio
+	 */
+	public static float getRatioPixelMeter() {
+		return ratio;
+	}
+
 	/**
 	 * @return the worldPhysic
 	 */

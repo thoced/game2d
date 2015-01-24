@@ -11,6 +11,7 @@ import org.jsfml.system.Vector2f;
 import org.jsfml.window.event.Event;
 
 import bilou.Camera;
+import bilou.PhysicWorld;
 import CoreTexturesManager.TexturesManager;
 
 public class PlayerView extends EntitieBase 
@@ -49,7 +50,7 @@ public class PlayerView extends EntitieBase
 		Vector2f pos = new Vector2f(this.pControl.getBody().getPosition().x,this.pControl.getBody().getPosition().y);
 		spritePlayer.setRotation((float) ((this.pControl.getBody().getAngle() * 180) / Math.PI) % 360);
 		
-		Vector2f tpos = Vector2f.mul(pos, 32.0f);
+		Vector2f tpos = Vector2f.mul(pos, PhysicWorld.getRatioPixelMeter());
 		
 		spritePlayer.setPosition(tpos);
 		
