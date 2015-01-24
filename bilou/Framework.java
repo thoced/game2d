@@ -27,6 +27,9 @@ import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 
+
+import CoreBackground.BackgroundDrawable;
+import CoreBackground.BackgroundDrawable.TypeBackground;
 import CoreDrawableCalqueManager.DrawableCalque;
 import CoreDrawableCalqueManager.DrawableCalqueBase;
 import CoreDrawableCalqueManager.DrawableCalqueDynamic;
@@ -97,6 +100,9 @@ public class Framework
 	private Texture charlie;
 	
 	private Sprite charlieSprite;
+	
+	// backgrond
+	private BackgroundDrawable background;
 	
 	
 	
@@ -180,7 +186,8 @@ public class Framework
 			e.printStackTrace();
 		}
 		
-		// 
+		// background
+		background = new BackgroundDrawable();
 		
 	}
 	
@@ -229,78 +236,32 @@ public class Framework
 	
 	public void Draw(RenderWindow window)
 	{
-		//window.setView(camera.getView());
 		
-		
-		/*Vector2f  size = camera.getView().getSize();
-		Vector2f centre = camera.getView().getCenter();
-		Vector2f source = Vector2f.sub(centre, Vector2f.div(size,2));
-		FloatRect zone = new FloatRect(source,size);*/
 		
 		FloatRect zone = Camera.GetBoundsVisible();
-		
-		// on récupère les élements visible 
-	//	listeElements.clear();
-		//quadtree.GetElements(zone,listeElements);
-		
-		//System.out.println("nb : " + String.valueOf(listeElements.size()) + " zone : x: " + zone.left + " y: " + zone.top + " width: " + zone.width + " height:" + zone.height);
-		
+
 		// on efface le backbuffer
-		renderText.clear(new Color(32,32,48));
-		
-		// RENDER 01
-		// on dessine les élements
-	/*	for(IGameBase e : listeElements)
-		{
-			e.Draw(renderText);
-		}
-		
-		
-		// on rend les élements
-		renderText.display();
-		
-		// RENDER 02
-		// on dessine la lumière dans le render 2
-		renderText2.clear(new Color(0,0,0,0));Drawable
-		lens.Draw(renderText2);
-		renderText2.display();
-		
-		// RENDER FINAL
-		// on fusionne les deux render 01 et 03
-		renderFinal.clear(new Color(255,255,255,0));
-		renderFinal.draw(postEffect1);
-		renderFinal.draw(postEffect2,rState);
-		renderFinal.display();
-	*/
+		renderText.clear(Color.TRANSPARENT);
 	
-	//	renderText.setView(camera.getView());
-	//	dm.draw(renderText, rState);
-		
-		
-	//	renderFinal.draw(postEffect1);
-		
-			
-		// drawdebug quadtree
-		//quadtree.DrawDebugBounds(window);
-		
-		// backbuffer dans le frontbuffer
-		//renderText.display();
-		
-		
 		// background affichage
-		renderText.setView(camera.getView());
+		/*renderText.setView(camera.getView());
 	 	dm.draw(renderText,rStateBackground);
+		renderText.display();
+		*/
+	
+		renderText.setView(window.getDefaultView());
+		renderText.draw(background);
 		renderText.display();
 		
 		// appel a la methode draw de l'entites manager
-				renderText.setView(camera.getView());
-				entitiesManager.Draw(renderText,rStateForeGround);
-				renderText.display();
+		renderText.setView(camera.getView());
+		entitiesManager.Draw(renderText,rStateForeGround);
+		renderText.display();
 		
 		// foreground affichage
-		renderText.setView(camera.getView());
-		dm2.draw(renderText,rStateForeGround);
-		renderText.display();
+		//renderText.setView(camera.getView());
+		//dm2.draw(renderText,rStateForeGround);
+		//renderText.display();
 		
 	//	RenderStates rs = new RenderStates(this.camera.getView().getTransform());
 		
@@ -318,6 +279,8 @@ public class Framework
 		
 		// affichage dans la fenetre principale (écran)
 		window.clear(new Color(3,32,48));
+		
+		// Affichage du Background qui ne bouge pas
 		window.draw(postEffect1);
 		window.display();
 		
@@ -526,6 +489,9 @@ public class Framework
 			e.printStackTrace();
 		}
 		System.out.println(tiled);
+		
+		// Chargement du background
+		background.ChooseBackground(TypeBackground.BACKGROUND01);
 		
 	//	arrayElements.add(lens);
 		//arrayElements.add(rob);
