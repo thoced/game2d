@@ -67,6 +67,50 @@
          "y":1632
         }, 
         {
+         "height":64,
+         "image":"..\/Textures\/c06.png",
+         "name":"c06",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":5184,
+         "y":1568
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/c06.png",
+         "name":"Copie de c06",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":6656,
+         "y":1440
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/c06.png",
+         "name":"Copie de Copie de c06",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":6144,
+         "y":1440
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/c06.png",
+         "name":"Copie de Copie de Copie de c06",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":5664,
+         "y":1536
+        }, 
+        {
          "draworder":"topdown",
          "height":256,
          "name":"obstacles",
@@ -303,6 +347,66 @@
                  "width":32,
                  "x":5088,
                  "y":1664
+                }, 
+                {
+                 "height":32,
+                 "id":26,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"ground",
+                 "visible":true,
+                 "width":352,
+                 "x":5184,
+                 "y":1568
+                }, 
+                {
+                 "height":32,
+                 "id":27,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"ground",
+                 "visible":true,
+                 "width":352,
+                 "x":5664,
+                 "y":1536
+                }, 
+                {
+                 "height":32,
+                 "id":28,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"ground",
+                 "visible":true,
+                 "width":352,
+                 "x":6144,
+                 "y":1440
+                }, 
+                {
+                 "height":32,
+                 "id":29,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"ground",
+                 "visible":true,
+                 "width":352,
+                 "x":6656,
+                 "y":1440
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -310,8 +414,25 @@
          "width":256,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/c06.png",
+         "name":"dynamic",
+         "opacity":1,
+         "properties":
+            {
+             "targetX":"10",
+             "targetY":"0",
+             "type":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7200,
+         "y":1440
         }],
- "nextobjectid":26,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "properties":
     {
