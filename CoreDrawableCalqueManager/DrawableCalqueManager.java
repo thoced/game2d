@@ -16,19 +16,19 @@ import bilou.ICoreBase;
 public class DrawableCalqueManager implements ICoreBase
 {
 	// liste de Layers
-	private List<DrawableCalque> listCalques;
-
+	private List<DrawableCalqueBase> listCalques;
+	
 	public DrawableCalqueManager()
 	{
 		// instance de la liste des calques
-		this.listCalques = new ArrayList<DrawableCalque>();
+		this.listCalques = new ArrayList<DrawableCalqueBase>();
 	}
 	
 	@Override
 	public void Update(Time deltaTime)
 	{
 		// TODO Auto-generated method stub
-		for(DrawableCalque calque : this.listCalques)
+		for(DrawableCalqueBase calque : this.listCalques)
 		{
 			// affichage des calques
 			calque.Update(deltaTime);
@@ -40,12 +40,19 @@ public class DrawableCalqueManager implements ICoreBase
 	{
 		// TODO Auto-generated method stub
 		
-		for(DrawableCalque calque : this.listCalques)
+		for(DrawableCalqueBase calque : this.listCalques)
 		{
 			// affichage des calques
 			calque.Draw(render);
 		}
 		
+	}
+	
+	public void InsertCalque(DrawableCalqueBase calque)
+	{
+		// ajout dans la liste
+		if(calque!=null)
+		this.listCalques.add(calque);
 	}
 	
 	public void InsertCalque(String pathTexture,String name,int posx,int posy)
