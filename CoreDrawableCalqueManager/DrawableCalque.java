@@ -13,7 +13,7 @@ public class DrawableCalque extends DrawableCalqueBase
 {
 	
 	
-	public DrawableCalque(Texture text,String name,int posx,int posy)
+	public DrawableCalque(Texture text,String name,float posx,float posy)
 	{
 		// appel a la class de base
 		super(text,name,posx,posy);

@@ -96,6 +96,7 @@ public class PlayerControl extends EntitieBase
 		fixture.density = 1.0f;
 		fixture.friction = 0.5f;
 		fixture.restitution = 0.0f;
+	
 		
 		ff = body.createFixture(fixture);
 		

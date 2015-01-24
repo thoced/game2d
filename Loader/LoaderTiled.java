@@ -173,25 +173,40 @@ public class LoaderTiled
 		layerImages.setPathImage(obj.getString("image"));
 		
 		// reception de la position de l'image 
-		layerImages.setPosx(obj.getInt("x"));
-		layerImages.setPosy(obj.getInt("y"));
+		layerImages.setPosx((float)obj.getJsonNumber("x").doubleValue());
+		layerImages.setPosy((float)obj.getJsonNumber("y").doubleValue());
 		
 		// reception de la taille de l'image
 		layerImages.setWidth(obj.getInt("width"));
 		layerImages.setHeight(obj.getInt("height"));
 		
 		// reception du type d'image si il y en a
-		if(obj.containsKey("type_calque"))
+		
+		// si l'objet properties existe (facultatif)
+		if(obj.containsKey("properties"))
 		{
-			layerImages.setTypeCalque(obj.getString("type_calque"));
+			JsonObject prop = obj.getJsonObject("properties");
 			
+			if(prop.containsKey("type_calque"))
+			{
+				layerImages.setTypeCalque(prop.getString("type_calque"));
+				
+			}
+			// reception du targetX targetY si existe
+			if(prop.containsKey("targetX") && prop.containsKey("targetY"))
+			{
+				layerImages.setTargetX(Integer.parseInt(prop.getString("targetX")));
+				layerImages.setTargetY(Integer.parseInt(prop.getString("targetY")));
+			}
+			
+			if(prop.containsKey("speed"))
+			{
+				layerImages.setSpeed(Integer.parseInt(prop.getString("speed")));
+			}
 		}
-		// reception du targetX targetY si existe
-		if(obj.containsKey("targetX") && obj.containsKey("targetY"))
-		{
-			layerImages.setTargetX(obj.getInt("targetX"));
-			layerImages.setTargetY(obj.getInt("targetY"));
-		}
+		
+		
+	
 		
 				
 		

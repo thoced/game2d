@@ -28,6 +28,8 @@ import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
 
 import CoreDrawableCalqueManager.DrawableCalque;
+import CoreDrawableCalqueManager.DrawableCalqueBase;
+import CoreDrawableCalqueManager.DrawableCalqueDynamic;
 import CoreDrawableCalqueManager.DrawableCalqueManager;
 import CoreManagerObstacle.ObstacleManager;
 import CoreQuadTree.QuadTreeNode;
@@ -209,6 +211,9 @@ public class Framework
 		lens.Update(deltaTime);
 		*/
 		
+		
+		// update du calquemanager
+		calquesManager.Update(deltaTime);
 		
 		// update du entities manager
 		entitiesManager.Update(deltaTime);
@@ -449,12 +454,37 @@ public class Framework
 				
 				// on récupère la texture à partir du texturesmanager en y passant le dernier element du vecteur split
 				String nameText = nameTexture[nameTexture.length-1];
-				int posx = calque.getPosx();
-				int posy = calque.getPosy();
+				float posx = calque.getPosx();
+				float posy = calque.getPosy();
 				String nameCalque = calque.getName();
 			
 				// on ajoute dans le drawablemanager
-				calquesManager.InsertCalque(nameText, nameCalque, posx, posy);
+				
+				DrawableCalqueBase c = null;
+				
+				if(calque.getTypeCalque() == null)
+				{
+					// c'est un simple calque static
+					Texture t = TexturesManager.GetTextureByName(nameText);
+					c = new DrawableCalque(t, nameCalque, posx, posy);
+				}
+				else
+				{
+					if(calque.getTypeCalque().equals("dynamic"))
+					{
+						
+						// on récupère les information dynamic
+						float speed = calque.getSpeed();
+						float targetX = calque.getTargetX();
+						float targetY = calque.getTargetY();
+						// c'est un calque dynamic
+						Texture t = TexturesManager.GetTextureByName(nameText);
+						c = new DrawableCalqueDynamic(t,nameCalque,posx,posy,speed,targetX,targetY);
+					}
+				}
+				
+				
+				calquesManager.InsertCalque(c);
 			}
 			
 			// reception des obstacle via les objet7

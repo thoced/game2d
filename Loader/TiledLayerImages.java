@@ -8,7 +8,7 @@ public class TiledLayerImages
 		private String name = null;
 		
 	// coordonnée d'affichage de l'image
-		private int posx,posy;
+		private float posx,posy;
 		
 	// taille de l'image
 		private int width,height;
@@ -39,7 +39,7 @@ public class TiledLayerImages
 		
 		
 		
-		public int getPosx() {
+		public float getPosx() {
 			return posx;
 		}
 
@@ -114,24 +114,24 @@ public class TiledLayerImages
 		}
 
 		/**
-		 * @param posx the posx to set
+		 * @param f the posx to set
 		 */
-		public void setPosx(int posx) {
-			this.posx = posx;
+		public void setPosx(float f) {
+			this.posx = f;
 		}
 
 		/**
 		 * @return the posy
 		 */
-		public int getPosy() {
+		public float getPosy() {
 			return posy;
 		}
 
 		/**
-		 * @param posy the posy to set
+		 * @param f the posy to set
 		 */
-		public void setPosy(int posy) {
-			this.posy = posy;
+		public void setPosy(float f) {
+			this.posy = f;
 		}
 
 		/**
