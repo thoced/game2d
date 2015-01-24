@@ -5,7 +5,7 @@ import org.jsfml.graphics.Sprite;
 public class TiledLayerImages 
 {
 	// nom du layer image
-		private String name;
+		private String name = null;
 		
 	// coordonnée d'affichage de l'image
 		private int posx,posy;
@@ -14,13 +14,19 @@ public class TiledLayerImages
 		private int width,height;
 	
 	// chemin absolu de l'image
-		private String pathImage;
+		private String pathImage = null;
 		
-	// type de chemin
-		private String type;
+	// type 
+		private String type = null;
+		
+	// typeCalque
+		private String typeCalque = null;
 		
 	// targetX et targetY (pour les déplacements dynamiques)
 		private float targetX,targetY;
+		
+	// speed
+		private float speed;  // m/s
 
 		/**
 		 * @return the image
@@ -32,8 +38,37 @@ public class TiledLayerImages
 		 */
 		
 		
+		
 		public int getPosx() {
 			return posx;
+		}
+
+		/**
+		 * @return the typeCalque
+		 */
+		public String getTypeCalque() {
+			return typeCalque;
+		}
+
+		/**
+		 * @param typeCalque the typeCalque to set
+		 */
+		public void setTypeCalque(String typeCalque) {
+			this.typeCalque = typeCalque;
+		}
+
+		/**
+		 * @return the speed
+		 */
+		public float getSpeed() {
+			return speed;
+		}
+
+		/**
+		 * @param speed the speed to set
+		 */
+		public void setSpeed(float speed) {
+			this.speed = speed;
 		}
 
 		/**

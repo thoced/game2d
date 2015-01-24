@@ -181,9 +181,9 @@ public class LoaderTiled
 		layerImages.setHeight(obj.getInt("height"));
 		
 		// reception du type d'image si il y en a
-		if(obj.containsKey("type"))
+		if(obj.containsKey("type_calque"))
 		{
-			layerImages.setType(obj.getString("type"));
+			layerImages.setTypeCalque(obj.getString("type_calque"));
 			
 		}
 		// reception du targetX targetY si existe
