@@ -9,18 +9,14 @@ import org.jsfml.system.Vector2f;
 
 import bilou.Camera;
 
-public class DrawableCalque extends DrawabkeCalqueBase
+public class DrawableCalque extends DrawableCalqueBase
 {
 	
 	
 	public DrawableCalque(Texture text,String name,int posx,int posy)
 	{
-		// creation du sprite depuis une reference texture
-		imageCalque = new Sprite(text);
-		// position du sprite
-		imageCalque.setPosition(new Vector2f(posx,posy));
-		// nom du calque
-		this.name = name;
+		// appel a la class de base
+		super(text,name,posx,posy);
 	}
 	
 	public void Draw(RenderTexture render)
