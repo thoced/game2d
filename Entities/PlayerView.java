@@ -4,10 +4,12 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.World;
+import org.jsfml.graphics.FloatRect;
 import org.jsfml.graphics.IntRect;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Time;
 import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
 import org.jsfml.window.event.Event;
 
 import bilou.Camera;
@@ -20,6 +22,14 @@ public class PlayerView extends EntitieBase
 	
 	// class Sprite
 	private Sprite spritePlayer;
+	// vecteur des FloatRect d'animation
+	private IntRect[] vectorAnim;
+	// indice d'animation
+	private int indAnim = 0;
+	// indicemax d'anim
+	private int indMaxAnim = 0;
+	// Time Anim
+	private Time timeAnim = Time.ZERO;
 	
 	
 	public PlayerView()
@@ -39,6 +49,21 @@ public class PlayerView extends EntitieBase
 	{
 		// TODO Auto-generated method stub
 		pControl.Update(elapsedTime);
+		
+		// update de l'animation
+		spritePlayer.setTextureRect(vectorAnim[indAnim]);
+		
+		timeAnim = Time.add(elapsedTime, timeAnim);
+		if(timeAnim.asSeconds() > 1f/24f)
+		{
+			indAnim++;
+			timeAnim = Time.ZERO;
+			if(indAnim > vectorAnim.length-1)
+			{
+				indAnim = 0;
+			}
+		}
+		
 	}
 
 	@Override
@@ -68,6 +93,33 @@ public class PlayerView extends EntitieBase
 		spritePlayer = new Sprite(TexturesManager.GetTextureByName("player"));
 		spritePlayer.setTextureRect(new IntRect(0,0,64,64));
 		
+		// taille de l'image
+		Vector2i size = TexturesManager.GetTextureByName("player").getSize();
+		
+		// initialisation du vecteur d'animation
+		vectorAnim = new IntRect[6]; // 12 étant le nombre d'animation pour le player
+		// on crée les floatrect
+		int x = 0;
+		int y = 0;
+		for(int i=0;i<vectorAnim.length;i++)
+		{
+			vectorAnim[i] = new IntRect(x,y,64,64);
+			x+=64;
+			if(x>size.x)
+			{
+				x=0;
+				y+=64;
+				if(y > size.y)
+				{
+					break;
+				}
+			}
+			
+		}
+		
+		
+		// on spécifie l'indice maximal de l'animation
+		indMaxAnim = vectorAnim.length;
 	}
 	
 	public void SetPosition(Vector2f pos)
