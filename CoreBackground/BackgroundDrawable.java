@@ -21,7 +21,6 @@ public class BackgroundDrawable implements Drawable
 	public void draw(RenderTarget render, RenderStates state) 
 	{		
 		render.draw(spriteBackground);
-	
 	}
 	
 	public void ChooseBackground(TypeBackground background)

@@ -13,6 +13,17 @@
         }, 
         {
          "height":64,
+         "image":"..\/Textures\/c01.png",
+         "name":"gros bloc flottant",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":5888,
+         "y":352
+        }, 
+        {
+         "height":64,
          "image":"..\/Textures\/c02.png",
          "name":"c02",
          "opacity":1,
@@ -65,6 +76,17 @@
          "width":256,
          "x":7712,
          "y":1472
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/c05.png",
+         "name":"superieur",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7648,
+         "y":384
         }, 
         {
          "height":64,
@@ -539,6 +561,111 @@
                  "width":512,
                  "x":7712,
                  "y":1472
+                }, 
+                {
+                 "height":384,
+                 "id":37,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"wall",
+                 "visible":true,
+                 "width":32,
+                 "x":7648,
+                 "y":416
+                }, 
+                {
+                 "height":32,
+                 "id":39,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"ground",
+                 "visible":true,
+                 "width":544,
+                 "x":7648,
+                 "y":384
+                }, 
+                {
+                 "height":32,
+                 "id":40,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"wall",
+                 "visible":true,
+                 "width":512,
+                 "x":7680,
+                 "y":768
+                }, 
+                {
+                 "height":32,
+                 "id":58,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"ground",
+                 "visible":true,
+                 "width":832,
+                 "x":5888,
+                 "y":352
+                }, 
+                {
+                 "height":800,
+                 "id":59,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"wall",
+                 "visible":true,
+                 "width":32,
+                 "x":6688,
+                 "y":384
+                }, 
+                {
+                 "height":800,
+                 "id":61,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"wall",
+                 "visible":true,
+                 "width":32,
+                 "x":5888,
+                 "y":384
+                }, 
+                {
+                 "height":32,
+                 "id":63,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"wall",
+                 "visible":true,
+                 "width":768,
+                 "x":5920,
+                 "y":1152
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -562,10 +689,118 @@
          "type":"imagelayer",
          "visible":true,
          "width":256,
-         "x":7082,
-         "y":1333
+         "x":7040,
+         "y":1344
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/passerelle.png",
+         "name":"passerellebis",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"3",
+             "targetX":"-7",
+             "targetY":"0",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7968,
+         "y":1280
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/passerelle.png",
+         "name":"passerelle02",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"3",
+             "targetX":"-15",
+             "targetY":"0",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7520,
+         "y":1152
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/passerelle.png",
+         "name":"passerelle03",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"3",
+             "targetX":"15",
+             "targetY":"0",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7040,
+         "y":1024
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/passerelle.png",
+         "name":"passerelle04",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"3",
+             "targetX":"-15",
+             "targetY":"0",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7520,
+         "y":896
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/passerelle.png",
+         "name":"passerelle06",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"3",
+             "targetX":"10",
+             "targetY":"0",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":6720,
+         "y":352
+        }, 
+        {
+         "height":64,
+         "image":"..\/Textures\/passerelle.png",
+         "name":"ascenseur01",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"3",
+             "targetX":"0",
+             "targetY":"-15",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7264,
+         "y":800
         }],
- "nextobjectid":37,
+ "nextobjectid":64,
  "orientation":"orthogonal",
  "properties":
     {

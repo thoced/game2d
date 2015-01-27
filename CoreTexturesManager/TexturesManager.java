@@ -1,6 +1,10 @@
 package CoreTexturesManager;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.Hashtable;
 
 import org.jsfml.graphics.RenderStates;
@@ -58,7 +62,6 @@ public class TexturesManager implements ICoreBase
 		{
 			Texture text = new Texture();
 			text.loadFromStream(TexturesManager.class.getResourceAsStream("/Textures/" + name));
-			// ajout dans la liste
 			hashTextures.put(name, text);
 			
 		} catch (IOException e) {
@@ -93,7 +96,7 @@ public class TexturesManager implements ICoreBase
 			if(!hashTextures.containsKey("player")) // si celle-ci n'existe pas
 			{
 				Texture text01 = new Texture();
-				text01.loadFromStream(TexturesManager.class.getResourceAsStream("/Textures/player.png"));
+				text01.loadFromStream(TexturesManager.class.getResourceAsStream("/Textures/robotcarrepng.png"));
 				// ajout dans le hash textures
 				hashTextures.put("player", text01);
 			}

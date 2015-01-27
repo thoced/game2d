@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import org.jsfml.graphics.BlendMode;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.FloatRect;
@@ -26,7 +28,6 @@ import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Keyboard;
 import org.jsfml.window.event.Event;
-
 
 import CoreBackground.BackgroundDrawable;
 import CoreBackground.BackgroundDrawable.TypeBackground;
@@ -413,7 +414,19 @@ public class Framework
 				// pour chaque calque on créer un drawablecalque
 				String pathTexture = calque.getPathImage();
 				// on récupère juste le nom de la texture
-				String[] nameTexture = pathTexture.split(File.separator);
+				//String[] nameTexture = pathTexture.split(File.separator);
+				
+				//JOptionPane.showConfirmDialog(null,pathTexture);
+				
+				String[] nameTexture  = null;
+				
+				String os = System.getProperty("os.name");
+				
+				
+				if(os.equals("Linux"))
+					nameTexture = pathTexture.split("/");
+				else
+					nameTexture = pathTexture.split("/");
 				
 				// on récupère la texture à partir du texturesmanager en y passant le dernier element du vecteur split
 				String nameText = nameTexture[nameTexture.length-1];

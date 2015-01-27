@@ -76,27 +76,40 @@ public class PlayerControl extends EntitieBase
 	{
 		// creatin du body jbox2d
 		bodyDef = new BodyDef();
+		bodyDef.position.set(new Vec2(0f,0.9f));
 		bodyDef.position = new Vec2(1,0);
 		bodyDef.type = BodyType.DYNAMIC;
 		
 		
+		
 		body = PhysicWorld.getWorldPhysic().createBody(bodyDef);
 		body.setUserData(this);
+		
+
 		// initialisation du body
 	
 		//body.setFixedRotation(true);
 		
-
+		/*MassData md = new MassData();
+		body.getMassData(md);
+		md.center.set(0f,5f);
+		body.setMassData(md);
+		body.applyAngularImpulse(180f);*/
+		
+		
+	
 		//
 		fixture = new FixtureDef();
 		PolygonShape poly = new PolygonShape();
 		poly.setAsBox(1, 1);
+		
 		
 		fixture.shape = poly;
 		fixture.density = 1.0f;
 		fixture.friction = 0.5f;
 		fixture.restitution = 0.0f;
 	
+		
 		
 		ff = body.createFixture(fixture);
 		
