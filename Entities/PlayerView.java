@@ -53,14 +53,31 @@ public class PlayerView extends EntitieBase
 		// update de l'animation
 		spritePlayer.setTextureRect(vectorAnim[indAnim]);
 		
+		// choix de l'anim
 		timeAnim = Time.add(elapsedTime, timeAnim);
-		if(timeAnim.asSeconds() > 1f/24f)
+		
+		if(pControl.getTypeSens() == PlayerControl.SENS.DROITE)
 		{
-			indAnim++;
-			timeAnim = Time.ZERO;
-			if(indAnim > vectorAnim.length-1)
+			if(timeAnim.asSeconds() > 1f/24f)
 			{
-				indAnim = 0;
+				indAnim++;
+				timeAnim = Time.ZERO;
+				if(indAnim > 11)
+				{
+					indAnim = 0;
+				}
+			}
+		}
+		else if(pControl.getTypeSens() == PlayerControl.SENS.GAUCHE)
+		{
+			if(timeAnim.asSeconds() > 1f/24f)
+			{
+				indAnim++;
+				timeAnim = Time.ZERO;
+				if(indAnim > 23)
+				{
+					indAnim = 12;
+				}
 			}
 		}
 		
@@ -97,7 +114,7 @@ public class PlayerView extends EntitieBase
 		Vector2i size = TexturesManager.GetTextureByName("player").getSize();
 		
 		// initialisation du vecteur d'animation
-		vectorAnim = new IntRect[6]; // 12 étant le nombre d'animation pour le player
+		vectorAnim = new IntRect[24]; // 12 étant le nombre d'animation pour le player
 		// on crée les floatrect
 		int x = 0;
 		int y = 0;
@@ -105,11 +122,11 @@ public class PlayerView extends EntitieBase
 		{
 			vectorAnim[i] = new IntRect(x,y,64,64);
 			x+=64;
-			if(x>size.x)
+			if(x>=size.x)
 			{
 				x=0;
 				y+=64;
-				if(y > size.y)
+				if(y >= size.y)
 				{
 					break;
 				}

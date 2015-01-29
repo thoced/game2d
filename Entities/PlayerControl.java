@@ -52,6 +52,11 @@ public class PlayerControl extends EntitieBase
 	
 	private Fixture ff;
 	
+	// enum sens
+	public static enum SENS {PAUSE,GAUCHE,DROITE}; 
+	// direction choisie (pour animation)
+	private SENS typeSens = SENS.PAUSE;
+	
 	/**
 	 * @return the isground
 	 */
@@ -76,7 +81,7 @@ public class PlayerControl extends EntitieBase
 	{
 		// creatin du body jbox2d
 		bodyDef = new BodyDef();
-		bodyDef.position.set(new Vec2(0f,0.9f));
+	//	bodyDef.position.set(new Vec2(0f,0.9f));
 		bodyDef.position = new Vec2(1,0);
 		bodyDef.type = BodyType.DYNAMIC;
 		
@@ -108,13 +113,7 @@ public class PlayerControl extends EntitieBase
 		fixture.density = 1.0f;
 		fixture.friction = 0.5f;
 		fixture.restitution = 0.0f;
-	
-		
-		
 		ff = body.createFixture(fixture);
-		
-
-	
 	}		
 		
 		
@@ -125,12 +124,20 @@ public class PlayerControl extends EntitieBase
 	{
 		//if(!body.isAwake())
 		//	this.setIsground(true);
+	
+		// on applique l'animation qui ne bouge pas
+		//this.typeSens = SENS.PAUSE;
 		
 		// on verifie l'etat du clavier
+	
 		if(   Keyboard.isKeyPressed(Keyboard.Key.D))
 		{
 			// si la touche D, la direction va vers la droite
 			body.applyForce(new Vec2(256,0),body.getWorldCenter());
+			
+			
+			// sens selectionné
+			this.typeSens = SENS.DROITE;
 			
 		
 			
@@ -138,6 +145,10 @@ public class PlayerControl extends EntitieBase
 		{
 			// si la touche Q, la direction va vers la gauche
 			body.applyForce(new Vec2(-256,0),body.getWorldCenter());
+			
+			// sens selectionné
+			this.typeSens = SENS.GAUCHE;
+						
 		
 		}
 		
@@ -150,6 +161,9 @@ public class PlayerControl extends EntitieBase
 		else if(!Keyboard.isKeyPressed(Keyboard.Key.SPACE))
 			this.isSpace = false;
 		
+		// on récupère le vecteur velocity
+		if(body.getLinearVelocity().lengthSquared() == 0f)
+			this.typeSens = SENS.PAUSE;
 		
 		
 		// appel de l'appelMVC
@@ -210,6 +224,14 @@ public class PlayerControl extends EntitieBase
 			direction = Vector2f.ZERO;
 		}
 	}
+
+	/**
+	 * @return the typeSens
+	 */
+	public SENS getTypeSens() {
+		return typeSens;
+	}
+
 	
 	
 }
