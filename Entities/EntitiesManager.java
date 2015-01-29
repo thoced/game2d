@@ -11,7 +11,8 @@ import bilou.ICoreBase;
 public class EntitiesManager implements ICoreBase
 {
 	
-	private PlayerView player;
+	private SmallRobotView playerSmallRobot;
+	
 	
 	
 	public EntitiesManager()
@@ -22,7 +23,7 @@ public class EntitiesManager implements ICoreBase
 	public void Update(Time deltaTime)
 	{
 		// TODO Auto-generated method stub
-		player.Update(deltaTime);
+		playerSmallRobot.Update(deltaTime);
 	}
 
 	
@@ -32,9 +33,9 @@ public class EntitiesManager implements ICoreBase
 	{
 		// TODO Auto-generated method stub
 		//Load content du TextureManager
-		player = new PlayerView();
-		player.LoadContent();
-		player.SetPosition(new Vector2f(10,0));
+		playerSmallRobot = new SmallRobotView();
+		playerSmallRobot.LoadContent();
+		playerSmallRobot.SetPosition(new Vector2f(10,0));
 	}
 
 	@Override
@@ -59,13 +60,13 @@ public class EntitiesManager implements ICoreBase
 	public void CatchEvent(Event e) 
 	{
 		// TODO Auto-generated method stub
-		this.player.SetEvent(e);
+		this.playerSmallRobot.SetEvent(e);
 	}
 	@Override
 	public void Draw(RenderTexture render, RenderStates state) 
 	{
 		
-		render.draw(player.getSpritePlayer());
+		render.draw(playerSmallRobot.getSpritePlayer());
 		
 	}
 	
