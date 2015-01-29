@@ -2,7 +2,7 @@
  "layers":[
         {
          "height":64,
-         "image":"..\/Textures\/c01.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c01.png",
          "name":"c01",
          "opacity":1,
          "type":"imagelayer",
@@ -13,18 +13,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c01.png",
-         "name":"gros bloc flottant",
-         "opacity":1,
-         "type":"imagelayer",
-         "visible":true,
-         "width":256,
-         "x":5888,
-         "y":352
-        }, 
-        {
-         "height":64,
-         "image":"..\/Textures\/c02.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c02.png",
          "name":"c02",
          "opacity":1,
          "type":"imagelayer",
@@ -35,7 +24,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c04.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c04.png",
          "name":"c04",
          "opacity":1,
          "type":"imagelayer",
@@ -46,7 +35,25 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c04.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c04.png",
+         "name":"porte01",
+         "opacity":1,
+         "properties":
+            {
+             "speed":"2",
+             "targetX":"0",
+             "targetY":"-6",
+             "type_calque":"dynamic"
+            },
+         "type":"imagelayer",
+         "visible":true,
+         "width":256,
+         "x":7872,
+         "y":384
+        }, 
+        {
+         "height":64,
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c04.png",
          "name":"c04bis",
          "opacity":1,
          "type":"imagelayer",
@@ -57,7 +64,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c05.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c05.png",
          "name":"c05",
          "opacity":1,
          "type":"imagelayer",
@@ -68,7 +75,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c05.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c05.png",
          "name":"Copie de c05",
          "opacity":1,
          "type":"imagelayer",
@@ -79,7 +86,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c05.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c05.png",
          "name":"superieur",
          "opacity":1,
          "type":"imagelayer",
@@ -90,7 +97,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c06.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c06.png",
          "name":"c06",
          "opacity":1,
          "type":"imagelayer",
@@ -101,7 +108,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c06.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c06.png",
          "name":"Copie de c06",
          "opacity":1,
          "type":"imagelayer",
@@ -112,7 +119,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c06.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c06.png",
          "name":"Copie de Copie de c06",
          "opacity":1,
          "type":"imagelayer",
@@ -123,7 +130,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c06.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c06.png",
          "name":"Copie de Copie de Copie de c06",
          "opacity":1,
          "type":"imagelayer",
@@ -134,7 +141,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/c03.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/c03.png",
          "name":"c03",
          "opacity":1,
          "type":"imagelayer",
@@ -606,66 +613,6 @@
                  "width":512,
                  "x":7680,
                  "y":768
-                }, 
-                {
-                 "height":32,
-                 "id":58,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"ground",
-                 "visible":true,
-                 "width":832,
-                 "x":5888,
-                 "y":352
-                }, 
-                {
-                 "height":800,
-                 "id":59,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"wall",
-                 "visible":true,
-                 "width":32,
-                 "x":6688,
-                 "y":384
-                }, 
-                {
-                 "height":800,
-                 "id":61,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"wall",
-                 "visible":true,
-                 "width":32,
-                 "x":5888,
-                 "y":384
-                }, 
-                {
-                 "height":32,
-                 "id":63,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"wall",
-                 "visible":true,
-                 "width":768,
-                 "x":5920,
-                 "y":1152
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -676,7 +623,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/passerelle.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/passerelle.png",
          "name":"passerelle",
          "opacity":1,
          "properties":
@@ -694,7 +641,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/passerelle.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/passerelle.png",
          "name":"passerellebis",
          "opacity":1,
          "properties":
@@ -712,7 +659,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/passerelle.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/passerelle.png",
          "name":"passerelle02",
          "opacity":1,
          "properties":
@@ -730,7 +677,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/passerelle.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/passerelle.png",
          "name":"passerelle03",
          "opacity":1,
          "properties":
@@ -748,7 +695,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/passerelle.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/passerelle.png",
          "name":"passerelle04",
          "opacity":1,
          "properties":
@@ -766,25 +713,7 @@
         }, 
         {
          "height":64,
-         "image":"..\/Textures\/passerelle.png",
-         "name":"passerelle06",
-         "opacity":1,
-         "properties":
-            {
-             "speed":"3",
-             "targetX":"10",
-             "targetY":"0",
-             "type_calque":"dynamic"
-            },
-         "type":"imagelayer",
-         "visible":true,
-         "width":256,
-         "x":6720,
-         "y":352
-        }, 
-        {
-         "height":64,
-         "image":"..\/Textures\/passerelle.png",
+         "image":"..\/..\/..\/..\/Documents\/mamap\/Textures\/passerelle.png",
          "name":"ascenseur01",
          "opacity":1,
          "properties":
@@ -800,7 +729,7 @@
          "x":7264,
          "y":800
         }],
- "nextobjectid":64,
+ "nextobjectid":41,
  "orientation":"orthogonal",
  "properties":
     {

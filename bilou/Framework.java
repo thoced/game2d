@@ -304,10 +304,7 @@ public class Framework
 				camera.Move(Camera.Up);
 			else if(event.asMouseEvent().position.y < 64)
 				camera.Move(Camera.Down);
-			
-			
-			
-
+		
 		}
 		
 		if(event.type == Event.Type.KEY_PRESSED)
@@ -319,6 +316,12 @@ public class Framework
 			else if(event.asKeyEvent().key == Keyboard.Key.P)
 			{
 				camera.ZoomOut();
+			}
+			
+			// changement de player
+			if(event.asKeyEvent().key == Keyboard.Key.G)
+			{
+				entitiesManager.SwitchPlayer();
 			}
 		}
 		

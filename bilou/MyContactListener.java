@@ -7,6 +7,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.contacts.Contact;
 
 import Entities.RobotBase;
+import Entities.SmallRobotControl;
 
 public class MyContactListener implements ContactListener {
 
@@ -16,20 +17,41 @@ public class MyContactListener implements ContactListener {
 		// TODO Auto-generated method stub
 		
 	
-			Object tempA = contact.m_fixtureA.m_body.getUserData();
-			Object tempB = contact.m_fixtureB.m_body.getUserData();
+		
 			
-			if(tempA != null && tempA.getClass() == RobotBase.class)
+			/*if(tempA != null && tempA.getClass() == SmallRobotControl.class)
 			{
-				if(tempB != null && tempB.equals("ground"))
+				if(tempB != null && (tempB.equals("ground")  || tempB.getClass() == SmallRobotControl.class))
 					((RobotBase)tempA).setIsground(true);
 			}
 			
-			if(tempB != null && tempB.getClass() == RobotBase.class)
+			if(tempB != null && tempB.getClass() == SmallRobotControl.class)
 			{
-				if(tempA != null && tempA.equals("ground"))
+				if(tempA != null && (tempA.equals("ground") || tempA.getClass() == SmallRobotControl.class))
 					((RobotBase)tempB).setIsground(true);
-			}
+			}*/
+			
+			
+			do
+			{
+			
+				Object tempA = contact.m_fixtureA.m_body.getUserData();
+				Object tempB = contact.m_fixtureB.m_body.getUserData();
+					
+				if(tempA != null && tempA.getClass().getSuperclass() == RobotBase.class)
+				{
+					((RobotBase)tempA).setIsground(true);
+				}
+				
+	
+				if(tempB != null && tempB.getClass().getSuperclass() == RobotBase.class)
+				{
+					((RobotBase)tempB).setIsground(true);
+				}
+				
+			contact = contact.getNext();
+			
+			}while(contact != null);
 			
 	}
 

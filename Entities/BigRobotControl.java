@@ -21,10 +21,11 @@ import bilou.PhysicWorld;
 import CoreManagerObstacle.ObstacleManager;
 import CoreManagerObstacle.ObstacleResult;
 
-public class SmallRobotControl extends RobotBase 
+public class BigRobotControl extends RobotBase 
 {
 	// class metier (controle MVC)
-	
+	// Vecteur de position
+	private Vector2f positionPlayer;
 	// bounds
 	private FloatRect bounds;
 	// Vecteur velocité
@@ -41,21 +42,20 @@ public class SmallRobotControl extends RobotBase
 	// la touche space est elle enfoncée
 	private boolean isSpace = false;
 	
-	
-	
-	
+
+
 	
 	/**
 	 * @return the isground
 	 */
 
 
-	public SmallRobotControl()
+	public BigRobotControl()
 	{
 		// creatin du body jbox2d
 		bodyDef = new BodyDef();
 	//	bodyDef.position.set(new Vec2(0f,0.9f));
-		bodyDef.position = new Vec2(1,10);
+		bodyDef.position = new Vec2(5,0);
 		bodyDef.type = BodyType.DYNAMIC;
 		
 		
@@ -79,7 +79,7 @@ public class SmallRobotControl extends RobotBase
 		//
 		fixture = new FixtureDef();
 		PolygonShape poly = new PolygonShape();
-		poly.setAsBox(1, 1);
+		poly.setAsBox(1.5f, 1.5f);
 		
 		
 		fixture.shape = poly;
@@ -87,12 +87,9 @@ public class SmallRobotControl extends RobotBase
 		fixture.friction = 0.5f;
 		fixture.restitution = 0.0f;
 		ff = body.createFixture(fixture);
-			
 		
-		// specifie en premier que le petit robot est selectionné
-		this.setSelected(true);
-		
-	
+		// specifie en premier que le grand robot n'est pas selectionné
+		this.setSelected(false);
 		
 	}		
 		
@@ -114,10 +111,10 @@ public class SmallRobotControl extends RobotBase
 		if(this.isSelected)
 		{
 	
-			if(  Keyboard.isKeyPressed(Keyboard.Key.D))
+			if(Keyboard.isKeyPressed(Keyboard.Key.D))
 			{
 				// si la touche D, la direction va vers la droite
-				body.applyForce(new Vec2(256,0),body.getWorldCenter());
+				body.applyForce(new Vec2(512,0),body.getWorldCenter());
 				
 				
 				// sens selectionné
@@ -128,7 +125,7 @@ public class SmallRobotControl extends RobotBase
 			}else if( Keyboard.isKeyPressed(Keyboard.Key.Q))
 			{
 				// si la touche Q, la direction va vers la gauche
-				body.applyForce(new Vec2(-256,0),body.getWorldCenter());
+				body.applyForce(new Vec2(-512,0),body.getWorldCenter());
 				
 				// sens selectionné
 				this.typeSens = SENS.GAUCHE;
@@ -144,7 +141,7 @@ public class SmallRobotControl extends RobotBase
 			}
 			else if(!Keyboard.isKeyPressed(Keyboard.Key.SPACE))
 				this.isSpace = false;
-		
+			
 		}
 		
 		// on récupère le vecteur velocity
@@ -152,7 +149,7 @@ public class SmallRobotControl extends RobotBase
 			this.typeSens = SENS.PAUSE;
 		
 		
-		// appel de l'appelMVC
+		
 		this.UpdateAttachMVC();
 		
 	}
@@ -180,6 +177,7 @@ public class SmallRobotControl extends RobotBase
 	}
 
 	
+
 	@Override
 	public void SetEvent(Event e)
 	{
@@ -191,6 +189,6 @@ public class SmallRobotControl extends RobotBase
 		}
 	}
 
-	
+
 	
 }

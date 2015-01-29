@@ -16,8 +16,9 @@ import bilou.Camera;
 import bilou.PhysicWorld;
 import CoreTexturesManager.TexturesManager;
 
-public class SmallRobotView extends RobotViewBase 
+public class BigRobotView extends RobotViewBase 
 {
+	
 	
 	// class Sprite
 	private Sprite spritePlayer;
@@ -31,12 +32,15 @@ public class SmallRobotView extends RobotViewBase
 	private Time timeAnim = Time.ZERO;
 	
 	
-	public SmallRobotView()
+	public BigRobotView()
 	{
 		// instance du PlayerControl
-		pControl = new SmallRobotControl();
+		pControl = new BigRobotControl();
 		// attachement au model MVC
 		pControl.Attach(this);
+		
+	
+		
 	
 	}
 
@@ -52,7 +56,7 @@ public class SmallRobotView extends RobotViewBase
 		// choix de l'anim
 		timeAnim = Time.add(elapsedTime, timeAnim);
 		
-		if(pControl.getTypeSens() == SmallRobotControl.SENS.DROITE)
+		if(pControl.getTypeSens() == BigRobotControl.SENS.DROITE)
 		{
 			if(timeAnim.asSeconds() > 1f/24f)
 			{
@@ -64,7 +68,7 @@ public class SmallRobotView extends RobotViewBase
 				}
 			}
 		}
-		else if(pControl.getTypeSens() == SmallRobotControl.SENS.GAUCHE)
+		else if(pControl.getTypeSens() == BigRobotControl.SENS.GAUCHE)
 		{
 			if(timeAnim.asSeconds() > 1f/24f)
 			{
@@ -93,7 +97,7 @@ public class SmallRobotView extends RobotViewBase
 		spritePlayer.setPosition(tpos);
 		
 
-		spritePlayer.setOrigin(new Vector2f(32,32));
+		spritePlayer.setOrigin(new Vector2f(48,48));
 		
 		// test update camera
 		if(this.pControl.isSelected)
@@ -104,11 +108,11 @@ public class SmallRobotView extends RobotViewBase
 	public void LoadContent() 
 	{
 		// TODO Auto-generated method stub
-		spritePlayer = new Sprite(TexturesManager.GetTextureByName("playerSmallRobot"));
+		spritePlayer = new Sprite(TexturesManager.GetTextureByName("playerBigRobot"));
 		spritePlayer.setTextureRect(new IntRect(0,0,64,64));
 		
 		// taille de l'image
-		Vector2i size = TexturesManager.GetTextureByName("playerSmallRobot").getSize();
+		Vector2i size = TexturesManager.GetTextureByName("playerBigRobot").getSize();
 		
 		// initialisation du vecteur d'animation
 		vectorAnim = new IntRect[24]; // 12 étant le nombre d'animation pour le player
@@ -117,12 +121,12 @@ public class SmallRobotView extends RobotViewBase
 		int y = 0;
 		for(int i=0;i<vectorAnim.length;i++)
 		{
-			vectorAnim[i] = new IntRect(x,y,64,64);
-			x+=64;
+			vectorAnim[i] = new IntRect(x,y,96,96);
+			x+=96;
 			if(x>=size.x)
 			{
 				x=0;
-				y+=64;
+				y+=96;
 				if(y >= size.y)
 				{
 					break;

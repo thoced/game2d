@@ -93,13 +93,23 @@ public class TexturesManager implements ICoreBase
 			}
 			
 			// création de la texture players
-			if(!hashTextures.containsKey("player")) // si celle-ci n'existe pas
+			if(!hashTextures.containsKey("playerSmallRobot")) // si celle-ci n'existe pas
 			{
 				Texture text01 = new Texture();
 				text01.loadFromStream(TexturesManager.class.getResourceAsStream("/Textures/robotpattesBALL.png"));
 				// ajout dans le hash textures
-				hashTextures.put("player", text01);
+				hashTextures.put("playerSmallRobot", text01);
 			}
+			
+			// création de la texture players
+			if(!hashTextures.containsKey("playerBigRobot")) // si celle-ci n'existe pas
+			{
+				Texture text02 = new Texture();
+				text02.loadFromStream(TexturesManager.class.getResourceAsStream("/Textures/robotpattesBALLBIG.png"));
+							// ajout dans le hash textures
+				hashTextures.put("playerBigRobot", text02);
+			}
+						
 			
 		} catch (IOException | TextureCreationException e) {
 			
