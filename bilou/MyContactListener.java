@@ -6,7 +6,7 @@ import org.jbox2d.collision.Manifold;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.contacts.Contact;
 
-import Entities.PlayerControl;
+import Entities.RobotBase;
 
 public class MyContactListener implements ContactListener {
 
@@ -19,16 +19,16 @@ public class MyContactListener implements ContactListener {
 			Object tempA = contact.m_fixtureA.m_body.getUserData();
 			Object tempB = contact.m_fixtureB.m_body.getUserData();
 			
-			if(tempA != null && tempA.getClass() == PlayerControl.class)
+			if(tempA != null && tempA.getClass() == RobotBase.class)
 			{
 				if(tempB != null && tempB.equals("ground"))
-					((PlayerControl)tempA).setIsground(true);
+					((RobotBase)tempA).setIsground(true);
 			}
 			
-			if(tempB != null && tempB.getClass() == PlayerControl.class)
+			if(tempB != null && tempB.getClass() == RobotBase.class)
 			{
 				if(tempA != null && tempA.equals("ground"))
-					((PlayerControl)tempB).setIsground(true);
+					((RobotBase)tempB).setIsground(true);
 			}
 			
 	}
