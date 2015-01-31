@@ -109,13 +109,13 @@ public class DrawableCalqueDynamic extends DrawableCalqueBase
 		Vec2 diffEnd = targetPos.sub(currentPos);
 		Vec2 diffStart = initialPos.sub(currentPos);
 	
-		if(istoTarget && diffEnd.length() <= 0.5f)
+		if(istoTarget && diffEnd.length() <= 0.2f)
 		{
 			// on retourne le sens de la velocity
 			body.setLinearVelocity(body.getLinearVelocity().negate());
 			istoTarget = false;
 		}
-	    if(!istoTarget && diffStart.length() <= 0.5f)
+	    if(!istoTarget && diffStart.length() <= 0.2f)
 		{
 			body.setLinearVelocity(body.getLinearVelocity().negate());
 			istoTarget = true;

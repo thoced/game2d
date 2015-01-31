@@ -179,7 +179,7 @@ public class ObstacleManager implements ICoreBase
 	}
 
 	@Override
-	public void Update(Time deltaTime) {
+	public void update(Time deltaTime) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -187,37 +187,37 @@ public class ObstacleManager implements ICoreBase
 	
 
 	@Override
-	public void LoadContent() {
+	public void loadContent() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void ReloadContent() {
+	public void reloadContent() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void DeleteContent() {
+	public void deleteContent() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void Init() {
+	public void init() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void CatchEvent(Event e) {
+	public void catchEvent(Event e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void Draw(RenderTexture render, RenderStates state) {
+	public void draw(RenderTexture render, RenderStates state) {
 		// TODO Auto-generated method stub
 		
 	}

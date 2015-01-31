@@ -66,7 +66,7 @@ public class SmallRobotControl extends RobotBase
 
 		// initialisation du body
 	
-		//body.setFixedRotation(true);
+		body.setFixedRotation(true);
 		
 		/*MassData md = new MassData();
 		body.getMassData(md);

@@ -104,9 +104,6 @@ public class Framework
 	
 	// backgrond
 	private BackgroundDrawable background;
-	
-	
-	
 	// fps
 	private int fps = 0;
 	private Time fpsTime = Time.ZERO;
@@ -188,7 +185,7 @@ public class Framework
 		}
 		
 		// background
-		background = new BackgroundDrawable();
+		background = new BackgroundDrawable(window.getView().getSize());
 		
 	}
 	
@@ -208,7 +205,7 @@ public class Framework
 		}
 		
 		// update camera
-		camera.Update(deltaTime);
+		camera.update(deltaTime);
 		
 		
 		/*for(IGameBase unit : arrayElements)
@@ -221,16 +218,19 @@ public class Framework
 		
 		
 		// update du calquemanager
-		calquesManager.Update(deltaTime);
+		calquesManager.update(deltaTime);
 		
 		// update du entities manager
-		entitiesManager.Update(deltaTime);
+		entitiesManager.update(deltaTime);
 		
 		// suppression des élements
 		arrayElements.removeAll(arrayDelete);
 		
 		// update du physic
-		physic.Update(deltaTime);
+		physic.update(deltaTime);
+		
+		// update du Background
+		background.update(deltaTime);
 		
 				
 	}
@@ -256,7 +256,7 @@ public class Framework
 		
 		// appel a la methode draw de l'entites manager
 		renderText.setView(camera.getView());
-		entitiesManager.Draw(renderText,rStateForeGround);
+		entitiesManager.draw(renderText,rStateForeGround);
 		renderText.display();
 		
 		// foreground affichage
@@ -268,7 +268,7 @@ public class Framework
 		
 		// on affiche les drawable calques
 		renderText.setView(camera.getView());
-		calquesManager.Draw(renderText,rStateForeGround);
+		calquesManager.draw(renderText,rStateForeGround);
 		renderText.display();
 		
 		
@@ -326,7 +326,7 @@ public class Framework
 		}
 		
 		// catch pour l'entities manager
-				entitiesManager.CatchEvent(event);
+				entitiesManager.catchEvent(event);
 	}
 	
 	public void DestroyGameBase(IGameBase base)
@@ -375,9 +375,9 @@ public class Framework
 		
 		
 		// textures manager loadcontent
-		texturesManager.LoadContent();
+		texturesManager.loadContent();
 		// entities manager loadcontent
-		entitiesManager.LoadContent();
+		entitiesManager.loadContent();
 		
 		
 		LoaderTiled tiled = new LoaderTiled();

@@ -66,7 +66,7 @@ public class BigRobotControl extends RobotBase
 
 		// initialisation du body
 	
-		//body.setFixedRotation(true);
+		body.setFixedRotation(true);
 		
 		/*MassData md = new MassData();
 		body.getMassData(md);
@@ -135,7 +135,7 @@ public class BigRobotControl extends RobotBase
 			
 			if(!this.isSpace && this.isIsground() && Keyboard.isKeyPressed(Keyboard.Key.SPACE))
 			{
-				body.applyLinearImpulse(new Vec2(0,-72), body.getWorldCenter());
+				body.applyLinearImpulse(new Vec2(0,-164), body.getWorldCenter());
 				this.setIsground(false);
 				this.isSpace = true;
 			}

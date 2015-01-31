@@ -8,18 +8,18 @@ import org.jsfml.window.event.Event;
 
 public interface ICoreBase 
 {
-	public abstract void Update(Time deltaTime);
+	public abstract void update(Time deltaTime);
 	
-	public abstract void Draw(RenderTexture render,RenderStates state);
+	public abstract void draw(RenderTexture render,RenderStates state);
 	
-	public abstract void LoadContent();
+	public abstract void loadContent();
 	
-	public abstract void ReloadContent();
+	public abstract void reloadContent();
 	
-	public abstract void DeleteContent();
+	public abstract void deleteContent();
 	
-	public abstract void Init();
+	public abstract void init();
 	
-	public abstract void CatchEvent(Event e);
+	public abstract void catchEvent(Event e);
 	
 }
